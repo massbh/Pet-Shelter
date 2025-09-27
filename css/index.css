@@ -1,8 +1,29 @@
+@font-face {
+    font-family: 'Figtree';
+    src: url(../assets/Figtree-VariableFont_wght.ttf) format(truetype);
+    font-weight: 300 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../assets/Inter-VariableFont_opsz,wght.ttf) format(truetype);
+    font-weight: 100 900;
+    font-style: normal;
+}
+
 header {
     display: flex;
     align-items: center;
     justify-content: space-between;
 
+}
+
+.sign-in-header {
+    display: flex;
+    align-self: start;
+    justify-content: flex-start;
+    gap: 10px;
 }
 
 header div {
@@ -113,9 +134,104 @@ nav a {
 }
 
 
+.sign-in-body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.sign-in-header {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
 
 
 
+
+hr.solid {
+    border: none;
+    border-top: 8px solid #AC5512;
+    margin: 0;
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    z-index: 5;
+}
+
+h1 {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: #AC5512;
+}
+
+h2.sign-in {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color:#AC5512;
+}
+
+form.sign-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    gap: 10px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: auto;
+    width: 350px;
+}
+
+form.sign-in input::placeholder {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #999;
+}
+
+form.sign-in label {
+    align-self: flex-start;
+    margin-left: 25px;
+}
+
+form.sign-in input {
+    width: 300px;
+    height: 22px;
+    margin-bottom: 15px;
+    
+}
+
+button.sign-in-submit {
+    width: 70px;
+    height: 30px;
+    background-color: #AC5512;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border: 0;
+}
+
+a.forgotpass {
+    font-size: 15px;
+    margin-left: 25px;
+    align-self: flex-start;
+    margin-bottom: 20px;
+}
 
 footer {
     background-color: #AC5512;
