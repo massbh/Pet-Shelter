@@ -1,0 +1,148 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+header div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+header div img {
+    width: 70px;
+    height: auto;
+}
+
+.sign-in-btn {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    gap: 2px;
+    background-color: #AC5512;
+    color: white;
+    border: 0;
+    border-radius: 20px;
+    width: 150px;
+    font-weight: bold;
+
+
+}
+.sign-in-btn img {
+    width: 30px;
+    height: auto;
+    padding-left: 25px;
+}
+
+nav {
+    background-color: #AC5512;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+
+}
+
+.front-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+}
+
+.front-image-bar {
+    height: 10px;
+    background-color: #AC5512;
+}
+
+.text-overlay {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    color: white;
+}
+
+.text-overlay h1 {
+    margin: 0px 0px 5px 0px;
+
+}
+.text-overlay p {
+    margin: 0px;
+    font-size: 12px;
+}
+
+.query-search {
+    display: flex;
+}
+.query-search a {
+    background-color: rgb(222, 220, 220);
+    margin: 0px 5px 0px 5px;
+    border-radius: 10px;
+    height: 100px;
+    width: 100px;
+    text-decoration: none;
+    color: black;
+}
+.query-search a img {
+    width: 48%;
+    margin: 10px 0px 6px 0px;
+}
+
+
+.main {
+    color:#AC5512;
+    margin-top: 100px;
+    justify-items: center;
+}
+
+
+
+
+
+
+footer {
+    background-color: #AC5512;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+footer div {
+    display: flex;
+    align-items: center;
+    color: white;
+}
+footer div img {
+    width: 70px;
+    height: auto;
+}
+footer a {
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+footer button {
+    background-color: white;
+    color: #AC5512;
+    border: 0;
+    border-radius: 20px;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+}
