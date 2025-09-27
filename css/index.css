@@ -17,21 +17,38 @@ header div img {
     height: auto;
 }
 
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
 .sign-in-btn {
     display: flex;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
     gap: 2px;
-    background-color: #AC5512;
-    color: white;
-    border: 0;
+    background-color: white;
+    color: #AC5512;
+    border: 2px solid #AC5512;
     border-radius: 20px;
     width: 150px;
     font-weight: bold;
-
-
 }
-.sign-in-btn img {
+
+.sign-up-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    background-color: #AC5512;
+    color: white;
+    border: 2px solid #AC5512;
+    border-radius: 20px;
+    width: 150px;
+    font-weight: bold;
+}
+
+.sign-in-btn img, .sign-up-btn img {
     width: 30px;
     height: auto;
     padding-left: 25px;
