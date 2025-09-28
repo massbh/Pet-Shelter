@@ -252,30 +252,103 @@ a.forgotpass {
 
 footer {
     background-color: #AC5512;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 40px 0 0 0;
+    font-family: 'Inter', sans-serif;
 }
-footer div {
-    display: flex;
-    align-items: center;
-    color: white;
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
 }
-footer div img {
-    width: 70px;
+
+.footer-brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.footer-brand img {
+    width: 60px;
     height: auto;
 }
-footer a {
+
+.footer-brand h1 {
+    color: white;
+    font-size: 28px;
+    margin: 0;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+}
+
+.footer-contact h3,
+.footer-legal h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+    color: white;
+    line-height: 1.4;
+}
+
+.contact-item img {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.footer-legal {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-legal a {
     color: white;
     text-decoration: none;
-    font-size: 20px;
+    transition: opacity 0.3s ease;
+    padding: 4px 0;
 }
-footer button {
-    background-color: white;
-    color: #AC5512;
-    border: 0;
-    border-radius: 20px;
-    width: 100px;
-    height: 30px;
-    font-weight: bold;
+
+.footer-legal a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    color: white;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-brand {
+        align-items: center;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
 }
