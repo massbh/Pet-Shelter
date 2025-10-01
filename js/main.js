@@ -5,17 +5,37 @@ fetch("../assets/animals.json")
     .then(animals => {
     allAnimals = animals;
     displayAnimals(allAnimals);
+    populateSpecies(allAnimals);
     })
     .catch(err => console.error("Error loading animals.json", err));
 
+
+function populateSpecies(animals) {
+    let species = [...new Set(animals.map(a => a.species))];
+
+    let speciesButtons = "";
+    species.forEach(sp => {
+        speciesButtons += `
+            <button onclick="filterState.species='${sp}'; advancedFilter(filterState)">
+                ${sp}
+            </button>
+        `;
+    });
+    document.getElementById("speciesButtons").innerHTML = speciesButtons;
+};
+
 function displayAnimals(animals) {
     let output = "";
+
     for (let animal of animals) {
-        output += `
+    output += `
     <div class="card">
         <img src="${animal.imageUrl}">
         <p>${animal.name}</p>
-        <p>${animal.age}</p>
+        <div>
+            <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
+            <span>${animal.sex}</span>
+        </div>
     </div>
     `;
     }
@@ -43,5 +63,10 @@ function advancedFilter(filterState) {
         filteredAnimals = filteredAnimals.filter(a => a.age >= filterState.age.minAge && a.age <= filterState.age.maxAge);
 
     displayAnimals(filteredAnimals);
+};
+
+function toggleDetailedSearch() {
+    document.querySelector(".query-search").classList.toggle("hidden");
+    document.querySelector(".detailed-search").classList.toggle("hidden");
 };
 

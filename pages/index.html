@@ -49,7 +49,42 @@
                             <img src="../assets/Query-paw.png">
                             <p>Other Animals</p>
                         </button>
-                    </div>                
+                        <button onclick="toggleDetailedSearch()">
+                            <img src="../assets/Query-paw.png">
+                            <p>Detailed search</p>
+                        </button>
+                    </div> 
+                    
+                    <div class="detailed-search hidden">
+                        <button onclick="toggleDetailedSearch()" class="close-detailed-search">&lt;</button>
+                        <h3>Detailed Search</h3>
+
+                        <div class="detailed-search-selections">
+                            <!-- Select sex -->
+                            
+                            <p>Animal</p>
+                            <details>
+                                <summary>Any</summary>
+                                <div id="speciesButtons"></div>
+                            </details>
+                            
+                            
+                            <p>Gender</p>
+                            <details>
+                                <summary>Any</summary>
+                                <div>
+                                    <Button onclick="filterState.sex = 'Male'; advancedFilter(filterState)">Male</Button>
+                                    <Button onclick="filterState.sex = 'Female'; advancedFilter(filterState)">Female</Button>
+                                </div>
+                            </details>
+
+
+
+                        </div>
+
+                    </div>
+
+
                 </div>
             </section>
 
