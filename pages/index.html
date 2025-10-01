@@ -3,6 +3,7 @@
     <head>
         <title>Home Page</title>
         <link rel="stylesheet" href="../css/index.css">
+        <script src="../js/main.js" defer></script>
     </head>
     <body>
         <header>
@@ -36,24 +37,27 @@
 
                         <!-- Overlayed Query -->
                      <div class="query-search">
-                        <a href="">
+                        <button onclick="filterState.species = 'Dog'; advancedFilter(filterState)">
                             <img src="../assets/Query-dog.png">
                             <p>Dogs</p>
-                        </a>
-                        <a href="">
+                        </button>
+                        <button onclick="filterState.species = 'Cat'; advancedFilter(filterState)">
                             <img src="../assets/Query-cat.png">
-                            <p>Cats</p>
-                        </a>
-                        <a href="">
+                            <p>Cat</p>
+                        </button>
+                        <button onclick="filterState.species = 'Other'; advancedFilter(filterState)">
                             <img src="../assets/Query-paw.png">
                             <p>Other Animals</p>
-                        </a>
+                        </button>
                     </div>                
                 </div>
             </section>
 
-            <section class="main">
-                <h3>Pets Available for Adoption ></h3>
+            <section>
+                <h3 class="animal-adoption">Pets Available for Adoption &gt;</h3>
+
+                <div id="cards"></div>
+
             </section>
 
 

@@ -2,6 +2,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 70px;
+    padding-right: 70px;
 
 }
 
@@ -72,10 +74,9 @@ nav a {
 
 .text-overlay {
     position: absolute;
-    top: 60%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     color: white;
 }
 
@@ -90,28 +91,62 @@ nav a {
 
 .query-search {
     display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
-.query-search a {
+.query-search button {
     background-color: rgb(222, 220, 220);
-    margin: 0px 5px 0px 5px;
+    margin-right: 10px;
     border-radius: 10px;
+    border: 0;
     height: 100px;
     width: 100px;
     text-decoration: none;
     color: black;
+
 }
-.query-search a img {
-    width: 48%;
-    margin: 10px 0px 6px 0px;
+.query-search button img {
+    width: 70%;
+    
 }
 
 
-.main {
+.animal-adoption {
     color:#AC5512;
-    margin-top: 100px;
-    justify-items: center;
+    margin-top: 150px;
+    text-align: center;
 }
 
+#cards {
+    display: grid;
+    grid-template-columns: repeat(5, 100px);
+    row-gap: 40px;
+    column-gap: 10px;;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+.card {
+    border-radius: 6px;
+    background-color: blanchedalmond;
+    width: 100px;
+    height: 150px;
+
+}
+.card img {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100px;
+    margin-bottom: 5px;
+}
+.card p {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    color:#AC5512;
+    font-weight: bold;
+    font-size: 14px;
+}
 
 
 
