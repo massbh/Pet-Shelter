@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home Page</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    </head>
+    <body>
+        
+        <!-- Header Container -->
+        <div id="header-container"></div>
+
+        <!-- Content -->
+
+        <!-- Footer Container -->
+        <div id="footer-container"></div>
+        
+        <!-- Script to load components -->
+        <script src="js/loadComponents.js"></script>
+    </body>
+</html>
