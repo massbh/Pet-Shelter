@@ -3,6 +3,7 @@
     <head>
         <title>Home Page</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <script src="{{ asset('js/home_filter.js') }}"></script>
     </head>
     <body>
 
@@ -22,24 +23,62 @@
 
                         <!-- Overlayed Query -->
                      <div class="query-search">
-                        <a href="">
+                        <button onclick="filterState.species = 'Dog'; advancedFilter(filterState)">
                             <img src="../assets/Query-dog.png">
                             <p>Dogs</p>
-                        </a>
-                        <a href="">
+                        </button>
+                        <button onclick="filterState.species = 'Cat'; advancedFilter(filterState)">
                             <img src="../assets/Query-cat.png">
-                            <p>Cats</p>
-                        </a>
-                        <a href="">
+                            <p>Cat</p>
+                        </button>
+                        <button onclick="filterState.species = 'Other'; advancedFilter(filterState)">
                             <img src="../assets/Query-paw.png">
                             <p>Other Animals</p>
-                        </a>
-                    </div>                
+                        </button>
+                        <button onclick="toggleDetailedSearch()">
+                            <img src="../assets/Query-paw.png">
+                            <p>Detailed search</p>
+                        </button>
+                    </div> 
+                    
+                    <div class="detailed-search hidden">
+                        <button onclick="toggleDetailedSearch()" class="close-detailed-search">&lt;</button>
+                        <h3>Detailed Search</h3>
+
+                        <div class="detailed-search-selections">
+                            <!-- Select sex -->
+                            
+                            <p>Animal</p>
+                            <details>
+                                <summary>Any</summary>
+                                <div id="speciesButtons"></div>
+                            </details>
+                            
+                            
+                            <p>Gender</p>
+                            <details>
+                                <summary>Any</summary>
+                                <div>
+                                    <Button onclick="filterState.sex = 'Male'; advancedFilter(filterState)">Male</Button>
+                                    <Button onclick="filterState.sex = 'Female'; advancedFilter(filterState)">Female</Button>
+                                </div>
+                            </details>
+
+
+
+                        </div>
+
+                    </div>
+
+
                 </div>
             </section>
 
-            <section class="main">
-                <h3>Pets Available for Adoption ></h3>
+            <section>
+                <h3 class="animal-adoption">Pets Available for Adoption &gt;</h3>
+
+                <div id="cards"></div>
+
             </section>
 
 
