@@ -3,6 +3,7 @@
     <head>
         <title>Happinest - FAQs</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <script src="{{ asset('js/qa_filter.js') }}"></script>
     </head>
     <body>
         
@@ -159,7 +160,7 @@
                     <div class="answer">
                         <p>Absolutely! We encourage visits to ensure a good match:</p>
                         <ul>
-                            <li><strong>Open hours:</strong> Tuesday-Sunday, 11 AM - 6 PM</li>
+                            <li><strong>Open hours:</strong> Monday-Friday, 8 AM - 6 PM Saturday-Sunday, 10 AM - 4 PM</li>
                             <li><strong>No appointment needed</strong> for general visits</li>
                             <li><strong>Private meet-and-greets</strong> available by appointment</li>
                             <li><strong>Bring your family</strong> and current pets to meet potential new companions</li>
@@ -190,20 +191,6 @@
             <div class="qa-contact">
                 <h2>Still Have Questions?</h2>
                 <p>Our friendly staff is here to help! Contact us through any of these methods:</p>
-                <div class="contact-options">
-                    <div class="contact-option">
-                        <h4>📞 Phone</h4>
-                        <p>(555) 123-PETS</p>
-                    </div>
-                    <div class="contact-option">
-                        <h4>✉️ Email</h4>
-                        <p>info@happinest.com</p>
-                    </div>
-                    <div class="contact-option">
-                        <h4>🏠 Visit Us</h4>
-                        <p>Mon-Sun: 11 AM - 6 PM</p>
-                    </div>
-                </div>
                 <a href="contact.html" class="contact-btn">Get In Touch</a>
             </div>
         </div>
@@ -212,67 +199,6 @@
         <div id="footer-container"></div>
         
         <!-- Script to load components -->
-        <script src="js/loadComponents.js"></script>
-        
-        <!-- Q&A Interactive Script -->
-        <script>
-            function toggleAnswer(element) {
-                const qaItem = element.parentNode;
-                const answer = qaItem.querySelector('.answer');
-                const icon = element.querySelector('.toggle-icon');
-                
-                if (answer.style.display === 'none' || answer.style.display === '') {
-                    answer.style.display = 'block';
-                    icon.textContent = '-';
-                    qaItem.classList.add('active');
-                } else {
-                    answer.style.display = 'none';
-                    icon.textContent = '+';
-                    qaItem.classList.remove('active');
-                }
-            }
-
-            function filterByCategory(category) {
-                const items = document.querySelectorAll('.qa-item');
-                const buttons = document.querySelectorAll('.category-btn');
-                
-                // Update active button
-                buttons.forEach(btn => btn.classList.remove('active'));
-                event.target.classList.add('active');
-                
-                // Filter items
-                items.forEach(item => {
-                    if (category === 'all' || item.dataset.category === category) {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            }
-
-            function filterQuestions() {
-                const searchTerm = document.getElementById('qaSearchInput').value.toLowerCase();
-                const items = document.querySelectorAll('.qa-item');
-                
-                items.forEach(item => {
-                    const question = item.querySelector('.question h3').textContent.toLowerCase();
-                    const answer = item.querySelector('.answer').textContent.toLowerCase();
-                    
-                    if (question.includes(searchTerm) || answer.includes(searchTerm) || searchTerm === '') {
-                        item.style.display = 'block';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            }
-
-            // Initialize - hide all answers by default
-            document.addEventListener('DOMContentLoaded', function() {
-                const answers = document.querySelectorAll('.answer');
-                answers.forEach(answer => {
-                    answer.style.display = 'none';
-                });
-            });
-        </script>
+        <script src="js/loadComponents.js"></script>       
     </body>
 </html>
