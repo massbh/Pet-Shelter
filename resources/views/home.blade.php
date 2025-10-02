@@ -3,6 +3,7 @@
     <head>
         <title>Home Page</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <script src="{{ asset('js/home_filter.js') }}"></script>
     </head>
     <body>
 
