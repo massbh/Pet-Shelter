@@ -16,6 +16,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 
 .sign-in-header {
@@ -109,7 +111,7 @@ nav a {
 
 .text-overlay {
     position: absolute;
-    top: 60%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -127,28 +129,91 @@ nav a {
 
 .query-search {
     display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
-.query-search a {
+
+.query-search button {
     background-color: rgb(222, 220, 220);
-    margin: 0px 5px 0px 5px;
+    margin-right: 10px;
     border-radius: 10px;
+    border: 0;
     height: 100px;
     width: 100px;
     text-decoration: none;
     color: black;
+
 }
-.query-search a img {
-    width: 48%;
-    margin: 10px 0px 6px 0px;
+.query-search button img {
+    width: 70%;
+    
+}
+
+.detailed-search {
+    background-color: white;
+    color: black;
+    width: 800px;
+    height: 400px;
+    border-radius: 60px;
+    border: 2px solid black;
 }
 
 
-.main {
+
+
+.animal-adoption {
     color:#AC5512;
-    margin-top: 100px;
-    justify-items: center;
+    margin-top: 150px;
+    text-align: center;
 }
 
+ #cards {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    row-gap: 40px;
+    column-gap: 20px;;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+
+.card {
+    border-radius: 10px;
+    background-color: var(--tone, blanchedalmond);
+    width: 200px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding-bottom: 16px;
+}
+
+.card img {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.card p {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.badge{
+    font-size:14px; 
+    padding:6px 10px; 
+    border-radius:999px;
+    background:#0000000d;
+    margin-left: 6px;
+  }
 
 .sign-in-body {
     margin: 0;
@@ -168,9 +233,6 @@ nav a {
     gap: 10px;
     z-index: 10;
 }
-
-
-
 
 hr.solid {
     border: none;
@@ -335,6 +397,244 @@ footer {
     font-size: 14px;
 }
 
+/* Q&A Page Styles */
+.qa-hero {
+    background: linear-gradient(135deg, #AC5512 0%, #d4691b 100%);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 40px;
+}
+
+.qa-hero h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 800;
+}
+
+.qa-hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+.qa-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+    font-family: 'Inter', sans-serif;
+}
+
+.qa-search button {
+    background-color: #AC5512;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.qa-search button:hover {
+    background-color: #8a4510;
+}
+
+.qa-categories {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    padding: 10px 20px;
+    border: 2px solid #AC5512;
+    background-color: transparent;
+    color: #AC5512;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background-color: #AC5512;
+    color: white;
+}
+
+.qa-list {
+    margin-bottom: 60px;
+}
+
+.qa-item {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.qa-item:hover {
+    box-shadow: 0 4px 15px rgba(172, 85, 18, 0.15);
+}
+
+.qa-item.active {
+    border-color: #AC5512;
+}
+
+.question {
+    padding: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+}
+
+.question:hover {
+    background-color: #f0f0f0;
+}
+
+.qa-item.active .question {
+    background-color: #AC5512;
+    color: white;
+}
+
+.question h3 {
+    margin: 0;
+    color: #AC5512;
+    font-size: 1.2rem;
+    font-weight: 600;
+    font-family: 'Figtree', sans-serif;
+}
+
+.qa-item.active .question h3 {
+    color: white;
+}
+
+.toggle-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #AC5512;
+    transition: transform 0.3s ease;
+}
+
+.qa-item.active .toggle-icon {
+    color: white;
+    transform: rotate(180deg);
+}
+
+.answer {
+    padding: 25px;
+    background-color: white;
+    border-top: 1px solid #f0f0f0;
+    line-height: 1.6;
+}
+
+.answer p {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.answer ul, .answer ol {
+    margin-bottom: 15px;
+    padding-left: 25px;
+}
+
+.answer li {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.answer strong {
+    color: #AC5512;
+    font-weight: 600;
+}
+
+.answer em {
+    color: #AC5512;
+    font-style: italic;
+}
+
+.qa-contact {
+    background: linear-gradient(135deg, #f8f8f8 0%, #e8e8e8 100%);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.qa-contact h2 {
+    color: #AC5512;
+    margin-bottom: 15px;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.qa-contact p {
+    color: #666;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+}
+
+.contact-options {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.contact-option {
+    text-align: center;
+    min-width: 150px;
+}
+
+.contact-option h4 {
+    color: #AC5512;
+    margin-bottom: 10px;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.contact-option p {
+    color: #555;
+    margin: 0;
+    font-weight: 500;
+}
+
+.contact-btn {
+    display: inline-block;
+    background-color: #AC5512;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.contact-btn:hover {
+    background-color: #8a4510;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(172, 85, 18, 0.3);
+}
 /* Responsive */
 @media (max-width: 768px) {
     .footer-content {
@@ -351,3 +651,6 @@ footer {
         justify-content: center;
     }
 }
+
+/* add this utility */
+.hidden { display: none !important; }
