@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "name": "Baris",
+        "species": "Dog",
+        "age": 1,
+        "sex": "Male",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 2,
+        "name": "Luna",
+        "species": "Cat",
+        "age": 1,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 3,
+        "name": "Nora",
+        "species": "Turtle",
+        "age": 3,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 4,
+        "name": "Charlie",
+        "species": "Dog",
+        "age": 4,
+        "sex": "Male",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 5,
+        "name": "Milo",
+        "species": "Cat",
+        "age": 2,
+        "sex": "Male",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 6,
+        "name": "Bella",
+        "species": "Dog",
+        "age": 3,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 7,
+        "name": "Simba",
+        "species": "Cat",
+        "age": 5,
+        "sex": "Male",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 8,
+        "name": "Daisy",
+        "species": "Dog",
+        "age": 1,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 9,
+        "name": "Oliver",
+        "species": "Cat",
+        "age": 3,
+        "sex": "Male",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 10,
+        "name": "Molly",
+        "species": "Dog",
+        "age": 2,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 11,
+        "name": "Coco",
+        "species": "Cat",
+        "age": 4,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 12,
+        "name": "Rocky",
+        "species": "Dog",
+        "age": 5,
+        "sex": "Male",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 13,
+        "name": "Lily",
+        "species": "Cat",
+        "age": 2,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 14,
+        "name": "Max",
+        "species": "Dog",
+        "age": 3,
+        "sex": "Male",
+        "imageUrl": "../assets/Baris.png"
+    },
+    {
+        "id": 15,
+        "name": "Misty",
+        "species": "Cat",
+        "age": 1,
+        "sex": "Female",
+        "imageUrl": "../assets/Baris.png"
+    }
+]

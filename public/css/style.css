@@ -16,6 +16,8 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding-left: 70px;
+    padding-right: 70px;
 }
 
 .sign-in-header {
@@ -109,7 +111,7 @@ nav a {
 
 .text-overlay {
     position: absolute;
-    top: 60%;
+    top: 90%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -127,28 +129,91 @@ nav a {
 
 .query-search {
     display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
-.query-search a {
+
+.query-search button {
     background-color: rgb(222, 220, 220);
-    margin: 0px 5px 0px 5px;
+    margin-right: 10px;
     border-radius: 10px;
+    border: 0;
     height: 100px;
     width: 100px;
     text-decoration: none;
     color: black;
+
 }
-.query-search a img {
-    width: 48%;
-    margin: 10px 0px 6px 0px;
+.query-search button img {
+    width: 70%;
+    
+}
+
+.detailed-search {
+    background-color: white;
+    color: black;
+    width: 800px;
+    height: 400px;
+    border-radius: 60px;
+    border: 2px solid black;
 }
 
 
-.main {
+
+
+.animal-adoption {
     color:#AC5512;
-    margin-top: 100px;
-    justify-items: center;
+    margin-top: 150px;
+    text-align: center;
 }
 
+ #cards {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    row-gap: 40px;
+    column-gap: 20px;;
+    justify-content: center;
+    margin-bottom: 100px;
+}
+
+
+.card {
+    border-radius: 10px;
+    background-color: var(--tone, blanchedalmond);
+    width: 200px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding-bottom: 16px;
+}
+
+.card img {
+    height: 150px;
+    width: 100%;
+    object-fit: cover;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.card p {
+    font-weight: bold;
+    font-size: 18px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.badge{
+    font-size:14px; 
+    padding:6px 10px; 
+    border-radius:999px;
+    background:#0000000d;
+    margin-left: 6px;
+  }
 
 .sign-in-body {
     margin: 0;
@@ -168,9 +233,6 @@ nav a {
     gap: 10px;
     z-index: 10;
 }
-
-
-
 
 hr.solid {
     border: none;
@@ -573,3 +635,22 @@ footer {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(172, 85, 18, 0.3);
 }
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-brand {
+        align-items: center;
+    }
+    
+    .contact-item {
+        justify-content: center;
+    }
+}
+
+/* add this utility */
+.hidden { display: none !important; }
