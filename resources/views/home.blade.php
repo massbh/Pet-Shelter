@@ -64,6 +64,20 @@
                                 </div>
                             </details>
 
+                            <p>Age</p>
+                            
+                            <details>
+                            <summary>Any</summary>
+                            <div>
+                                <label for="minAge">Min Age</label>
+                                <input type="number" id="minAge" placeholder="0" 
+                                    oninput="filterState.age.minAge = this.value ? parseInt(this.value) : null; advancedFilter(filterState)">
+                                
+                                <label for="maxAge">Max Age</label>
+                                <input type="number" id="maxAge" placeholder="20" 
+                                    oninput="filterState.age.maxAge = this.value ? parseInt(this.value) : null; advancedFilter(filterState)">
+                            </div>
+                            </details>
 
 
                         </div>
