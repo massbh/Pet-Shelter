@@ -3,6 +3,7 @@
     <head>
         <title>Happinest - About Us</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     </head>
     <body>
         
@@ -22,10 +23,10 @@
                     <div class="about-text">
                         <h2>Our Mission & Vision</h2>
                         <p>At Happinest, our mission is to rescue, rehabilitate, and rehome abandoned and neglected animals while promoting responsible pet ownership through community education and outreach programs.</p>
-                        <p>We envision a world where every pet has a loving home and no animal suffers from neglect or abandonment. Through our comprehensive adoption programs, spay/neuter initiatives, and educational efforts, we're working toward creating a more compassionate community for all animals.</p>
+                        <p>We envision a world where every pet has a loving home and no animal suffers from neglect or abandonment. Through our comprehensive adoption programs, innovative initiatives, and educational efforts, we're working toward creating a more compassionate community for all animals.</p>
                     </div>
                     <div class="about-image">
-                        <img src="{{ asset('assets/about-mission.jpg') }}" alt="Our team with rescued animals">
+                        <img src="{{ asset('assets/about/mission.jpg') }}" alt="Kitten after being recued">
                     </div>
                 </div>
             </div>
@@ -35,11 +36,11 @@
                 <div class="about-content reverse">
                     <div class="about-text">
                         <h2>Our Story</h2>
-                        <p>Founded in 2010 by Dr. Sarah Johnson, Happinest began as a small foster-based rescue operating out of her home. After witnessing the overwhelming number of homeless pets in our community, Dr. Johnson dedicated her life to creating a safe haven for animals in need.</p>
-                        <p>What started with just a handful of volunteers has grown into a comprehensive animal shelter that has helped over 5,000 pets find their forever homes. In 2015, we opened our current facility, which includes state-of-the-art medical facilities, spacious adoption areas, and dedicated training spaces.</p>
+                        <p>Founded in 2018 by Dr. Mubarasha Sadiqqa, a commited cat lover, Happinest began as a small foster-based rescue operating out of the SDU university campus. After witnessing the overwhelming number of homeless pets in our community, Dr. Sadiqqa dedicated her life to creating a safe haven for animals in need.</p>
+                        <p>What started with just a handful of volunteers has grown into a comprehensive animal shelter that has helped over 5,000 pets find their forever homes. In 2023, we opened our current facility, which includes medical facilities, spacious adoption areas, and dedicated training spaces.</p>
                     </div>
                     <div class="about-image">
-                        <img src="{{ asset('assets/about-history.jpg') }}" alt="Our shelter building">
+                        <img src="{{ asset('assets/about/history.jpg') }}" alt="Our shelter">
                     </div>
                 </div>
             </div>
@@ -53,7 +54,7 @@
                         <p>We believe that every pet deserves individual attention and personalized care. Our staff-to-animal ratio ensures that each resident receives the love, training, and medical care they need to thrive while waiting for their forever family.</p>
                     </div>
                     <div class="about-image">
-                        <img src="{{ asset('assets/about-team.jpg') }}" alt="Our team members">
+                        <img src="{{ asset('assets/about/team.jpg') }}" alt="Our team members">
                     </div>
                 </div>
             </div>
@@ -67,14 +68,14 @@
                         <ul>
                             <li>Over 5,000 successful adoptions</li>
                             <li>98% live release rate for all animals in our care</li>
-                            <li>Provided low-cost spay/neuter services to 3,000+ pets</li>
+                            <li>Provided low-cost services to 3,000+ pets</li>
                             <li>Educational programs reaching 10,000+ community members annually</li>
                             <li>Partnerships with 25+ local businesses and organizations</li>
                         </ul>
                         <p>These achievements are only possible thanks to the generous support of our donors, volunteers, and community partners.</p>
                     </div>
                     <div class="about-image">
-                        <img src="{{ asset('assets/about-impact.jpg') }}" alt="Happy adopted pets with their families">
+                        <img src="{{ asset('assets/about/impact.jpeg') }}" alt="Happy family adopting a dog">
                     </div>
                 </div>
             </div>
@@ -95,7 +96,7 @@
                         <p>Our philosophy is simple: every life matters. We never give up on an animal, no matter their age, medical needs, or behavioral challenges.</p>
                     </div>
                     <div class="about-image">
-                        <img src="{{ asset('assets/about-values.jpg') }}" alt="Volunteers caring for animals">
+                        <img src="{{ asset('assets/about/values.jpg') }}" alt="Volunteer taking care of the dogs">
                     </div>
                 </div>
             </div>
