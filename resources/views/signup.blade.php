@@ -7,8 +7,8 @@
 
 <body class="sign-in-body">
     <header class="sign-in-header">
-        <img src="../assets/Logo.png" style="height: 70px; width: 70px;">
-        <h1>HAPPINEST</h1>
+        <a href="/"><img src="../assets/Logo.png" style="height: 70px; width: 70px;"></a>
+        <a href="/" class="logotext">HAPPINEST</a>
     </header>
 
     <hr class="solid">
@@ -39,11 +39,11 @@
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" name="terms" required>
-                    <span>I agree to the <a href="/terms">Terms & Conditions</a> and <a href="/privacy">Privacy Policy</a></span>
+                    <span>I agree to the <a href="/terms">Terms & Conditions</a> and <a href="/privacy-policy">Privacy Policy</a></span>
                 </label>
             </div>
 
-            <button type="submit" class="sign-in-submit">Create Account</button>
+            <button type="submit" class="sign-up-submit">Create Account</button>
 
             <div class="signup-link">
                 <p>Already have an account? <a href="/signin">Sign In</a></p>
