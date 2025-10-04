@@ -11,7 +11,7 @@
         "id": 2,
         "name": "Luna",
         "species": "Cat",
-        "age": 1,
+        "age": 16,
         "sex": "Female",
         "imageUrl": "../assets/Baris.png"
     },
@@ -19,7 +19,7 @@
         "id": 3,
         "name": "Nora",
         "species": "Turtle",
-        "age": 3,
+        "age": 13,
         "sex": "Female",
         "imageUrl": "../assets/Baris.png"
     },
@@ -43,7 +43,7 @@
         "id": 6,
         "name": "Bella",
         "species": "Dog",
-        "age": 3,
+        "age": 7,
         "sex": "Female",
         "imageUrl": "../assets/Baris.png"
     },
@@ -75,7 +75,7 @@
         "id": 10,
         "name": "Molly",
         "species": "Dog",
-        "age": 2,
+        "age": 8,
         "sex": "Female",
         "imageUrl": "../assets/Baris.png"
     },
