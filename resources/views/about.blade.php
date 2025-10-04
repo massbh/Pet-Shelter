@@ -3,7 +3,6 @@
     <head>
         <title>Happinest - About Us</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/about.css') }}">
     </head>
     <body>
         

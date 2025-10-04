@@ -19,8 +19,8 @@
 
                     <!-- Overlayed Text -->
                     <div class="text-overlay">
-                        <h1>Every Pet Deserves a Second Chance - Maybe You are Theirs.</h1>
-                        <p>Adopt pets ready to fill your home with love and laughter. Help us make a difference.</p>
+                        <h1 style="color: white; text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0px 0px 20px rgba(0,0,0,0.6);">Every Pet Deserves a Second Chance - Maybe You are Theirs.</h1>
+                        <p style="text-shadow: 0 2px 6px #0000008f;">Adopt pets ready to fill your home with love and laughter. Help us make a difference.</p>
 
                         <!-- Overlayed Query -->
                      <div class="query-search">
@@ -97,7 +97,7 @@
             <section>
                 <h2 class="animal-adoption">Pets Available for Adoption &gt;</h2>
 
-                <div id="cards"></div>
+                <div class="cards" id="cards"></div>
 
             </section>
 
