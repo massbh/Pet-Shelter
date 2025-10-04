@@ -36,7 +36,7 @@
                 <div class="about-content reverse">
                     <div class="about-text">
                         <h2>Our Story</h2>
-                        <p>Founded in 2018 by Dr. Mubarasha Sadiqqa, a commited cat lover, Happinest began as a small foster-based rescue operating out of the SDU university campus. After witnessing the overwhelming number of homeless pets in our community, Dr. Sadiqqa dedicated her life to creating a safe haven for animals in need.</p>
+                        <p>Founded in 2018 by Dr. Mubashrah Saddiqa, a commited cat lover, Happinest began as a small foster-based rescue operating out of the SDU university campus. After witnessing the overwhelming number of homeless pets in our community, Dr. Saddiqa dedicated her life to creating a safe haven for animals in need.</p>
                         <p>What started with just a handful of volunteers has grown into a comprehensive animal shelter that has helped over 5,000 pets find their forever homes. In 2023, we opened our current facility, which includes medical facilities, spacious adoption areas, and dedicated training spaces.</p>
                     </div>
                     <div class="about-image">
