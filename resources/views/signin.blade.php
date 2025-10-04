@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Happiness - SignIn</title>
+    <title>Happinest - SignIn</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body class="sign-in-body">
     <header class="sign-in-header">
         <img src="../assets/Logo.png" style="height: 70px; width: 70px;">
-        <h1>HAPPINESS</h1>
+        <h1>HAPPINEST</h1>
     </header>
 
     <hr class="solid">

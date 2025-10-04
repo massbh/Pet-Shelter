@@ -191,7 +191,7 @@
             <div class="qa-contact">
                 <h2>Still Have Questions?</h2>
                 <p>Our friendly staff is here to help! Contact us through any of these methods:</p>
-                <a href="contact.html" class="contact-btn">Get In Touch</a>
+                <a href="/contact" class="contact-btn">Get In Touch</a>
             </div>
         </div>
 
