@@ -150,16 +150,86 @@ nav a {
 }
 
 .detailed-search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: white;
     color: black;
     width: 800px;
-    height: 400px;
-    border-radius: 60px;
+    min-height: 300px;
+    border-radius: 30px;
     border: 2px solid black;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin-bottom: 100px;
+}
+
+.close-detailed-search {
+    position: absolute;
+    top: 12%;
+    left: 2%;
+    width: 40px;
+    height: 40px;
+    background-color: #AC5512;
+    color: white;
+    border-radius: 10px;
+    border: none;
+}
+
+.detailed-search > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+}
+
+.detailed-search section p {
+    font-size: 16px;
+}
+
+.advanced-filter{
+    width: 100px;
+    height: 40px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
 
 
+.detailed-search > section {
+    min-width: 300px;
+    margin-top: 20px;
+}
+.detailed-search div section {
+    border: 1px solid black;
+    border-radius: 5px;
+    min-width: 100px;
+    min-height: 100px;
+    padding: 5px;
+}
+
+.dse-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.dse-buttons button {
+    text-align: left;
+    border: none;
+    outline: none;
+    background-color: white;
+    padding: 5px 0px;
+
+}
+.dse-buttons button:hover {
+    background-color: #999;
+
+}
+.dse-buttons button:active {
+    background-color: black;
+
+}
 
 .animal-adoption {
     color:#AC5512;
@@ -414,5 +484,83 @@ footer {
     }
 }
 
-/* add this utility */
 .hidden { display: none !important; }
+
+
+/* Slider */
+/* STACK RANGE SLIDERS */
+.drange {
+  position: relative;
+}
+.drange input[type="range"] {
+  position: absolute;
+  width: 100%;
+  pointer-events: none;
+}
+.drange input[type=range]::-webkit-slider-thumb {
+  pointer-events: all;
+}
+.drange input[type=range]::-moz-range-thumb {
+  pointer-events: all;
+}
+
+/* WRAPPER : CENTER SLIDERS & DIMENSIONS */
+.drange {
+  display: flex; align-items: center;
+  max-width: 400px; height: 50px;
+  margin: 10px 10px 20px 10px;
+}
+ 
+/* HIDE DEFAULT SLIDER STYLES */
+.drange input[type=range] {
+  appearance: none;
+  background: none;
+}
+.drange input[type=range]::-webkit-slider-thumb {
+  appearance: none;
+}
+.drange input[type=range]:focus {
+  outline: none;
+}
+
+/* CUSTOM THUMB */
+.drange input[type=range]::-webkit-slider-thumb {
+  width: 20px; height: 20px;
+  border: 0; border-radius: 50%;
+  background: #AC5512;
+  cursor: pointer;
+}
+.drange input[type=range]::-moz-range-thumb {
+  width: 20px; height: 20px;
+  border: 0; border-radius: 50%;
+  background: #AC5512;
+  cursor: pointer;
+}
+
+/* CUSTOM TRACK : FIRST SLIDER ONLY */
+.drange input[type=range]:first-child::-webkit-slider-runnable-track {
+  background: #3e3e3e
+}
+.drange input[type=range]:first-child::-moz-range-track {
+  background: #3e3e3e;
+}
+
+/*  TO "RESIZE" TRACK */
+/* (20px - 6px) / 2 = 7 px */
+.drange input[type=range]::-webkit-slider-runnable-track {
+  height: 6px;
+}
+.drange input[type=range]::-moz-range-track {
+  height: 6px;
+}
+.drange input[type=range]::-webkit-slider-thumb {
+  margin-top: -7px;
+}
+
+/* MIN/MAX VALUE */
+.drange .dmin, .drange .dmax {
+  position: absolute; bottom: -5px;
+  font-size: 14px; font-weight: 700;
+}
+.drange .dmin { left: 0; }
+.drange .dmax { right: 0; }
