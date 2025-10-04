@@ -55,6 +55,7 @@ header div img {
     border-radius: 20px;
     width: 150px;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .sign-up-btn {
@@ -68,12 +69,12 @@ header div img {
     border-radius: 20px;
     width: 150px;
     font-weight: bold;
+    text-decoration: none;
 }
 
 .sign-in-btn img, .sign-up-btn img {
     width: 30px;
     height: auto;
-    padding-left: 25px;
 }
 
 nav {
@@ -194,8 +195,6 @@ nav a {
     margin-top: 20px;
 }
 
-
-
 .detailed-search > section {
     min-width: 300px;
     margin-top: 20px;
@@ -287,12 +286,13 @@ nav a {
 
 .sign-in-body {
     margin: 0;
-    padding: 0;
-    height: 100vh;
+    padding: 120px 0 0 0;
+    height: auto;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
+    overflow: scroll;
 }
 
 .sign-in-header {
@@ -354,15 +354,21 @@ form.sign-in label {
     margin-left: 25px;
 }
 
-form.sign-in input {
-    width: 300px;
-    height: 22px;
-    margin-bottom: 15px;
-    
-}
-
 button.sign-in-submit {
     width: 70px;
+    height: 30px;
+    background-color: #AC5512;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 10px;
+    border: 0;
+}
+
+button.sign-up-submit {
+    width: 150px;
     height: 30px;
     background-color: #AC5512;
     border-radius: 5px;
@@ -374,11 +380,112 @@ button.sign-in-submit {
     border: 0;
 }
 
+.form-options {
+    margin: 15px;
+}
+
+form.sign-in input:not([type="checkbox"]) {
+    width: 300px;
+    height: 22px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.form-options {
+    margin: 15px 0;         /* was 15pxpx */
+    align-self: flex-start; /* align left like labels */
+    width: 300px;           /* match input width */
+    margin-left: 25px;      /* match label indent */
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+}
+
+.checkbox-label a {
+    color: #AC5512;
+    text-decoration: none;
+}
+
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.signup-link p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #AC5512;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+.sign-in-form-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sign-in-form-container form.sign-in {
+    height: auto;
+    min-height: 375px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .sign-in-form-container form.sign-in {
+        width: 90%;
+        padding: 20px 15px;
+    }
+    
+    .checkbox-label {
+        font-size: 13px;
+    }
+}
+
+a.logotext {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: #AC5512;
+    text-decoration: none;
+}
+
 a.forgotpass {
-    font-size: 15px;
+    font-size: 14px;
     margin-left: 25px;
     align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+a.sign-in-to-sign-up {
+    font-size: 14px;
+    font-weight: 600;
+    align-self: flex-start;
     margin-bottom: 20px;
+    color: #AC5512
 }
 
 footer {

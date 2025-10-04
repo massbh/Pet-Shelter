@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 
 <head>
-    <title>Happiness - SignIn</title>
+    <title>Happinest - SignIn</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
 <body class="sign-in-body">
     <header class="sign-in-header">
-        <img src="../assets/Logo.png" style="height: 70px; width: 70px;">
-        <h1>HAPPINESS</h1>
+        <a href="/"><img src="../assets/Logo.png" style="height: 70px; width: 70px;"></a>
+        <a href="/" class="logotext">HAPPINEST</a>
     </header>
 
     <hr class="solid">
@@ -25,6 +25,8 @@
             <a class="forgotpass" href="">Forgot password?</a>
 
             <button type="submit" class="sign-in-submit">Sign in</button>
+
+            <p style="font-size: 14px; font-weight: 300;">You don't have an account? <a class="sign-in-to-sign-up" href="/signup"> Create one</a></p>
         </form>
     </div>
 
