@@ -2,6 +2,7 @@
 <html>
     <head>
         <title>Home Page</title>
+        <meta charset="utf-8">
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <script src="{{ asset('js/home_filter.js') }}"></script>
     </head>
@@ -18,8 +19,8 @@
 
                     <!-- Overlayed Text -->
                     <div class="text-overlay">
-                        <h1>Find your New Best Friend and Adopt a Pet with Petfinder</h1>
-                        <p>Browse pets from our network of over 14,500 shelters and rescues.</p>
+                        <h1>Every Pet Deserves a Second Chance - Maybe You are Theirs.</h1>
+                        <p>Adopt pets ready to fill your home with love and laughter. Help us make a difference.</p>
 
                         <!-- Overlayed Query -->
                      <div class="query-search">
@@ -36,46 +37,65 @@
                             <p>Other Animals</p>
                         </button>
                         <button onclick="toggleDetailedSearch()">
-                            <img src="../assets/Query-paw.png">
+                            <img src="../assets/Filter-logo.png">
                             <p>Detailed search</p>
                         </button>
                     </div> 
                     
                     <div class="detailed-search hidden">
                         <button onclick="toggleDetailedSearch()" class="close-detailed-search">&lt;</button>
-                        <h3>Detailed Search</h3>
+                        <h2>Detailed Search</h2>
 
-                        <div class="detailed-search-selections">
+                        <div>
+                            <!-- Select animal -->
+                            <section>
+                                <p>Animal</p>
+                                <details>
+                                    <summary id="animalTextSpecies">Any</summary>
+                                    <div class="dse-buttons" id="speciesButtons"></div>
+                                </details>
+                            </section>
+                            
+                           
                             <!-- Select sex -->
-                            
-                            <p>Animal</p>
-                            <details>
-                                <summary>Any</summary>
-                                <div id="speciesButtons"></div>
-                            </details>
-                            
-                            
-                            <p>Gender</p>
-                            <details>
-                                <summary>Any</summary>
-                                <div>
-                                    <Button onclick="filterState.sex = 'Male'; advancedFilter(filterState)">Male</Button>
-                                    <Button onclick="filterState.sex = 'Female'; advancedFilter(filterState)">Female</Button>
-                                </div>
-                            </details>
-
-
-
+                            <section>
+                                <p>Gender</p>
+                                <details>
+                                    <summary id="animalTextGender">Any</summary>
+                                    <div class="dse-buttons">
+                                        <button onclick="filterState.sex = 'Male'; setAnimalText(2, 'Male')">Male</Button>
+                                        <button onclick="filterState.sex = 'Female'; setAnimalText(2, 'Female')">Female</Button>
+                                    </div>
+                                </details>
+                             </section>
                         </div>
 
-                    </div>
+                        <!-- Select age -->
+                        <section>
+                            <p>Age</p>
+                            <div class="drange">
+                                <input type="range" min="1" max="20" value="1" id="sliderMinValue">
+                                <input type="range" min="1" max="20" value="20" id="sliderMaxValue">
+                                <div class="dmin">0</div>
+                                <div class="dmax">0</div>
+                            </div>
+                         </section>
+
+                        <button onclick="
+                            filterState.age.minAge = +document.getElementById('sliderMinValue').value;
+                            filterState.age.maxAge = +document.getElementById('sliderMaxValue').value;
+                            advancedFilter(filterState)" class="advanced-filter">Filter</button>
+
+
+
+                    </div> 
 
 
                 </div>
             </section>
 
             <section>
-                <h3 class="animal-adoption">Pets Available for Adoption &gt;</h3>
+                <h2 class="animal-adoption">Pets Available for Adoption &gt;</h2>
 
                 <div id="cards"></div>
 
