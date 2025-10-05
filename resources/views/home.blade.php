@@ -21,17 +21,17 @@
 
                     <div>
                         <div class="query-search">
-                            <button class="filter-btn" data-species="Dog">
+                            <button class="filter-btn" data-species="Dog" onclick="toggleSpeciesFilter('Dog')">
                                 <img src="{{ asset('assets/Query-dog.png') }}" alt="Dogs face">
                                 <p>Dogs</p>
                             </button>
 
-                            <button class="filter-btn" data-species="Cat">
+                            <button class="filter-btn" data-species="Cat" onclick="toggleSpeciesFilter('Cat')">
                                 <img src="{{ asset('assets/Query-cat.png') }}" alt="Cats face">
                                 <p>Cat</p>
                             </button>
 
-                            <button class="filter-btn" data-species="Other">
+                            <button class="filter-btn" data-species="Other" onclick="toggleSpeciesFilter('Other')">
                                 <img src="{{ asset('assets/Query-paw.png') }}" alt="Paw">
                                 <p>Other Animals</p>
                             </button>
@@ -93,5 +93,50 @@
         
         <!-- Footer Container -->
         <div id="footer-container"></div>
+
+        <script>
+            let activeSpeciesFilter = null;
+
+            function toggleSpeciesFilter(species) {
+                const buttons = document.querySelectorAll('.filter-btn');
+                
+                if (activeSpeciesFilter === species) {
+                    // Deseleccionar si ya está activo
+                    activeSpeciesFilter = null;
+                    buttons.forEach(btn => {
+                        btn.style.backgroundColor = 'rgb(222, 222, 222)';
+                        btn.style.border = '0.5px solid #ccc';
+                    });
+                    filterState.species = null;
+                } else {
+                    // Deseleccionar todos primero
+                    buttons.forEach(btn => {
+                        btn.style.backgroundColor = 'rgb(222, 222, 222)';
+                        btn.style.border = '0.5px solid #ccc';
+                    });
+                    
+                    // Seleccionar el nuevo
+                    activeSpeciesFilter = species;
+                    const activeButton = document.querySelector(`.filter-btn[data-species="${species}"]`);
+                    activeButton.style.backgroundColor = '#FFB366';
+                    activeButton.style.border = '2px solid #FF8C1A';
+                    activeButton.style.boxShadow = '0 0 15px rgba(255, 140, 26, 0.4)';
+                    filterState.species = species;
+                }
+                
+                // Aplicar filtro
+                advancedFilter(filterState);
+            }
+
+            // Inicializar estado de los botones
+            document.addEventListener('DOMContentLoaded', function() {
+                const filterButtons = document.querySelectorAll('.filter-btn');
+                filterButtons.forEach(btn => {
+                    btn.style.backgroundColor = 'rgb(222, 222, 222)';
+                    btn.style.border = '0.5px solid #ccc';
+                    btn.style.transition = 'all 0.3s ease';
+                });
+            });
+        </script>
     </body>
 </html>
