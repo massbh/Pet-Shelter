@@ -1,5 +1,6 @@
 let allAnimals = [];
 
+// Load animals from json file
 fetch("../assets/animals.json")
     .then(response => response.json())
     .then(animals => {
@@ -9,6 +10,46 @@ fetch("../assets/animals.json")
     })
     .catch(err => console.error("Error loading animals.json", err));
 
+    
+// Open/Close form element and deselect radio buttons
+document.getElementById("detailed-search-btn").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
+document.getElementById("close-detailed-search").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
+
+function toggleDetailedSearch() {
+    document.querySelector(".query-search").classList.toggle("hidden");
+    document.querySelector(".detailed-search-form").classList.toggle("hidden");
+};
+
+// Advanced filtering
+document.getElementById("advanced-filter-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    
+    const selectedSpecies = document.querySelector('input[name="animal"]:checked');
+    const selectedSex = document.querySelector('input[name="sex"]:checked');
+
+    filterState.species = selectedSpecies ? selectedSpecies.value : null;
+    filterState.sex = selectedSex ? selectedSex.value : null;
+    filterState.age.minAge = +document.getElementById("sliderMinValue").value;
+    filterState.age.maxAge = +document.getElementById("sliderMaxValue").value;
+
+    advancedFilter(filterState);
+    toggleDetailedSearch();
+});
+
+// Basic filtering
+document.querySelectorAll(".filter-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        const species = button.dataset.species;
+        filterState.species = species;
+        advancedFilter(filterState);
+    });
+});
+
+function deselectRadioButtons() {
+  const radios = document.querySelectorAll('.detailed-search-form input[type="radio"]');
+  radios.forEach(radio => radio.checked = false);
+};
+
 
 function populateSpecies(animals) {
     let species = [...new Set(animals.map(a => a.species))];
@@ -16,10 +57,9 @@ function populateSpecies(animals) {
     let speciesButtons = "";
     species.forEach(sp => {
         speciesButtons += `
-            <button onclick="filterState.species='${sp}'; setAnimalText(1, '${sp}')">
-                ${sp}
-            </button>
-        `;
+            <input type="radio" id="animal-${sp}" name="animal" value="${sp}">
+            <label for="animal-${sp}">${sp}</label>
+            `;
     });
     document.getElementById("speciesButtons").innerHTML = speciesButtons;
 };
@@ -35,6 +75,7 @@ function displayAnimals(animals) {
         <div>
             <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
             <span>${animal.sex}</span>
+            <a href="/contact?petId=${animal.id}">Adopt</a>
         </div>
     </div>
     `;
@@ -51,7 +92,6 @@ const filterState = {
 function advancedFilter(filterState) {
     let filteredAnimals = allAnimals;
     
-    
     if (filterState.species != null)
         if (filterState.species == "Other")
             filteredAnimals = filteredAnimals.filter(a => a.species != "Dog" && a.species != "Cat");
@@ -66,37 +106,13 @@ function advancedFilter(filterState) {
 
     displayAnimals(filteredAnimals);
 
-    // closes the detailed search if it's open after filtering
-    if (document.querySelector(".query-search").classList.contains("hidden")) 
-        toggleDetailedSearch(); 
-    
-
     // Reset filter
     filterState.species = filterState.sex = filterState.age.minAge = filterState.age.maxAge = null; 
-    setAnimalText(0, 'Any');
 };
 
-function toggleDetailedSearch() {
-    document.querySelector(".query-search").classList.toggle("hidden");
-    document.querySelector(".detailed-search").classList.toggle("hidden");
-};
-
-function setAnimalText(number, text) {
-    if (number == 0) {
-       document.getElementById("animalTextSpecies").textContent = text; 
-       document.getElementById("animalTextGender").textContent = text;
-    }
-    else if (number == 1) {
-        document.getElementById("animalTextSpecies").textContent = text;
-    }
-    else if (number == 2) {
-        document.getElementById("animalTextGender").textContent = text;
-    }
-}
 
 
 // Slider
-
 window.addEventListener("load", () => {
   // (PART A) LOOP THROUGH DUAL RANGE SLIDERS
   document.querySelectorAll(".drange").forEach(drange => {

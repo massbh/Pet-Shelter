@@ -74,7 +74,7 @@
 
                 <div class="form-group">
                   <label for="petInterest">Pet you're interested in (if any)</label>
-                  <input type="text" id="petInterest" name="petInterest" placeholder="Pet name or ID">
+                  <input type="text" id="petInterest" name="petInterest" placeholder="Pet name or ID" value="{{  request('petId') }}">
                 </div>
               </fieldset>
 
@@ -164,9 +164,17 @@
           charCount.textContent = this.value.length;
         });
 
-        // Show/hide visit schedule based on subject selection
+        // Define variables for Show/hide visit schedule based on subject selection
         const subjectSelect = document.getElementById('subject');
         const visitSchedule = document.getElementById('visitSchedule');
+
+        // First check if page is entered through adoption
+        if (document.getElementById('petInterest').value !== "") {
+          subjectSelect.value = "adoption";
+          visitSchedule.classList.remove('hidden');
+        }
+
+        // Show/hide visit schedule based on subject selection
         subjectSelect.addEventListener('change', function() {
           if (this.value === 'adoption') {
             visitSchedule.classList.remove('hidden');

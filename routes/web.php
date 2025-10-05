@@ -37,3 +37,4 @@ Route::get('/signup', function () {
 Route::get('/terms', function () {
     return view('terms-conditions');
 });
+
