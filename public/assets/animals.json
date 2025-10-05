@@ -5,7 +5,7 @@
         "species": "Dog",
         "age": 1,
         "sex": "Male",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Baris.png"
     },
     {
         "id": 2,
@@ -13,7 +13,7 @@
         "species": "Cat",
         "age": 16,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Luna.jpeg"
     },
     {
         "id": 3,
@@ -21,7 +21,7 @@
         "species": "Turtle",
         "age": 13,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Nora.jpg"
     },
     {
         "id": 4,
@@ -29,7 +29,7 @@
         "species": "Dog",
         "age": 4,
         "sex": "Male",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Charlie.jpg"
     },
     {
         "id": 5,
@@ -37,7 +37,7 @@
         "species": "Cat",
         "age": 2,
         "sex": "Male",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Milo.jpg"
     },
     {
         "id": 6,
@@ -45,7 +45,7 @@
         "species": "Dog",
         "age": 7,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Bella.jpg"
     },
     {
         "id": 7,
@@ -53,7 +53,7 @@
         "species": "Cat",
         "age": 5,
         "sex": "Male",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Simba.jpg"
     },
     {
         "id": 8,
@@ -61,7 +61,7 @@
         "species": "Dog",
         "age": 1,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Daisy.jpg"
     },
     {
         "id": 9,
@@ -69,7 +69,7 @@
         "species": "Cat",
         "age": 3,
         "sex": "Male",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Oliver.jpeg"
     },
     {
         "id": 10,
@@ -77,7 +77,7 @@
         "species": "Dog",
         "age": 8,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Molly.jpg"
     },
     {
         "id": 11,
@@ -85,7 +85,7 @@
         "species": "Cat",
         "age": 4,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Coco.jpg"
     },
     {
         "id": 12,
@@ -93,7 +93,7 @@
         "species": "Dog",
         "age": 5,
         "sex": "Male",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Rocky.jpg"
     },
     {
         "id": 13,
@@ -101,7 +101,7 @@
         "species": "Cat",
         "age": 2,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Lily.JPEG"
     },
     {
         "id": 14,
@@ -109,7 +109,7 @@
         "species": "Dog",
         "age": 3,
         "sex": "Male",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Max.jpg"
     },
     {
         "id": 15,
@@ -117,6 +117,94 @@
         "species": "Cat",
         "age": 1,
         "sex": "Female",
-        "imageUrl": "../assets/Baris.png"
+        "imageUrl": "../assets/animals/Misty.jpeg"
+    },
+    {
+        "id": 16,
+        "name": "Tweety",
+        "species": "Bird",
+        "age": 2,
+        "sex": "Male",
+        "imageUrl": "../assets/animals/Tweety.jpg"
+    },
+    {
+        "id": 18,
+        "name": "Cappy",
+        "species": "Capybara",
+        "age": 4,
+        "sex": "Male",
+        "imageUrl": "../assets/animals/Cappy.jpg"
+    },
+    {
+        "id": 19,
+        "name": "Bugs",
+        "species": "Rabbit",
+        "age": 1,
+        "sex": "Male",
+        "imageUrl": "../assets/animals/Bugs.jpg"
+    },
+    {
+        "id": 20,
+        "name": "Ziggy",
+        "species": "Reptile",
+        "age": 3,
+        "sex": "Male",
+        "imageUrl": "../assets/animals/Ziggy.jpg"
+    },
+    {
+        "id": 22,
+        "name": "Hoppy",
+        "species": "Rabbit",
+        "age": 2,
+        "sex": "Female",
+        "imageUrl": "../assets/animals/Hoppy.jpg"
+    },
+    {
+        "id": 23,
+        "name": "Spike",
+        "species": "Reptile",
+        "age": 5,
+        "sex": "Male",
+        "imageUrl": "../assets/animals/Spike.jpg"
+    },
+    {
+        "id": 25,
+        "name": "Feathers",
+        "species": "Bird",
+        "age": 3,
+        "sex": "Male",
+        "imageUrl": "../assets/animals/Feathers.jpg"
+    },
+    {
+        "id": 27,
+        "name": "Cotton",
+        "species": "Rabbit",
+        "age": 1,
+        "sex": "Female",
+        "imageUrl": "../assets/animals/Cotton.jpg"
+    },
+    {
+        "id": 28,
+        "name": "Scales",
+        "species": "Reptile",
+        "age": 4,
+        "sex": "Female",
+        "imageUrl": "../assets/animals/Scales.jpg"
+    },
+    {
+        "id": 29,
+        "name": "Chonky",
+        "species": "Capybara",
+        "age": 5,
+        "sex": "Male",
+        "imageUrl": "../assets/animals/Chonky.jpg"
+    },
+    {
+        "id": 30,
+        "name": "Sky",
+        "species": "Bird",
+        "age": 2,
+        "sex": "Female",
+        "imageUrl": "../assets/animals/Sky.jpg"
     }
 ]

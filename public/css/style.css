@@ -1982,5 +1982,44 @@ footer {
     transition: all 0.3s ease;
 }
 
+.reset-search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    width: 100%;
+}
+
+#reset-search-btn {
+    background-color: #f8f8f8;
+    border: 1px solid #d0d0d0;
+    color: #666;
+    border-radius: 8px;
+    height: 40px;
+    width: 120px;
+    text-decoration: none;
+    box-shadow: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#reset-search-btn:hover {
+    background-color: #e8e8e8;
+    border-color: #AC5512;
+    color: #AC5512;
+    transform: translateY(-1px);
+}
+
+#reset-search-btn p {
+    margin: 0;
+    font-weight: 500;
+    font-size: 14px;
+    color: inherit;
+}
+
 /* add this utility */
 .hidden { display: none !important; }

@@ -42,6 +42,12 @@
                             </button>
                         </div>
 
+                        <!-- Reset button centered below filters -->
+                        <div class="reset-search-container">
+                            <button id="reset-search-btn" onclick="resetFilters()">
+                                <p>Reset Filters</p>
+                            </button>
+                        </div>
 
                         <!-- Detailed search form -->
                         <form class="detailed-search-form hidden" id="advanced-filter-form">
@@ -99,36 +105,66 @@
 
             function toggleSpeciesFilter(species) {
                 const buttons = document.querySelectorAll('.filter-btn');
+                const detailedSearchBtn = document.getElementById('detailed-search-btn');
                 
                 if (activeSpeciesFilter === species) {
-                    // Deseleccionar si ya está activo
                     activeSpeciesFilter = null;
                     buttons.forEach(btn => {
                         btn.style.backgroundColor = 'rgb(222, 222, 222)';
                         btn.style.border = '0.5px solid #ccc';
+                        btn.style.boxShadow = 'none';
                     });
                     filterState.species = null;
                 } else {
-                    // Deseleccionar todos primero
                     buttons.forEach(btn => {
                         btn.style.backgroundColor = 'rgb(222, 222, 222)';
                         btn.style.border = '0.5px solid #ccc';
+                        btn.style.boxShadow = 'none';
                     });
                     
-                    // Seleccionar el nuevo
                     activeSpeciesFilter = species;
                     const activeButton = document.querySelector(`.filter-btn[data-species="${species}"]`);
                     activeButton.style.backgroundColor = '#FFB366';
                     activeButton.style.border = '2px solid #FF8C1A';
                     activeButton.style.boxShadow = '0 0 15px rgba(255, 140, 26, 0.4)';
                     filterState.species = species;
+                    
+                    const detailedSearchForm = document.getElementById('advanced-filter-form');
+                    if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
+                        detailedSearchForm.classList.add('hidden');
+                        detailedSearchBtn.style.display = 'flex';
+                    }
                 }
-                
-                // Aplicar filtro
-                advancedFilter(filterState);
+
+                if (typeof advancedFilter === 'function') {
+                    advancedFilter(filterState);
+                }
             }
 
-            // Inicializar estado de los botones
+            function resetFilters() {
+                const buttons = document.querySelectorAll('.filter-btn');
+                activeSpeciesFilter = null;
+                
+                buttons.forEach(btn => {
+                    btn.style.backgroundColor = 'rgb(222, 222, 222)';
+                    btn.style.border = '0.5px solid #ccc';
+                    btn.style.boxShadow = 'none';
+                });
+
+                filterState.species = null;
+                
+                if (typeof advancedFilter === 'function') {
+                    advancedFilter(filterState);
+                }
+                
+                const detailedSearchForm = document.getElementById('advanced-filter-form');
+                const detailedSearchBtn = document.getElementById('detailed-search-btn');
+                if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
+                    detailedSearchForm.classList.add('hidden');
+                    detailedSearchBtn.style.display = 'flex';
+                }
+            }
+
             document.addEventListener('DOMContentLoaded', function() {
                 const filterButtons = document.querySelectorAll('.filter-btn');
                 filterButtons.forEach(btn => {
