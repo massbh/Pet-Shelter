@@ -190,7 +190,7 @@ nav a {
 
 #close-detailed-search {
     position: absolute;
-    top: 12%;
+    top: 10%;
     left: 15%;
     width: 40px;
     height: 40px;
@@ -1969,14 +1969,14 @@ footer {
     margin-top: 3px;
 }
 
-.filter-btn.active {
+.filter-btn-design.active {
     background-color: #FFB366 !important;
     border: 2px solid #FF8C1A !important;
     box-shadow: 0 0 15px rgba(255, 140, 26, 0.4) !important;
     transform: scale(1.05);
 }
 
-.filter-btn:hover {
+.filter-btn-design:hover {
     background-color: #f2d8c3 !important;
     transform: translateY(-2px);
     transition: all 0.3s ease;

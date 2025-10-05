@@ -21,31 +21,24 @@
 
                     <div>
                         <div class="query-search">
-                            <button class="filter-btn" data-species="Dog" onclick="toggleSpeciesFilter('Dog')">
+                            <button class="filter-btn filter-btn-design" data-species="Dog">
                                 <img src="{{ asset('assets/Query-dog.png') }}" alt="Dogs face">
                                 <p>Dogs</p>
                             </button>
 
-                            <button class="filter-btn" data-species="Cat" onclick="toggleSpeciesFilter('Cat')">
+                            <button class="filter-btn filter-btn-design" data-species="Cat">
                                 <img src="{{ asset('assets/Query-cat.png') }}" alt="Cats face">
                                 <p>Cat</p>
                             </button>
 
-                            <button class="filter-btn" data-species="Other" onclick="toggleSpeciesFilter('Other')">
+                            <button class="filter-btn filter-btn-design" data-species="Other">
                                 <img src="{{ asset('assets/Query-paw.png') }}" alt="Paw">
                                 <p>Other Animals</p>
                             </button>
 
-                            <button id="detailed-search-btn">
+                            <button class="filter-btn-design" id="detailed-search-btn">
                                 <img src="{{ asset('assets/Filter-logo.png') }}" alt="Filter icon">
                                 <p>Detailed search</p>
-                            </button>
-                        </div>
-
-                        <!-- Reset button centered below filters -->
-                        <div class="reset-search-container">
-                            <button id="reset-search-btn" onclick="resetFilters()">
-                                <p>Reset Filters</p>
                             </button>
                         </div>
 
@@ -99,80 +92,5 @@
         
         <!-- Footer Container -->
         <div id="footer-container"></div>
-
-        <script>
-            let activeSpeciesFilter = null;
-
-            function toggleSpeciesFilter(species) {
-                const buttons = document.querySelectorAll('.filter-btn');
-                const detailedSearchBtn = document.getElementById('detailed-search-btn');
-                
-                if (activeSpeciesFilter === species) {
-                    activeSpeciesFilter = null;
-                    buttons.forEach(btn => {
-                        btn.style.backgroundColor = 'rgb(222, 222, 222)';
-                        btn.style.border = '0.5px solid #ccc';
-                        btn.style.boxShadow = 'none';
-                    });
-                    filterState.species = null;
-                } else {
-                    buttons.forEach(btn => {
-                        btn.style.backgroundColor = 'rgb(222, 222, 222)';
-                        btn.style.border = '0.5px solid #ccc';
-                        btn.style.boxShadow = 'none';
-                    });
-                    
-                    activeSpeciesFilter = species;
-                    const activeButton = document.querySelector(`.filter-btn[data-species="${species}"]`);
-                    activeButton.style.backgroundColor = '#FFB366';
-                    activeButton.style.border = '2px solid #FF8C1A';
-                    activeButton.style.boxShadow = '0 0 15px rgba(255, 140, 26, 0.4)';
-                    filterState.species = species;
-                    
-                    const detailedSearchForm = document.getElementById('advanced-filter-form');
-                    if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
-                        detailedSearchForm.classList.add('hidden');
-                        detailedSearchBtn.style.display = 'flex';
-                    }
-                }
-
-                if (typeof advancedFilter === 'function') {
-                    advancedFilter(filterState);
-                }
-            }
-
-            function resetFilters() {
-                const buttons = document.querySelectorAll('.filter-btn');
-                activeSpeciesFilter = null;
-                
-                buttons.forEach(btn => {
-                    btn.style.backgroundColor = 'rgb(222, 222, 222)';
-                    btn.style.border = '0.5px solid #ccc';
-                    btn.style.boxShadow = 'none';
-                });
-
-                filterState.species = null;
-                
-                if (typeof advancedFilter === 'function') {
-                    advancedFilter(filterState);
-                }
-                
-                const detailedSearchForm = document.getElementById('advanced-filter-form');
-                const detailedSearchBtn = document.getElementById('detailed-search-btn');
-                if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
-                    detailedSearchForm.classList.add('hidden');
-                    detailedSearchBtn.style.display = 'flex';
-                }
-            }
-
-            document.addEventListener('DOMContentLoaded', function() {
-                const filterButtons = document.querySelectorAll('.filter-btn');
-                filterButtons.forEach(btn => {
-                    btn.style.backgroundColor = 'rgb(222, 222, 222)';
-                    btn.style.border = '0.5px solid #ccc';
-                    btn.style.transition = 'all 0.3s ease';
-                });
-            });
-        </script>
     </body>
 </html>
