@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 
 Route::get('/', function () {
     return view('home');
@@ -38,3 +39,30 @@ Route::get('/terms', function () {
     return view('terms-conditions');
 });
 
+Route::get('/pet/{id}', function ($id) {
+    // force JSON reading from public/assets
+    $jsonPath = public_path('assets/animals.json');
+    
+    $animals = json_decode(file_get_contents($jsonPath), true);
+    
+    // find pet
+    $pet = null;
+    foreach ($animals as $animal) {
+        if (isset($animal['id']) && $animal['id'] == (int)$id) {
+            $pet = $animal;
+            break;
+        }
+    }
+    
+    // prevent 404 :)
+    if (!$pet) {
+        return redirect('/home')->with('error', 'Pet not found');
+    }
+    
+    // absolute url
+    if (isset($pet['imageUrl']) && !str_starts_with($pet['imageUrl'], '/')) {
+        $pet['imageUrl'] = '/' . ltrim($pet['imageUrl'], '/');
+    }
+    
+    return view('pet', ['pet' => (object)$pet]);
+})->name('pet.detail');

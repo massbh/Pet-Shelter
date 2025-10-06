@@ -5,7 +5,8 @@
         "species": "Dog",
         "age": 1,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Baris.png"
+        "imageUrl": "/assets/animals/Baris.png",
+        "description": "Full of puppy energy! 🐶 Loves playing fetch and learning new tricks. Very curious and friendly with everyone. 🎾"
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "species": "Cat",
         "age": 16,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Luna.jpeg"
+        "imageUrl": "../assets/animals/Luna.jpeg",
+        "description": "Wise senior lady 🐱 Prefers quiet cuddles and sunny naps. Has seen it all and loves gentle attention. ☀️"
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "species": "Turtle",
         "age": 13,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Nora.jpg"
+        "imageUrl": "../assets/animals/Nora.jpg",
+        "description": "Patient and steady companion 🐢 Enjoys slow exploration and peaceful environments. Very low maintenance friend. 🌿"
     },
     {
         "id": 4,
@@ -29,7 +32,8 @@
         "species": "Dog",
         "age": 4,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Charlie.jpg"
+        "imageUrl": "../assets/animals/Charlie.jpg",
+        "description": "Loyal companion 🐶 Great with families and other pets. Loves outdoor adventures and car rides. 🚗"
     },
     {
         "id": 5,
@@ -37,7 +41,8 @@
         "species": "Cat",
         "age": 2,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Milo.jpg"
+        "imageUrl": "../assets/animals/Milo.jpg",
+        "description": "Playful and mischievous 🐱 Always finding new games to play. Loves feather toys and cardboard boxes. 📦"
     },
     {
         "id": 6,
@@ -45,7 +50,8 @@
         "species": "Dog",
         "age": 7,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Bella.jpg"
+        "imageUrl": "../assets/animals/Bella.jpg",
+        "description": "Gentle soul 🐶 Perfect for calm households. Enjoys leisurely walks and cozy evenings. Very affectionate. 💕"
     },
     {
         "id": 7,
@@ -53,7 +59,8 @@
         "species": "Cat",
         "age": 5,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Simba.jpg"
+        "imageUrl": "../assets/animals/Simba.jpg",
+        "description": "Confident and regal 🐱 Likes being the center of attention. Enjoys high perches and interactive play. 👑"
     },
     {
         "id": 8,
@@ -61,7 +68,8 @@
         "species": "Dog",
         "age": 1,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Daisy.jpg"
+        "imageUrl": "../assets/animals/Daisy.jpg",
+        "description": "Bubbly and sweet 🐶 Learning basic commands quickly. Loves meeting new people and other dogs. 🌼"
     },
     {
         "id": 9,
@@ -69,7 +77,8 @@
         "species": "Cat",
         "age": 3,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Oliver.jpeg"
+        "imageUrl": "../assets/animals/Oliver.jpeg",
+        "description": "Social butterfly 🐱 Gets along with everyone. Enjoys conversation and will meow back when talked to. 🗣️"
     },
     {
         "id": 10,
@@ -77,7 +86,8 @@
         "species": "Dog",
         "age": 8,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Molly.jpg"
+        "imageUrl": "../assets/animals/Molly.jpg",
+        "description": "Mature and wise 🐶 Perfect companion for quiet homes. House-trained and knows basic commands. 📚"
     },
     {
         "id": 11,
@@ -85,7 +95,8 @@
         "species": "Cat",
         "age": 4,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Coco.jpg"
+        "imageUrl": "../assets/animals/Coco.jpg",
+        "description": "Independent spirit 🐱 Enjoys her alone time but shows affection on her terms. Very graceful mover. 💃"
     },
     {
         "id": 12,
@@ -93,7 +104,8 @@
         "species": "Dog",
         "age": 5,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Rocky.jpg"
+        "imageUrl": "../assets/animals/Rocky.jpg",
+        "description": "Adventure buddy 🐶 Loves hiking and outdoor activities. Very protective and loyal to his family. ⛰️"
     },
     {
         "id": 13,
@@ -101,7 +113,8 @@
         "species": "Cat",
         "age": 2,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Lily.JPEG"
+        "imageUrl": "../assets/animals/Lily.JPEG",
+        "description": "Real lady 👑💅 She is basically a verified diva. Do not like to share her space with other pets. 🚫🐾"
     },
     {
         "id": 14,
@@ -109,7 +122,8 @@
         "species": "Dog",
         "age": 3,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Max.jpg"
+        "imageUrl": "../assets/animals/Max.jpg",
+        "description": "Energetic and smart 🐶 Excels at learning new tricks. Loves puzzle toys and mental stimulation. 🧩"
     },
     {
         "id": 15,
@@ -117,7 +131,8 @@
         "species": "Cat",
         "age": 1,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Misty.jpeg"
+        "imageUrl": "../assets/animals/Misty.jpeg",
+        "description": "Playful kitten 🐱 Full of curiosity and wonder. Loves chasing laser pointers and exploring. 🔴"
     },
     {
         "id": 16,
@@ -125,7 +140,8 @@
         "species": "Bird",
         "age": 2,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Tweety.jpg"
+        "imageUrl": "../assets/animals/Tweety.jpg",
+        "description": "Cheerful singer 🐦 Loves morning melodies and interactive toys. Enjoys mimicking household sounds. 🎵"
     },
     {
         "id": 18,
@@ -133,7 +149,8 @@
         "species": "Capybara",
         "age": 4,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Cappy.jpg"
+        "imageUrl": "../assets/animals/Cappy.jpg",
+        "description": "Chill and social 🐾 Loves water and group activities. Very peaceful nature, gets along with all animals. 💧"
     },
     {
         "id": 19,
@@ -141,7 +158,8 @@
         "species": "Rabbit",
         "age": 1,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Bugs.jpg"
+        "imageUrl": "../assets/animals/Bugs.jpg",
+        "description": "Binky master 🐰 Loves hopping and exploring. Enjoys fresh veggies and safe chewing toys. Very curious! 🥕"
     },
     {
         "id": 20,
@@ -149,7 +167,8 @@
         "species": "Reptile",
         "age": 3,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Ziggy.jpg"
+        "imageUrl": "../assets/animals/Ziggy.jpg",
+        "description": "Cool customer 🦎 Enjoys basking under heat lamps. Very low maintenance and fascinating to watch. 🔥"
     },
     {
         "id": 22,
@@ -157,7 +176,8 @@
         "species": "Rabbit",
         "age": 2,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Hoppy.jpg"
+        "imageUrl": "../assets/animals/Hoppy.jpg",
+        "description": "Gentle hopper 🐰 Loves quiet environments and routine. Enjoys being gently petted during calm moments. 🌙"
     },
     {
         "id": 23,
@@ -165,7 +185,8 @@
         "species": "Reptile",
         "age": 5,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Spike.jpg"
+        "imageUrl": "../assets/animals/Spike.jpg",
+        "description": "Ancient soul 🦎 Very calm and observant. Enjoys warm environments and peaceful handling sessions. 🪨"
     },
     {
         "id": 25,
@@ -173,7 +194,8 @@
         "species": "Bird",
         "age": 3,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Feathers.jpg"
+        "imageUrl": "../assets/animals/Feathers.jpg",
+        "description": "Colorful character 🐦 Loves showing off his plumage. Enjoys interactive play and learning simple tricks. 🌈"
     },
     {
         "id": 27,
@@ -181,7 +203,8 @@
         "species": "Rabbit",
         "age": 1,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Cotton.jpg"
+        "imageUrl": "../assets/animals/Cotton.jpg",
+        "description": "Soft and sweet 🐰 Loves gentle handling and quiet spaces. Enjoys exploring safe, enclosed areas. 🏠"
     },
     {
         "id": 28,
@@ -189,7 +212,8 @@
         "species": "Reptile",
         "age": 4,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Scales.jpg"
+        "imageUrl": "../assets/animals/Scales.jpg",
+        "description": "Mysterious beauty 🦎 Observes everything calmly. Enjoys proper temperature gradients and hiding spots. 🌡️"
     },
     {
         "id": 29,
@@ -197,7 +221,8 @@
         "species": "Capybara",
         "age": 5,
         "sex": "Male",
-        "imageUrl": "../assets/animals/Chonky.jpg"
+        "imageUrl": "../assets/animals/Chonky.jpg",
+        "description": "Ultimate chill buddy 🐾 Master of relaxation. Loves floating in water and gentle social interactions. 😎"
     },
     {
         "id": 30,
@@ -205,6 +230,7 @@
         "species": "Bird",
         "age": 2,
         "sex": "Female",
-        "imageUrl": "../assets/animals/Sky.jpg"
+        "imageUrl": "../assets/animals/Sky.jpg",
+        "description": "Bright and alert 🐦 Enjoys flying in safe spaces. Loves variety in her diet and interesting perches. 🪶"
     }
 ]

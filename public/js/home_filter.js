@@ -1,4 +1,5 @@
 let allAnimals = [];
+let activeSpeciesFilter = null;
 
 // Load animals from json file
 fetch("../assets/animals.json")
@@ -7,10 +8,20 @@ fetch("../assets/animals.json")
     allAnimals = animals;
     displayAnimals(allAnimals);
     populateSpecies(allAnimals);
+    initializeButtonStyles();
     })
     .catch(err => console.error("Error loading animals.json", err));
 
-    
+// Initialize button styles
+function initializeButtonStyles() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.style.backgroundColor = 'rgb(222, 222, 222)';
+        btn.style.border = '0.5px solid #ccc';
+        btn.style.transition = 'all 0.3s ease';
+    });
+}
+
 // Open/Close form element and deselect radio buttons
 document.getElementById("detailed-search-btn").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
 document.getElementById("close-detailed-search").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
@@ -36,20 +47,95 @@ document.getElementById("advanced-filter-form").addEventListener("submit", (e) =
     toggleDetailedSearch();
 });
 
-// Basic filtering
+// Basic filtering with toggle functionality
 document.querySelectorAll(".filter-btn").forEach(button => {
     button.addEventListener("click", () => {
         const species = button.dataset.species;
-        filterState.species = species;
-        advancedFilter(filterState);
+        toggleSpeciesFilter(species);
     });
 });
+
+// Toggle species filter with visual feedback
+function toggleSpeciesFilter(species) {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const detailedSearchBtn = document.getElementById('detailed-search-btn');
+    
+    if (activeSpeciesFilter === species) {
+        activeSpeciesFilter = null;
+        buttons.forEach(btn => {
+            btn.style.backgroundColor = 'rgb(222, 222, 222)';
+            btn.style.border = '0.5px solid #ccc';
+            btn.style.boxShadow = 'none';
+        });
+        filterState.species = null;
+    } else {
+        buttons.forEach(btn => {
+            btn.style.backgroundColor = 'rgb(222, 222, 222)';
+            btn.style.border = '0.5px solid #ccc';
+            btn.style.boxShadow = 'none';
+        });
+        
+        activeSpeciesFilter = species;
+        const activeButton = document.querySelector(`.filter-btn[data-species="${species}"]`);
+        activeButton.style.backgroundColor = '#FFB366';
+        activeButton.style.border = '2px solid #FF8C1A';
+        activeButton.style.boxShadow = '0 0 15px rgba(255, 140, 26, 0.4)';
+        filterState.species = species;
+        
+        const detailedSearchForm = document.getElementById('advanced-filter-form');
+        if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
+            detailedSearchForm.classList.add('hidden');
+            detailedSearchBtn.style.display = 'flex';
+        }
+    }
+
+    advancedFilter(filterState);
+}
+
+// Reset filters functionality
+document.getElementById("reset-search-btn").addEventListener("click", resetFilters);
+
+function resetFilters() {
+    const buttons = document.querySelectorAll('.filter-btn');
+    activeSpeciesFilter = null;
+    
+    buttons.forEach(btn => {
+        btn.style.backgroundColor = 'rgb(222, 222, 222)';
+        btn.style.border = '0.5px solid #ccc';
+        btn.style.boxShadow = 'none';
+    });
+
+    filterState.species = null;
+    filterState.sex = null;
+    filterState.age.minAge = null;
+    filterState.age.maxAge = null;
+    
+    advancedFilter(filterState);
+    
+    const detailedSearchForm = document.getElementById('advanced-filter-form');
+    const detailedSearchBtn = document.getElementById('detailed-search-btn');
+    if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
+        detailedSearchForm.classList.add('hidden');
+        detailedSearchBtn.style.display = 'flex';
+    }
+    
+    // Reset form elements
+    deselectRadioButtons();
+    document.getElementById("sliderMinValue").value = 1;
+    document.getElementById("sliderMaxValue").value = 20;
+    
+    // Update slider display
+    const ranges = document.querySelectorAll(".drange input[type=range]");
+    const dmin = document.querySelector(".dmin");
+    const dmax = document.querySelector(".dmax");
+    dmin.innerHTML = ranges[0].value;
+    dmax.innerHTML = ranges[1].value;
+}
 
 function deselectRadioButtons() {
   const radios = document.querySelectorAll('.detailed-search-form input[type="radio"]');
   radios.forEach(radio => radio.checked = false);
 };
-
 
 function populateSpecies(animals) {
     let species = [...new Set(animals.map(a => a.species))];
@@ -105,12 +191,32 @@ function advancedFilter(filterState) {
         filteredAnimals = filteredAnimals.filter(a => a.age >= filterState.age.minAge && a.age <= filterState.age.maxAge);
 
     displayAnimals(filteredAnimals);
-
-    // Reset filter
-    filterState.species = filterState.sex = filterState.age.minAge = filterState.age.maxAge = null; 
 };
 
+// Pet details
+function openPetDetail(petId) {
+    window.location.href = `/pet/${petId}`;
+}
 
+// Animal displayal uses absolute URLs for images
+function displayAnimals(animals) {
+    let output = "";
+
+    for (let animal of animals) {
+    output += `
+    <div class="card">
+        <img src="${animal.imageUrl}" alt="${animal.name}" onclick="openPetDetail(${animal.id})" style="cursor: pointer;">
+        <p>${animal.name}</p>
+        <div>
+            <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
+            <span>${animal.sex}</span>
+            <a href="/contact?petId=${animal.id}">Adopt</a>
+        </div>
+    </div>
+    `;
+    }
+    document.getElementById("cards").innerHTML = output;
+};
 
 // Slider
 window.addEventListener("load", () => {

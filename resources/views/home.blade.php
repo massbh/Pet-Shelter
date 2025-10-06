@@ -42,6 +42,13 @@
                             </button>
                         </div>
 
+                        <!-- Reset button centered below filters -->
+                        <div class="reset-search-container">
+                            <button id="reset-search-btn">
+                                <p>Reset Filters</p>
+                            </button>
+                        </div>
+
                         <!-- Detailed search form -->
                         <form class="detailed-search-form hidden" id="advanced-filter-form">
                             <button type="button" id="close-detailed-search">&lt;</button> 
