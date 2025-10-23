@@ -1,16 +1,25 @@
 let allAnimals = [];
 let activeSpeciesFilter = null;
 
-// Load animals from json file
-fetch("../assets/animals.json")
+// Load animals from database API
+fetch("/api/pets")
     .then(response => response.json())
     .then(animals => {
-    allAnimals = animals;
+    // Transform database fields to match expected format
+    allAnimals = animals.map(pet => ({
+        id: pet.id,
+        name: pet.name,
+        species: pet.species,
+        age: pet.age,
+        sex: pet.sex,
+        imageUrl: pet.image_url,
+        description: pet.description
+    }));
     displayAnimals(allAnimals);
     populateSpecies(allAnimals);
     initializeButtonStyles();
     })
-    .catch(err => console.error("Error loading animals.json", err));
+    .catch(err => console.error("Error loading pets from database", err));
 
 // Initialize button styles
 function initializeButtonStyles() {
