@@ -128,7 +128,6 @@ nav a {
 #hero-frontpage-overlay p {
     margin: 0px;
     font-size: 12px;
-    text-shadow: 0 2px 6px #0000008f;
 }
 
 .query-search {
@@ -145,7 +144,6 @@ nav a {
     height: 100px;
     width: 100px;
     text-decoration: none;
-    box-shadow: 0, 8px, 18px rgba(0,0,0,1.25);
     color: black;
 
 }
@@ -204,7 +202,9 @@ nav a {
     background-color: #8a4510;
 }
 
-.advanced-filter-btn {
+
+
+.filter-btn-design {
     background-color: #AC5512;
     border-radius: 10px;
     padding: 10px 20px;
@@ -212,7 +212,7 @@ nav a {
     cursor: pointer;
     border: none;
 }
-.advanced-filter-btn:hover {
+.filter-btn-design:hover {
     background-color: #8a4510;;
 }
 
@@ -446,6 +446,16 @@ p {
     justify-content: space-between;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     padding-bottom: 16px;
+    /* añadido: transición suave para hover */
+    transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1);
+    will-change: transform, box-shadow;
+    cursor: pointer;
+}
+
+/* efecto al pasar el ratón */
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.16);
 }
 
 .card img {
@@ -620,7 +630,6 @@ button.sign-up-submit {
 form.sign-in input:not([type="checkbox"]) {
     width: 300px;
     height: 22px;
-    margin-bottom: 15px;
     box-sizing: border-box;
 }
 
@@ -1970,14 +1979,14 @@ footer {
 }
 
 .filter-btn-design.active {
-    background-color: #FFB366 !important;
-    border: 2px solid #FF8C1A !important;
-    box-shadow: 0 0 15px rgba(255, 140, 26, 0.4) !important;
+    background-color: #FFB366 ;
+    border: 2px solid #FF8C1A ;
+    box-shadow: 0 0 15px rgba(255, 140, 26, 0.4) ;
     transform: scale(1.05);
 }
 
 .filter-btn-design:hover {
-    background-color: #f2d8c3 !important;
+    background-color: #f2d8c3;
     transform: translateY(-2px);
     transition: all 0.3s ease;
 }
@@ -1990,9 +1999,9 @@ footer {
 }
 
 #reset-search-btn {
-    background-color: #f8f8f8;
-    border: 1px solid #d0d0d0;
-    color: #666;
+    background-color: #ffffff;
+    border: 1px solid #AC5512;
+    color: #AC5512;
     border-radius: 8px;
     height: 40px;
     width: 120px;
