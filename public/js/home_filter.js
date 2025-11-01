@@ -21,13 +21,12 @@ fetch("/api/pets")
     })
     .catch(err => console.error("Error loading pets from database", err));
 
-// Initialize button styles
+// Initialize button styles - ya no es necesario porque los estilos están en CSS
 function initializeButtonStyles() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
+    // Los estilos ya están definidos en CSS, solo removemos la clase active si existe
+    const filterButtons = document.querySelectorAll('.filter-btn[data-species]');
     filterButtons.forEach(btn => {
-        btn.style.backgroundColor = 'rgb(222, 222, 222)';
-        btn.style.border = '0.5px solid #ccc';
-        btn.style.transition = 'all 0.3s ease';
+        btn.classList.remove('active');
     });
 }
 
@@ -57,7 +56,7 @@ document.getElementById("advanced-filter-form").addEventListener("submit", (e) =
 });
 
 // Basic filtering with toggle functionality
-document.querySelectorAll(".filter-btn").forEach(button => {
+document.querySelectorAll(".filter-btn[data-species]").forEach(button => {
     button.addEventListener("click", () => {
         const species = button.dataset.species;
         toggleSpeciesFilter(species);
@@ -66,35 +65,28 @@ document.querySelectorAll(".filter-btn").forEach(button => {
 
 // Toggle species filter with visual feedback
 function toggleSpeciesFilter(species) {
-    const buttons = document.querySelectorAll('.filter-btn');
-    const detailedSearchBtn = document.getElementById('detailed-search-btn');
+    const buttons = document.querySelectorAll('.filter-btn[data-species]');
     
     if (activeSpeciesFilter === species) {
         activeSpeciesFilter = null;
         buttons.forEach(btn => {
-            btn.style.backgroundColor = 'rgb(222, 222, 222)';
-            btn.style.border = '0.5px solid #ccc';
-            btn.style.boxShadow = 'none';
+            btn.classList.remove('active');
         });
         filterState.species = null;
     } else {
         buttons.forEach(btn => {
-            btn.style.backgroundColor = 'rgb(222, 222, 222)';
-            btn.style.border = '0.5px solid #ccc';
-            btn.style.boxShadow = 'none';
+            btn.classList.remove('active');
         });
         
         activeSpeciesFilter = species;
         const activeButton = document.querySelector(`.filter-btn[data-species="${species}"]`);
-        activeButton.style.backgroundColor = '#FFB366';
-        activeButton.style.border = '2px solid #FF8C1A';
-        activeButton.style.boxShadow = '0 0 15px rgba(255, 140, 26, 0.4)';
+        activeButton.classList.add('active');
         filterState.species = species;
         
         const detailedSearchForm = document.getElementById('advanced-filter-form');
         if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
             detailedSearchForm.classList.add('hidden');
-            detailedSearchBtn.style.display = 'flex';
+            document.querySelector(".query-search").classList.remove('hidden');
         }
     }
 
@@ -105,13 +97,11 @@ function toggleSpeciesFilter(species) {
 document.getElementById("reset-search-btn").addEventListener("click", resetFilters);
 
 function resetFilters() {
-    const buttons = document.querySelectorAll('.filter-btn');
+    const buttons = document.querySelectorAll('.filter-btn[data-species]');
     activeSpeciesFilter = null;
     
     buttons.forEach(btn => {
-        btn.style.backgroundColor = 'rgb(222, 222, 222)';
-        btn.style.border = '0.5px solid #ccc';
-        btn.style.boxShadow = 'none';
+        btn.classList.remove('active');
     });
 
     filterState.species = null;
@@ -122,10 +112,14 @@ function resetFilters() {
     advancedFilter(filterState);
     
     const detailedSearchForm = document.getElementById('advanced-filter-form');
-    const detailedSearchBtn = document.getElementById('detailed-search-btn');
+    const querySearch = document.querySelector('.query-search');
+    
+    // Reset UI state - ensure query search is visible and detailed form is hidden
     if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
         detailedSearchForm.classList.add('hidden');
-        detailedSearchBtn.style.display = 'flex';
+        if (querySearch) {
+            querySearch.classList.remove('hidden');
+        }
     }
     
     // Reset form elements
@@ -137,8 +131,8 @@ function resetFilters() {
     const ranges = document.querySelectorAll(".drange input[type=range]");
     const dmin = document.querySelector(".dmin");
     const dmax = document.querySelector(".dmax");
-    dmin.innerHTML = ranges[0].value;
-    dmax.innerHTML = ranges[1].value;
+    if (dmin) dmin.innerHTML = ranges[0].value;
+    if (dmax) dmax.innerHTML = ranges[1].value;
 }
 
 function deselectRadioButtons() {
@@ -157,25 +151,6 @@ function populateSpecies(animals) {
             `;
     });
     document.getElementById("speciesButtons").innerHTML = speciesButtons;
-};
-
-function displayAnimals(animals) {
-    let output = "";
-
-    for (let animal of animals) {
-    output += `
-    <div class="card">
-        <img src="${animal.imageUrl}">
-        <p>${animal.name}</p>
-        <div>
-            <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
-            <span>${animal.sex}</span>
-            <a href="/contact?petId=${animal.id}">Adopt</a>
-        </div>
-    </div>
-    `;
-    }
-    document.getElementById("cards").innerHTML = output;
 };
 
 const filterState = {

@@ -255,6 +255,11 @@ nav a {
 
 .hidden { display: none !important; }
 
+.filter-btn.active {
+    background-color: #FFB366 !important;
+    border: 2px solid #FF8C1A !important;
+    box-shadow: 0 0 15px rgba(255, 140, 26, 0.4) !important;
+}
 
 /* Slider */
 /* STACK RANGE SLIDERS */
