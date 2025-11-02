@@ -178,11 +178,15 @@
         const today = new Date().toISOString().split('T')[0];
         document.getElementById('visitDate').min = today;
 
+        // Load saved form data if exists
+        loadSavedFormData();
+
         // Character counter for message
         const messageTextarea = document.getElementById('message');
         const charCount = document.getElementById('charCount');
         messageTextarea.addEventListener('input', function() {
           charCount.textContent = this.value.length;
+          saveFormData(); // Save on every input
         });
 
         // Define variables for Show/hide visit schedule based on subject selection
@@ -202,6 +206,14 @@
           } else {
             visitSchedule.classList.add('hidden');
           }
+          saveFormData(); // Save on change
+        });
+
+        // Auto-save form data on input
+        const formInputs = document.querySelectorAll('#contactForm input, #contactForm select, #contactForm textarea');
+        formInputs.forEach(input => {
+          input.addEventListener('input', saveFormData);
+          input.addEventListener('change', saveFormData);
         });
 
         // Form submission
@@ -216,6 +228,7 @@
           
           // Check if user is authenticated
           if (!isAuthenticated) {
+            saveFormData(); // Save before redirecting to sign in
             showAuthRequiredModal();
             return;
           }
@@ -227,6 +240,48 @@
         // Close modals when clicking outside
         setupModalCloseListeners();
       });
+
+      // Save form data to localStorage
+      function saveFormData() {
+        const formData = {
+          name: document.getElementById('name').value,
+          email: document.getElementById('email').value,
+          subject: document.getElementById('subject').value,
+          message: document.getElementById('message').value,
+          visitDate: document.getElementById('visitDate').value,
+          visitTime: document.getElementById('visitTime').value,
+          petInterest: document.getElementById('petInterest').value,
+          charCount: document.getElementById('charCount').textContent
+        };
+        localStorage.setItem('contactFormData', JSON.stringify(formData));
+      }
+
+      // Load saved form data from localStorage
+      function loadSavedFormData() {
+        const savedData = localStorage.getItem('contactFormData');
+        if (savedData) {
+          const formData = JSON.parse(savedData);
+          
+          document.getElementById('name').value = formData.name || '';
+          document.getElementById('email').value = formData.email || '';
+          document.getElementById('subject').value = formData.subject || '';
+          document.getElementById('message').value = formData.message || '';
+          document.getElementById('visitDate').value = formData.visitDate || '';
+          document.getElementById('visitTime').value = formData.visitTime || '';
+          document.getElementById('petInterest').value = formData.petInterest || '';
+          document.getElementById('charCount').textContent = formData.charCount || '0';
+
+          // Show/hide visit schedule based on loaded subject
+          if (formData.subject === 'adoption') {
+            document.getElementById('visitSchedule').classList.remove('hidden');
+          }
+        }
+      }
+
+      // Clear saved form data after successful submission
+      function clearSavedFormData() {
+        localStorage.removeItem('contactFormData');
+      }
 
       function validateForm() {
         let isValid = true;
@@ -316,6 +371,8 @@
       }
 
       function redirectToSignIn() {
+        // Save form data one more time before redirecting
+        saveFormData();
         window.location.href = '/signin';
       }
 
@@ -345,6 +402,9 @@
         document.getElementById('confirmationModal').classList.remove('hidden');
         console.log('Form submitted:', { name, email, subject, message, visitDate, visitTime, petInterest });
 
+        // Clear saved data after successful submission
+        clearSavedFormData();
+        
         document.getElementById('contactForm').reset();
         document.getElementById('charCount').textContent = '0';
         document.getElementById('visitSchedule').classList.add('hidden');
