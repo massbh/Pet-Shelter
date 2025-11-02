@@ -26,11 +26,13 @@
               <div class="form-group">
                 <label for="name">Full Name *</label>
                 <input type="text" id="name" name="name" required autocomplete="name" placeholder="Enter your full name" value="{{ auth()->check() ? auth()->user()->name : '' }}">
+                <div class="error-message" id="nameError"></div>
               </div>
 
               <div class="form-group">
                 <label for="email">Email Address *</label>
                 <input type="email" id="email" name="email" required autocomplete="email" placeholder="Enter your email address" value="{{ auth()->check() ? auth()->user()->email : '' }}">
+                <div class="error-message" id="emailError"></div>
               </div>
 
               <div class="form-group">
@@ -45,6 +47,7 @@
                   <option value="complaint">Complaint or suggestion</option>
                   <option value="other">Other</option>
                 </select>
+                <div class="error-message" id="subjectError"></div>
               </div>
 
               <!-- Visit schedule -->
@@ -55,6 +58,7 @@
                   <div class="form-group">
                     <label for="visitDate">Preferred Date *</label>
                     <input type="date" id="visitDate" name="visitDate" min="">
+                    <div class="error-message" id="visitDateError"></div>
                   </div>
                   <div class="form-group">
                     <label for="visitTime">Preferred Time *</label>
@@ -69,6 +73,7 @@
                       <option value="15:00">3:00 PM</option>
                       <option value="16:00">4:00 PM</option>
                     </select>
+                    <div class="error-message" id="visitTimeError"></div>
                   </div>
                 </div>
 
@@ -84,6 +89,7 @@
                 <p class="char-counter" id="messageHelp" aria-live="polite">
                   <span id="charCount">0</span>/500 characters
                 </p>
+                <div class="error-message" id="messageError"></div>
               </div>
 
               <button type="submit" class="submit-btn">Send Message</button>
@@ -203,19 +209,103 @@
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
           
+          // Validate form before checking authentication
+          if (!validateForm()) {
+            return; // Stop if form is invalid
+          }
+          
           // Check if user is authenticated
           if (!isAuthenticated) {
             showAuthRequiredModal();
             return;
           }
           
-          // If authenticated, proceed with form submission
+          // If authenticated and form is valid, proceed with submission
           showConfirmation();
         });
 
         // Close modals when clicking outside
         setupModalCloseListeners();
       });
+
+      function validateForm() {
+        let isValid = true;
+        
+        // Clear previous errors
+        clearErrors();
+        
+        // Validate name
+        const name = document.getElementById('name').value.trim();
+        if (!name) {
+          showError('name', 'This field is required');
+          isValid = false;
+        }
+        
+        // Validate email
+        const email = document.getElementById('email').value.trim();
+        if (!email) {
+          showError('email', 'This field is required');
+          isValid = false;
+        }
+        
+        // Validate subject
+        const subject = document.getElementById('subject').value;
+        if (!subject) {
+          showError('subject', 'Please select a subject');
+          isValid = false;
+        }
+        
+        // Validate visit fields if adoption is selected
+        if (subject === 'adoption') {
+          const visitDate = document.getElementById('visitDate').value;
+          const visitTime = document.getElementById('visitTime').value;
+          
+          if (!visitDate) {
+            showError('visitDate', 'This field is required');
+            isValid = false;
+          }
+          
+          if (!visitTime) {
+            showError('visitTime', 'This field is required');
+            isValid = false;
+          }
+        }
+        
+        // Validate message
+        const message = document.getElementById('message').value.trim();
+        if (!message) {
+          showError('message', 'This field is required');
+          isValid = false;
+        }
+        
+        return isValid;
+      }
+
+      function showError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const errorElement = document.getElementById(fieldId + 'Error');
+        
+        // Add error styles
+        field.classList.add('input-error');
+        
+        // Show error message
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+      }
+
+      function clearErrors() {
+        // Remove all error styles and messages
+        const errorElements = document.querySelectorAll('.error-message');
+        const errorInputs = document.querySelectorAll('.input-error');
+        
+        errorElements.forEach(el => {
+          el.style.display = 'none';
+        });
+        
+        errorInputs.forEach(input => {
+          input.classList.remove('input-error');
+        });
+      }
 
       function showAuthRequiredModal() {
         document.getElementById('authRequiredModal').classList.remove('hidden');

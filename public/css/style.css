@@ -1565,6 +1565,52 @@ footer {
     transform: translateY(-2px);
 }
 
+/* Validation Styles */
+.error-message {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-top: 5px;
+  display: none;
+  font-weight: 500;
+  padding-left: 8px;
+  border-left: 3px solid #e74c3c;
+  background: rgba(231, 76, 60, 0.05);
+  padding: 8px 12px;
+  border-radius: 0 4px 4px 0;
+}
+
+.input-error {
+  border-color: #e74c3c !important;
+  background: rgba(231, 76, 60, 0.05);
+}
+
+.input-error:focus {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+}
+
+/* Sign in pop-up (contact page) */
+.ultra-compact-modal {
+  padding: 1.25rem;
+  max-width: 250px;
+  text-align: center;
+}
+
+.sign-in-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background: #AC5512;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.sign-in-btn:hover {
+  background: #8a4510;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .contact-content {
@@ -2222,28 +2268,6 @@ footer {
         padding: 6px 12px;
         font-size: 0.85rem;
     }
-}
-
-/* Sign in pop-up (contact page) */
-.ultra-compact-modal {
-  padding: 1.25rem;
-  max-width: 250px;
-  text-align: center;
-}
-
-.sign-in-btn {
-  width: 100%;
-  padding: 0.5rem;
-  background: #AC5512;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 0.9rem;
-}
-
-.sign-in-btn:hover {
-  background: #AC5512;
 }
 
 /* add this utility */
