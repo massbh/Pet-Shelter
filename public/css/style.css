@@ -2224,5 +2224,27 @@ footer {
     }
 }
 
+/* Sign in pop-up (contact page) */
+.ultra-compact-modal {
+  padding: 1.25rem;
+  max-width: 250px;
+  text-align: center;
+}
+
+.sign-in-btn {
+  width: 100%;
+  padding: 0.5rem;
+  background: #AC5512;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.sign-in-btn:hover {
+  background: #AC5512;
+}
+
 /* add this utility */
 .hidden { display: none !important; }

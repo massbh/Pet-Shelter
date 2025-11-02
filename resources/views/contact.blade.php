@@ -119,10 +119,22 @@
           </aside>
         </div>
 
+        <!-- Sign in pop-up -->
+        <div id="authRequiredModal" class="modal hidden" role="dialog" aria-modal="true">
+          <div class="modal-content ultra-compact-modal">
+            <button type="button" class="close-modal" onclick="closeAuthModal()">&times;</button>
+            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🔒</div>
+            <p style="margin: 0 0 1rem 0; font-weight: 500;">Authentication required</p>
+            <button class="sign-in-btn" onclick="redirectToSignIn()">
+              Sign In to continue
+            </button>
+          </div>
+        </div>
+
         <!-- Confirmation modal -->
         <div id="confirmationModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
           <div class="modal-content">
-            <button type="button" class="close-modal" aria-label="Close modal">&times;</button>
+            <button type="button" class="close-modal" aria-label="Close modal" onclick="closeModal()">&times;</button>
             <h2 id="confirmTitle">Message Sent Successfully!</h2>
             <div class="confirmation-details">
               <p><strong>Thank you for contacting Happinest!</strong></p>
@@ -152,6 +164,9 @@
     <!-- Scripts -->
     <script src="{{ asset('js/loadComponents.js') }}"></script>
     <script>
+      // Check if user is authenticated (PHP variable passed to JavaScript)
+      const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};
+
       // Set minimum date for visit scheduling to today
       document.addEventListener('DOMContentLoaded', function() {
         const today = new Date().toISOString().split('T')[0];
@@ -187,9 +202,32 @@
         const contactForm = document.getElementById('contactForm');
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
+          
+          // Check if user is authenticated
+          if (!isAuthenticated) {
+            showAuthRequiredModal();
+            return;
+          }
+          
+          // If authenticated, proceed with form submission
           showConfirmation();
         });
+
+        // Close modals when clicking outside
+        setupModalCloseListeners();
       });
+
+      function showAuthRequiredModal() {
+        document.getElementById('authRequiredModal').classList.remove('hidden');
+      }
+
+      function closeAuthModal() {
+        document.getElementById('authRequiredModal').classList.add('hidden');
+      }
+
+      function redirectToSignIn() {
+        window.location.href = '/signin';
+      }
 
       function showConfirmation() {
         const name = document.getElementById('name').value;
@@ -226,12 +264,28 @@
         document.getElementById('confirmationModal').classList.add('hidden');
       }
 
-      window.addEventListener('click', function(e) {
-        const modal = document.getElementById('confirmationModal');
-        if (e.target === modal) {
-          closeModal();
-        }
-      });
+      function setupModalCloseListeners() {
+        // Close modals when clicking outside
+        window.addEventListener('click', function(e) {
+          const authModal = document.getElementById('authRequiredModal');
+          const confirmModal = document.getElementById('confirmationModal');
+          
+          if (e.target === authModal) {
+            closeAuthModal();
+          }
+          if (e.target === confirmModal) {
+            closeModal();
+          }
+        });
+
+        // Close modals with escape key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeAuthModal();
+            closeModal();
+          }
+        });
+      }
     </script>
   </body>
 </html>
