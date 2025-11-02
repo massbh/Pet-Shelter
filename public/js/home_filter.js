@@ -21,9 +21,8 @@ fetch("/api/pets")
     })
     .catch(err => console.error("Error loading pets from database", err));
 
-// Initialize button styles - ya no es necesario porque los estilos están en CSS
+// Initialize button styles
 function initializeButtonStyles() {
-    // Los estilos ya están definidos en CSS, solo removemos la clase active si existe
     const filterButtons = document.querySelectorAll('.filter-btn[data-species]');
     filterButtons.forEach(btn => {
         btn.classList.remove('active');

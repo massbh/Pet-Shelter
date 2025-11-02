@@ -28,7 +28,7 @@
 
                             <button class="filter-btn filter-btn-design" data-species="Cat">
                                 <img src="{{ asset('assets/Query-cat.png') }}" alt="Cats face">
-                                <p>Cat</p>
+                                <p>Cats</p>
                             </button>
 
                             <button class="filter-btn filter-btn-design" data-species="Other">

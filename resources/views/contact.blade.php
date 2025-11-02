@@ -25,12 +25,12 @@
               @csrf
               <div class="form-group">
                 <label for="name">Full Name *</label>
-                <input type="text" id="name" name="name" required autocomplete="name" placeholder="Enter your full name">
+                <input type="text" id="name" name="name" required autocomplete="name" placeholder="Enter your full name" value="{{ auth()->check() ? auth()->user()->name : '' }}">
               </div>
 
               <div class="form-group">
                 <label for="email">Email Address *</label>
-                <input type="email" id="email" name="email" required autocomplete="email" placeholder="Enter your email address">
+                <input type="email" id="email" name="email" required autocomplete="email" placeholder="Enter your email address" value="{{ auth()->check() ? auth()->user()->email : '' }}">
               </div>
 
               <div class="form-group">
@@ -74,7 +74,7 @@
 
                 <div class="form-group">
                   <label for="petInterest">Pet you're interested in (if any)</label>
-                  <input type="text" id="petInterest" name="petInterest" placeholder="Pet name or ID" value="{{  request('petId') }}">
+                  <input type="text" id="petInterest" name="petInterest" placeholder="Pet name or ID" value="{{ request('petId') }}">
                 </div>
               </fieldset>
 
