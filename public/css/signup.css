@@ -1,0 +1,217 @@
+/* Sign Up Page Styles */
+
+/* Body */
+.sign-in-body {
+    margin: 0;
+    padding: 120px 0 0 0;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    overflow: scroll;
+}
+
+/* Header Separator */
+hr.solid {
+    border: none;
+    border-top: 8px solid #AC5512;
+    margin: 0;
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    z-index: 5;
+}
+
+/* Sign Up Header */
+.sign-in-header img {
+    height: 70px;
+    width: 70px;
+}
+
+/* Form Container */
+.sign-in-form-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sign-in-form-container form.sign-in {
+    height: auto;
+    min-height: 375px;
+}
+
+/* Form Heading */
+h2.sign-in {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    color: #AC5512;
+}
+
+/* Form */
+form.sign-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    gap: 10px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: auto;
+    width: 350px;
+}
+
+form.sign-in input::placeholder {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    color: #999;
+}
+
+form.sign-in label {
+    align-self: flex-start;
+    margin-left: 25px;
+}
+
+form.sign-in input:not([type="checkbox"]) {
+    width: 300px;
+    height: 22px;
+    box-sizing: border-box;
+}
+
+/* Error List in Error Message */
+.error-message ul {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.25rem;
+}
+
+/* Password Helper Text */
+form.sign-in small {
+    color: #666;
+    font-size: 11px;
+    display: block;
+    margin-top: 0.25rem;
+    align-self: flex-start;
+    margin-left: 25px;
+    width: 300px;
+}
+
+/* Submit Button */
+button.sign-up-submit {
+    width: 150px;
+    height: 30px;
+    background-color: #AC5512;
+    border-radius: 5px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    margin-bottom: 20px;
+    border: 0;
+    cursor: pointer;
+}
+
+button.sign-up-submit:hover {
+    background-color: #8a4510;
+}
+
+/* Form Options */
+.form-options {
+    margin: 15px 0;
+    align-self: flex-start;
+    width: 300px;
+    margin-left: 25px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+    cursor: pointer;
+}
+
+.checkbox-label a {
+    color: #AC5512;
+    text-decoration: none;
+}
+
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+/* Sign In Link */
+.signup-link {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #e0e0e0;
+}
+
+.signup-link p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.signup-link a {
+    color: #AC5512;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}
+
+/* Error Messages */
+.error-message {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border: 1px solid #f5c6cb;
+    font-size: 14px;
+}
+
+.field-error {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.input-error {
+    border-color: #dc3545 !important;
+}
+
+/* Success Message */
+.success-message {
+    background: #d4edda;
+    color: #155724;
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    border: 1px solid #c3e6cb;
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .sign-in-form-container form.sign-in {
+        width: 90%;
+        padding: 20px 15px;
+    }
+    
+    .checkbox-label {
+        font-size: 13px;
+    }
+}

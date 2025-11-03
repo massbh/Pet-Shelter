@@ -1,0 +1,225 @@
+/* Home Page Specific Styles */
+
+/* Hero Section */
+#frontpage-hero-image {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hero-frontpage {
+    position: relative;
+    text-align: center;
+}
+
+#front-image-bar {
+    height: 10px;
+    background-color: #AC5512;
+}
+
+#hero-frontpage-overlay {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}
+
+#hero-frontpage-overlay h1 {
+    margin: 0px 0px 5px 0px;
+    color: white; 
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.8), 0px 0px 20px rgba(0,0,0,0.6);
+}
+
+#hero-frontpage-overlay p {
+    margin: 0px;
+    font-size: 12px;
+}
+
+/* Query Search Buttons */
+.query-search {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.query-search button {
+    background-color: rgb(222, 222, 222);
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 0.5;
+    height: 100px;
+    width: 100px;
+    text-decoration: none;
+    color: black;
+}
+
+.query-search button:hover {
+    background-color: rgb(198, 198, 198);
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.query-search button img {
+    width: 70%;
+}
+
+/* Detailed Search Form */
+.detailed-search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    color: black;
+    width: 600px;
+    min-height: 360px;
+    border: 2px solid black;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    margin-bottom: 100px;
+    margin-left: 120px;
+}
+
+.filter-fieldsets {
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+    gap: 10px;
+}
+
+.age-slider {
+    width: 300px;
+    border: none;
+    margin-top: 10px;
+}
+
+#close-detailed-search {
+    position: absolute;
+    top: 10%;
+    left: 15%;
+    width: 40px;
+    height: 40px;
+    background-color: #AC5512;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#close-detailed-search:hover {
+    background-color: #8a4510;
+}
+
+.detailed-search > section {
+    min-width: 300px;
+    margin-top: 20px;
+}
+
+.detailed-search div section {
+    border: 1px solid black;
+    border-radius: 5px;
+    min-width: 100px;
+    min-height: 100px;
+    padding: 5px;
+}
+
+/* Filter Buttons */
+.filter-btn-design {
+    background-color: #AC5512;
+    border-radius: 10px;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+
+.filter-btn-design:hover {
+    background-color: #8a4510;
+}
+
+.filter-btn.active {
+    background-color: #FFB366 !important;
+    border: 2px solid #FF8C1A !important;
+    box-shadow: 0 0 15px rgba(255, 140, 26, 0.4) !important;
+}
+
+.filter-btn-design.active {
+    background-color: #8B4410;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(172,85,18,0.4);
+}
+
+.filter-btn-design:hover {
+    background-color: #8B4410;
+    transform: translateY(-2px);
+}
+
+/* DSE Buttons (Filter Options) */
+.dse-btns label {
+    display: block;
+    justify-content: left;
+    border: none;
+    padding: 8px 12px;
+    margin: 4px 0;
+    cursor: pointer;
+    font-weight: 500;
+    background-color: #fff;
+    transition: all 0.2s ease;
+}
+
+.dse-btns input[type="radio"] {
+    display: none;
+}
+
+.dse-btns input[type="radio"]:checked + label {
+    background-color: #AC5512;
+}
+
+.dse-btns label:hover {
+    background-color: #f2d8c3;
+}
+
+/* Reset Search Button */
+.reset-search-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+#reset-search-btn {
+    background-color: #AC5512;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 8px 20px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+#reset-search-btn:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+#reset-search-btn p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Animal Adoption Section */
+.animal-adoption {
+    color: #AC5512;
+    margin-top: 150px;
+    text-align: center;
+}

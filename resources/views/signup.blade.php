@@ -4,41 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happinest - Sign Up</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <style>
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 0.75rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid #f5c6cb;
-            font-size: 14px;
-        }
-        .field-error {
-            color: #dc3545;
-            font-size: 12px;
-            margin-top: 0.25rem;
-            display: block;
-        }
-        .input-error {
-            border-color: #dc3545 !important;
-        }
-        .success-message {
-            background: #d4edda;
-            color: #155724;
-            padding: 0.75rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid #c3e6cb;
-            font-size: 14px;
-        }
-    </style>
+    
+    <link rel="stylesheet" href="{{ asset('css/sign-in-up-header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/signup.css') }}">
 </head>
 
 <body class="sign-in-body">
     <header class="sign-in-header">
-        <a href="/"><img src="{{ asset('assets/Logo.png') }}" style="height: 70px; width: 70px;" alt="Happinest Logo"></a>
+        <a href="/"><img src="{{ asset('assets/Logo.png') }}" alt="Happinest Logo"></a>
         <a href="/" class="logotext">HAPPINEST</a>
     </header>
 
@@ -53,7 +26,7 @@
             @if ($errors->any())
                 <div class="error-message">
                     <strong>Please correct the following errors:</strong>
-                    <ul style="margin: 0.5rem 0 0 0; padding-left: 1.25rem;">
+                    <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -102,7 +75,7 @@
                 autocomplete="new-password"
                 minlength="8"
                 maxlength="255">
-            <small style="color: #666; font-size: 11px; display: block; margin-top: 0.25rem;">
+            <small>
                 Must contain uppercase, lowercase, and number
             </small>
             @error('password')

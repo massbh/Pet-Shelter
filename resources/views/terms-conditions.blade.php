@@ -3,6 +3,8 @@
     <head>
         <title>Happinest - Terms & Conditions</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/terms.css') }}">
     </head>
     <body>
         

@@ -5,31 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happinest - SignIn</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    <style>
-        .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 0.75rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-            border: 1px solid #f5c6cb;
-            font-size: 14px;
-        }
-        .field-error {
-            color: #dc3545;
-            font-size: 12px;
-            margin-top: 0.25rem;
-            display: block;
-        }
-        .input-error {
-            border-color: #dc3545 !important;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/sign-in-up-header.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/signin.css') }}">
 </head>
 
 <body class="sign-in-body">
     <header class="sign-in-header">
-        <a href="/"><img src="{{ asset('assets/Logo.png') }}" style="height: 70px; width: 70px;" alt="Happinest Logo"></a>
+        <a href="/"><img src="{{ asset('assets/Logo.png') }}" alt="Happinest Logo"></a>
         <a href="/" class="logotext">HAPPINEST</a>
     </header>
 
@@ -67,7 +49,6 @@
 
             <label for="password">Password</label>
             <input 
-                style="margin-bottom: 5px;" 
                 type="password" 
                 id="password" 
                 name="password" 
@@ -83,7 +64,7 @@
 
             <button type="submit" class="sign-in-submit">Sign in</button>
 
-            <p style="font-size: 14px; font-weight: 300;">You don't have an account? <a class="sign-in-to-sign-up" href="{{ route('register') }}"> Create one</a></p>
+            <p>You don't have an account? <a class="sign-in-to-sign-up" href="{{ route('register') }}"> Create one</a></p>
         </form>
     </div>
 

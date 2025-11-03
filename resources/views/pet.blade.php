@@ -4,6 +4,8 @@
         <meta charset="utf-8" />
         <title>{{ $pet->name ?? 'Pet' }} - Adopt Me</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/pet.css') }}">
         <script src="{{ asset('js/loadComponents.js') }}" defer></script>
     </head>
     <body>
