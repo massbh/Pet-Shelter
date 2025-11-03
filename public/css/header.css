@@ -1,0 +1,108 @@
+@font-face {
+    font-family: 'Figtree';
+    src: url(../assets/Figtree-VariableFont_wght.ttf) format(truetype);
+    font-weight: 300 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(../assets/Inter-VariableFont_opsz,wght.ttf) format(truetype);
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+header.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 70px;
+    padding-right: 70px;
+}
+
+header.main-header div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+nav.header-nav {
+    background-color: #AC5512;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    font-family: 'Inter';
+    font-weight: 600;
+
+}
+
+nav.header-nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+}
+
+img.logo {
+    width: 70px;
+    height: 70px;
+}
+
+.sign-in-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #AC5512;
+    color: white;
+    border-radius: 24px;
+    padding: 10px 20px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 2px 8px rgba(172,85,18,0.15);
+    transition: all 0.3s cubic-bezier(.2,.8,.2,1);
+    font-family: 'Inter', sans-serif;
+}
+
+.sign-in-btn:hover {
+    background-color: #AC5512;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(172,85,18,0.35);
+}
+
+.sign-in-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(172,85,18,0.25);
+}
+
+img.sign-in-btn-icon {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.sign-in-btn:hover img.sign-in-btn-icon {
+    transform: scale(1.1);
+}
+
+p.sign-in-text {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 14px;
+    margin: 0;
+}
+
+a.logotext {
+    font-family: 'Figtree', sans-serif;
+    font-weight: 800;
+    font-size: 30px;
+    color: #AC5512;
+    text-decoration: none;
+}
