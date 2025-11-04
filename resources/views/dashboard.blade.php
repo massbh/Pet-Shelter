@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+      <script>
+      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
+      null);
+  </script>;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,13 +14,22 @@
             max-width: 1200px;
             margin: 2rem auto;
             padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
+
         .user-info {
-            background: #f8f9fa;
+            background-color: #fff3e0; 
             padding: 2rem;
-            border-radius: 8px;
+            border-radius: 12px;
             margin-bottom: 2rem;
+            border: 1px solid #ffd3a1; 
         }
+        .user-info h1 {
+            color: #FF6B00; 
+        }
+
         .badge {
             display: inline-block;
             padding: 0.25rem 0.75rem;
@@ -24,12 +37,13 @@
             font-size: 0.875rem;
             font-weight: 600;
         }
-        .badge-admin { background: #dc3545; color: white; }
-        .badge-user { background: #28a745; color: white; }
-        .badge-guest { background: #6c757d; color: white; }
-        .badge-pending { background: #ffc107; color: #000; }
-        .badge-approved { background: #28a745; color: white; }
-        .badge-rejected { background: #dc3545; color: white; }
+        .badge-admin { background-color: #FF6B00; color: #fff; } 
+        .badge-user { background-color: #FFA040; color: #fff; } 
+        .badge-guest { background-color: #f0f0f0; color: #333; }
+        .badge-pending { background-color: #fff4e6; color: #FF6B00; }
+        .badge-approved { background-color: #E6FFEB; color: #28a745; }
+        .badge-rejected { background-color: #FFE6E6; color: #dc3545; }
+
         .requests-table {
             width: 100%;
             border-collapse: collapse;
@@ -41,32 +55,47 @@
             text-align: left;
             border-bottom: 1px solid #dee2e6;
         }
-        .requests-table th {
-            background: #f8f9fa;
-            font-weight: 600;
-        }
+            .requests-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 1rem;
+                font-family: 'Inter', sans-serif; 
+            }
+            .requests-table th,
+            .requests-table td {
+                padding: 1rem;
+                border-bottom: 1px solid #ffe0b2; 
+            }
+            .requests-table th {
+                background-color: #fff3e0; 
+                color: #FF6B00;
+                font-weight: 600;
+            }
+            .requests-table tbody tr:hover {
+                background-color: #fff7ed; 
+            }
+
         .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
+            border-radius: 10px;
+            padding: 0.6rem 1.2rem;
             font-weight: 500;
-            transition: all 0.3s;
         }
-        .btn-primary {
-            background: #007bff;
-            color: white;
+
+            .btn-primary {
+            background-color: #FF6B00; 
+            color: #fff;
         }
         .btn-primary:hover {
-            background: #0056b3;
+            background-color: #e65c00; 
         }
         .btn-danger {
-            background: #dc3545;
-            color: white;
+            background-color: #FF6B00; 
+            color: #fff;
         }
         .btn-danger:hover {
-            background: #c82333;
+            background-color: #e65c00;
         }
+
         .alert {
             padding: 1rem;
             border-radius: 4px;
@@ -152,4 +181,6 @@
     <div id="footer-container"></div>
     <script src="{{ asset('js/loadComponents.js') }}"></script>
 </body>
+
+
 </html>

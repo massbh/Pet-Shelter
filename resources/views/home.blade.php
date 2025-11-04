@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+      <script>
+      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
+      null);
+  </script>;
     <head>
         <meta charset="utf-8" />
         <title>Home Page</title>
@@ -100,4 +104,6 @@
         <!-- Footer Container -->
         <div id="footer-container"></div>
     </body>
+  
+
 </html>

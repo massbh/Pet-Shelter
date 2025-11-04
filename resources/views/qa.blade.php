@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+      <script>
+      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
+      null);
+  </script>;
     <head>
         <title>Happinest - FAQs</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
@@ -201,4 +205,6 @@
         <!-- Script to load components -->
         <script src="js/loadComponents.js"></script>       
     </body>
+
+
 </html>
