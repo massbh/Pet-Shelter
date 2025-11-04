@@ -264,8 +264,11 @@
         if (savedData) {
           const formData = JSON.parse(savedData);
           
-          document.getElementById('name').value = formData.name || '';
-          document.getElementById('email').value = formData.email || '';
+          if (!isAuthenticated) {
+            document.getElementById('name').value = formData.name || '';
+            document.getElementById('email').value = formData.email || '';
+          }
+          
           document.getElementById('subject').value = formData.subject || '';
           document.getElementById('message').value = formData.message || '';
           document.getElementById('visitDate').value = formData.visitDate || '';
