@@ -105,20 +105,11 @@ p {
     gap: 5px;
 }
 
-.card > div:last-child a {
-    margin-left: auto;
-    margin-right: 10px;
-    background-color: rgb(228, 224, 222); 
-    border-radius: 10px;
-    padding: 5px;
-    text-decoration: none;
-    color: black;
+.card span,
+.card p {
+    color: rgb(255, 255, 255);
 }
 
-.card > div:last-child a:hover {
-    background-color: rgb(209, 209, 209); 
-    cursor: pointer;
-}
 
 div.cards {
     font-family: 'Figtree', sans-serif;
