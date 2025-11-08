@@ -32,13 +32,6 @@ class DatabaseSeeder extends Seeder
             'role' => 'user',
         ]);
 
-        User::create([
-            'name' => 'Guest User',
-            'email' => 'guest@happinest.com',
-            'password' => Hash::make('password123'),
-            'role' => 'guest',
-        ]);
-
         $jsonPath = public_path('assets/animals.json');
         
         if (file_exists($jsonPath)) {
