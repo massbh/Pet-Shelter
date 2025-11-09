@@ -30,12 +30,14 @@ function initializeButtonStyles() {
 }
 
 // Open/Close form element and deselect radio buttons
-document.getElementById("detailed-search-btn").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
-document.getElementById("close-detailed-search").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
+document.querySelector(".detailed-search-btn").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
+document.querySelector(".close-detailed-search").addEventListener("click", () => {toggleDetailedSearch(); deselectRadioButtons();});
 
 function toggleDetailedSearch() {
     document.querySelector(".query-search").classList.toggle("hidden");
     document.querySelector(".detailed-search-form").classList.toggle("hidden");
+    document.querySelector(".reset-search-container").classList.toggle("hidden");
+    document.querySelector(".animal-adoption").classList.toggle("filter-open");
 };
 
 // Advanced filtering
@@ -62,6 +64,8 @@ document.querySelectorAll(".filter-btn[data-species]").forEach(button => {
     });
 });
 
+
+
 // Toggle species filter with visual feedback
 function toggleSpeciesFilter(species) {
     const buttons = document.querySelectorAll('.filter-btn[data-species]');
@@ -70,27 +74,30 @@ function toggleSpeciesFilter(species) {
         activeSpeciesFilter = null;
         buttons.forEach(btn => {
             btn.classList.remove('active');
+            document.querySelector(".detailed-search-btn").classList.remove("active");
         });
         filterState.species = null;
     } else {
         buttons.forEach(btn => {
             btn.classList.remove('active');
+            document.querySelector(".detailed-search-btn").classList.remove("active");
         });
         
         activeSpeciesFilter = species;
         const activeButton = document.querySelector(`.filter-btn[data-species="${species}"]`);
         activeButton.classList.add('active');
         filterState.species = species;
-        
-        const detailedSearchForm = document.getElementById('advanced-filter-form');
-        if (detailedSearchForm && !detailedSearchForm.classList.contains('hidden')) {
-            detailedSearchForm.classList.add('hidden');
-            document.querySelector(".query-search").classList.remove('hidden');
-        }
     }
 
     advancedFilter(filterState);
 }
+// include to work with advanced filtering button
+document.querySelector(".advanced-filter-btn").addEventListener('click', () => {
+    document.querySelector(".detailed-search-btn").classList.add("active");
+    document.querySelectorAll('.filter-btn[data-species]').forEach(btn => {
+        btn.classList.remove("active")});
+
+});
 
 // Reset filters functionality
 document.getElementById("reset-search-btn").addEventListener("click", resetFilters);
@@ -102,6 +109,7 @@ function resetFilters() {
     buttons.forEach(btn => {
         btn.classList.remove('active');
     });
+    document.querySelector(".detailed-search-btn").classList.remove("active");
 
     filterState.species = null;
     filterState.sex = null;
@@ -193,7 +201,6 @@ function displayAnimals(animals) {
         <div>
             <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
             <span>${animal.sex}</span>
-            <a href="/contact?petId=${animal.id}">Adopt</a>
         </div>
     </div>
     `;
