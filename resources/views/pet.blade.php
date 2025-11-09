@@ -42,7 +42,15 @@
                         </div>
 
                         <div class="pet-actions">
-                            <a href="/contact?petId={{ $pet->id ?? '' }}" class="adopt-btn">Adopt Me</a>
+                            @auth
+                                @if(!Auth::user()->isAdmin())
+                                    <a href="/contact?petId={{ $pet->id ?? '' }}" class="adopt-btn">Adopt Me</a>
+                                @else
+                                    <p style="color: #666; font-style: italic;">Administrators cannot submit adoption requests. Please register as a user to adopt pets.</p>
+                                @endif
+                            @else
+                                <a href="/contact?petId={{ $pet->id ?? '' }}" class="adopt-btn">Adopt Me</a>
+                            @endauth
                             <button onclick="window.history.back()" class="back-btn">← Back</button>
                         </div>
                     </div>

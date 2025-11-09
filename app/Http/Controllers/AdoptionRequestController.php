@@ -23,6 +23,12 @@ class AdoptionRequestController extends Controller
      */
     public function create(Pet $pet)
     {
+        // Prevent admins from creating adoption requests
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('dashboard')
+                ->with('error', 'Administrators cannot submit adoption requests.');
+        }
+
         // Check if user already has a pending request for this pet
         $existingRequest = AdoptionRequest::where('user_id', Auth::id())
             ->where('pet_id', $pet->id)
@@ -42,26 +48,31 @@ class AdoptionRequestController extends Controller
      */
     public function store(Request $request)
     {
+        // Prevent admins from creating adoption requests
+        if (Auth::user()->isAdmin()) {
+            return redirect()->route('dashboard')
+                ->with('error', 'Administrators cannot submit adoption requests.');
+        }
+
         $validated = $request->validate([
             'pet_id' => 'required|exists:pets,id',
             'message' => 'nullable|string|max:1000',
         ]);
 
-        // Check if user already has a pending request for this pet
         $existingRequest = AdoptionRequest::where('user_id', Auth::id())
             ->where('pet_id', $validated['pet_id'])
             ->where('status', 'pending')
-            ->first();
+            ->exists();
 
         if ($existingRequest) {
             return redirect()->route('pets.show', $validated['pet_id'])
                 ->with('error', 'You already have a pending adoption request for this pet.');
         }
 
-        $adoptionRequest = AdoptionRequest::create([
+        AdoptionRequest::create([
             'user_id' => Auth::id(),
             'pet_id' => $validated['pet_id'],
-            'message' => $validated['message'] ?? null,
+            'message' => $validated['message'],
             'status' => 'pending',
         ]);
 
@@ -74,7 +85,6 @@ class AdoptionRequestController extends Controller
      */
     public function show(AdoptionRequest $adoptionRequest)
     {
-        // Check authorization
         if (!Auth::user()->isAdmin() && $adoptionRequest->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
@@ -93,15 +103,18 @@ class AdoptionRequestController extends Controller
             'admin_notes' => 'nullable|string|max:1000',
         ]);
 
-        $adoptionRequest->update($validated);
+        $adoptionRequest->update([
+            'status' => $validated['status'],
+            'admin_notes' => $validated['admin_notes'] ?? null,
+        ]);
 
-        // If approved, update pet status
         if ($validated['status'] === 'approved') {
             $adoptionRequest->pet->update(['status' => 'adopted']);
         }
 
-        return redirect()->back()
-            ->with('success', 'Adoption request status updated successfully!');
+        $statusMessage = ucfirst($validated['status']);
+        return redirect()->route('dashboard')
+            ->with('success', "Adoption request {$statusMessage} successfully!");
     }
 
     /**
@@ -109,14 +122,14 @@ class AdoptionRequestController extends Controller
      */
     public function destroy(AdoptionRequest $adoptionRequest)
     {
-        // Check authorization - users can delete their own requests, admins can delete any
+        // Only allow users to delete their own requests, or admins to delete any
         if (!Auth::user()->isAdmin() && $adoptionRequest->user_id !== Auth::id()) {
             abort(403, 'Unauthorized action.');
         }
 
         $adoptionRequest->delete();
 
-        return redirect()->back()
+        return redirect()->route('dashboard')
             ->with('success', 'Adoption request deleted successfully!');
     }
 
