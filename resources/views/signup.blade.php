@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{ asset('css/signup.css') }}">
 </head>
 
-<body class="sign-in-body">
+<body class="sign-up-body">
     <header class="sign-in-header">
         <a href="/"><img src="{{ asset('assets/Logo.png') }}" alt="Happinest Logo"></a>
         <a href="/" class="logotext">HAPPINEST</a>
@@ -17,11 +17,11 @@
 
     <hr class="solid">
 
-    <div class="sign-in-form-container">
-        <form class="sign-in" method="POST" action="{{ route('register') }}">
+    <div class="sign-up-form-container">
+        <form class="sign-up" method="POST" action="{{ route('register') }}">
             @csrf
             
-            <h2 class="sign-in">Create Account</h2>
+            <h2 class="sign-up">Create Account</h2>
 
             @if ($errors->any())
                 <div class="error-message">
@@ -50,10 +50,7 @@
             @enderror
 
             <label for="email">Email</label>
-            <input 
-                type="email" 
-                id="email" 
-                name="email" 
+            <input type="email" id="email" name="email" 
                 placeholder="Enter your email" 
                 value="{{ old('email') }}"
                 class="@error('email') input-error @enderror"
