@@ -62,9 +62,15 @@ Route::middleware(['auth'])->group(function () {
 // Admin-only routes
 Route::middleware(['auth', 'role:admin'])->group(function () {
     // Pet management
-    Route::get('/pets/create', [PetController::class, 'create'])->name('pets.create');
+    Route::get('admin/create', [PetController::class, 'create'])->name('pets.create');
+    Route::get('/pet/{pet}/edit', [PetController::class, 'edit'])->name('pets.edit');
+
+    // Admin-only pet gallery view
+    Route::get('/admin/pet-gallery', function () {
+        return view('pets.gallery');
+    })->name('pets.gallery');
+
     Route::post('/pets', [PetController::class, 'store'])->name('pets.store');
-    Route::get('/pets/{pet}/edit', [PetController::class, 'edit'])->name('pets.edit');
     Route::put('/pets/{pet}', [PetController::class, 'update'])->name('pets.update');
     Route::delete('/pets/{pet}', [PetController::class, 'destroy'])->name('pets.destroy');
     

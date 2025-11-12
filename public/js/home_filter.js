@@ -184,29 +184,119 @@ function advancedFilter(filterState) {
     displayAnimals(filteredAnimals);
 };
 
-// Pet details
+// These two functions return the route to pet detail view based on its id either for users or admins
 function openPetDetail(petId) {
     window.location.href = `/pet/${petId}`;
+}
+
+function openPetAdminEdit(petId) {
+    window.location.href = `/pet/${petId}/edit`;
 }
 
 // Animal displayal uses absolute URLs for images
 function displayAnimals(animals) {
     let output = "";
 
+    const isAdminGallery = window.location.pathname.startsWith('/admin/pet-gallery');
+
     for (let animal of animals) {
-    output += `
-    <div class="card">
-        <img src="${animal.imageUrl}" alt="${animal.name}" onclick="openPetDetail(${animal.id})" style="cursor: pointer;">
-        <p>${animal.name}</p>
-        <div>
-            <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
-            <span>${animal.sex}</span>
+        // Determine where to go when the image is clicked based on if it´s admin gallery or not
+        const imgOnClick = isAdminGallery
+            ? `openPetAdminEdit(${animal.id})`
+            : `openPetDetail(${animal.id})`;
+
+        // Create the card HTML, with admin buttons if in admin gallery
+        output += `
+        <div class="card">
+            <img src="${animal.imageUrl}" alt="${animal.name}" onclick="${imgOnClick}" style="cursor: pointer;">
+            <div class="card-name-row">
+                <p>${animal.name}</p>
+                ${isAdminGallery ? `
+                <div style="display: flex; justify-content: flex-end; gap: 6px;">
+                    <button class="view-pet-btn" onclick="event.stopPropagation(); openPetDetail(${animal.id})" title="View ${animal.name}'s adoption page">
+                        View
+                    </button>
+                    <button class="delete-pet-btn" onclick="event.stopPropagation(); deletePet(${animal.id}, '${animal.name}')" title="Delete ${animal.name}">
+                        Delete
+                    </button>
+                </div>
+                ` : ''}
+            </div>
+            <div class="card-info-row">
+                <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
+                <span>${animal.sex}</span>
+            </div>
         </div>
-    </div>
-    `;
+        `;
     }
     document.getElementById("cards").innerHTML = output;
-};
+}
+
+// Delete pet function
+function deletePet(petId, petName) {
+    if (!confirm(`Are you sure you want to delete ${petName}? This action cannot be undone.`)) {
+        return;
+    }
+
+    fetch(`/pets/${petId}`, {
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+            'Accept': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Reload the animals from the API after deleting one
+            fetch("/api/pets")
+                .then(response => response.json())
+                .then(animals => {
+                    allAnimals = animals.map(pet => ({
+                        id: pet.id,
+                        name: pet.name,
+                        species: pet.species,
+                        age: pet.age,
+                        sex: pet.sex,
+                        imageUrl: pet.image_url,
+                        description: pet.description
+                    }));
+                    displayAnimals(allAnimals);
+                    populateSpecies(allAnimals);
+                    
+                    // Show success message
+                    showFlashMessage('success', `${petName} has been deleted successfully!`);
+                })
+                .catch(err => console.error("Error reloading pets", err));
+        } else {
+            showFlashMessage('error', 'Failed to delete pet. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showFlashMessage('error', 'An error occurred while deleting the pet.');
+    });
+}
+
+// Show flash message function
+function showFlashMessage(type, message) {
+    // Remove any existing flash messages
+    const existingFlash = document.querySelector('.flash-message');
+    if (existingFlash) {
+        existingFlash.remove();
+    }
+
+    // Create new flash message
+    const flashDiv = document.createElement('div');
+    flashDiv.className = `flash-message ${type}`;
+    flashDiv.textContent = message;
+    
+    // Insert before the cards section
+    const cardsSection = document.querySelector('.cards');
+    if (cardsSection) {
+        cardsSection.parentNode.insertBefore(flashDiv, cardsSection);
+    }
+}
 
 // Slider
 window.addEventListener("load", () => {

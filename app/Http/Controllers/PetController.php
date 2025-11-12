@@ -64,8 +64,9 @@ class PetController extends Controller
         }
 
         $pet = Pet::create($validated);
-
-        return redirect()->route('pets.show', $pet)->with('success', 'Pet added successfully!');
+        
+        // Returns to the gallery view after adding a pet
+        return redirect()->route('pets.gallery')->with('success', 'Pet added successfully!');
     }
 
     /**
@@ -112,7 +113,7 @@ class PetController extends Controller
 
         $pet->update($validated);
 
-        return redirect()->route('pets.show', $pet)->with('success', 'Pet updated successfully!');
+        return redirect()->route('pets.gallery')->with('success', 'Pet updated successfully!');
     }
 
     /**
@@ -127,7 +128,15 @@ class PetController extends Controller
 
         $pet->delete();
 
-        return redirect()->route('pets.index')->with('success', 'Pet deleted successfully!');
+        // Check if request expects JSON (AJAX request)
+        if (request()->expectsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Pet deleted successfully!'
+            ]);
+        }
+
+        return redirect()->route('pets.gallery')->with('success', 'Pet deleted successfully!');
     }
 
     /**
