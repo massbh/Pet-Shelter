@@ -13,7 +13,7 @@
     <div id="header-container"></div>
 
     <main id="main-content">
-      <section class="contact-hero" aria-labelledby="contact-page-title">
+      <section class="hero" aria-labelledby="contact-page-title">
         <h1 id="contact-page-title">Contact Happinest</h1>
         <p>We're here to help you find your perfect companion or answer any questions</p>
       </section>

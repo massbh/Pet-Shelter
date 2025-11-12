@@ -1,30 +1,5 @@
 /* Contact Us Page Styles */
 
-.contact-hero {
-    background: linear-gradient(135deg, #AC5512 0%, #d4691b 100%);
-    color: white;
-    text-align: center;
-    padding: 60px 20px;
-    margin-bottom: 40px;
-}
-
-.contact-hero h1 {
-    color: white;
-    font-size: 2.5rem;
-    margin-bottom: 15px;
-    font-family: 'Figtree', sans-serif;
-    font-weight: 800;
-}
-
-.contact-hero p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    max-width: 600px;
-    margin: 0 auto;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-}
-
 .contact-container {
     max-width: 1200px;
     margin: 0 auto;

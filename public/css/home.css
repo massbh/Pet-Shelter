@@ -1,6 +1,3 @@
-/* Home Page Specific Styles */
-
-/* Hero Section */
 #frontpage-hero-image {
     display: block;
     width: 100%;
@@ -64,100 +61,6 @@
     width: 70%;
 }
 
-/* Detailed Search Form */
-.detailed-search-form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #fafafa 100%;
-    border-radius: 16px;
-    color: #222;
-    width: min(680px, 92%);
-    max-height: 520px;
-    border: 1px solid rgba(0,0,0,0.08);
-    padding: 32px 28px;
-    margin: 30px auto 80px auto;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    overflow: visible;
-    position: relative;
-    font-family: 'Inter', sans-serif;
-}
-
-#filter-title {
-    font-size: 22px;
-    font-weight: 700;
-    color: #AC5512;
-    margin: 0 0 24px 0;
-    font-family: 'Figtree', sans-serif;
-}
-
-.filter-fieldsets {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.fieldset-animal {
-    max-height: 200px;
-    overflow: auto;
-    padding-right: 8px;
-    scrollbar-width: thin;
-    scrollbar-color: #AC5512 #f0f0f0;
-}
-
-.fieldset-animal::-webkit-scrollbar {
-    width: 6px;
-}
-
-.fieldset-animal::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-}
-
-.fieldset-animal::-webkit-scrollbar-thumb {
-    background: #AC5512;
-    border-radius: 10px;
-}
-
-fieldset {
-    border: none;
-    padding: 0;
-    margin: 0;
-}
-
-fieldset > legend {
-    font-weight: 700;
-    font-size: 15px;
-    color: #333;
-    font-family: 'Inter', sans-serif;
-}
-
-.close-detailed-search {
-    position: absolute;
-    top: -16px;
-    left: -16px;
-    width: 44px;
-    height: 44px;
-    background: linear-gradient(135deg, #AC5512, #8a4510);
-    color: white;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 6px 16px rgba(172,85,18,0.3);
-    font-size: 18px;
-    transition: transform 180ms ease, box-shadow 180ms ease;
-}
-
-.close-detailed-search:hover {
-    transform: scale(1.08) rotate(-5deg);
-    box-shadow: 0 8px 20px rgba(172,85,18,0.4);
-}
-
 .advanced-filter-btn {
     padding: 14px 32px;
     background: linear-gradient(135deg, #AC5512, #8a4510);
@@ -176,16 +79,6 @@ fieldset > legend {
 .advanced-filter-btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 12px 28px rgba(172,85,18,0.3);
-}
-
-.detailed-search > section {
-    min-width: 100%;
-    margin-top: 8px;
-}
-
-.detailed-search div section {
-    border-radius: 10px;
-    padding: 12px;
 }
 
 /* Filter Buttons */
