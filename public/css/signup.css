@@ -1,7 +1,7 @@
 /* Sign Up Page Styles */
 
 /* Body */
-.sign-in-body {
+.sign-up-body {
     margin: 0;
     padding: 120px 0 0 0;
     height: auto;
@@ -30,7 +30,7 @@ hr.solid {
 }
 
 /* Form Container */
-.sign-in-form-container {
+.sign-up-form-container {
     margin-top: 30px;
     margin-bottom: 30px;
     width: 100%;
@@ -38,13 +38,13 @@ hr.solid {
     justify-content: center;
 }
 
-.sign-in-form-container form.sign-in {
+.sign-up-form-container form.sign-up {
     height: auto;
     min-height: 375px;
 }
 
 /* Form Heading */
-h2.sign-in {
+h2.sign-up {
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 22px;
@@ -52,7 +52,7 @@ h2.sign-in {
 }
 
 /* Form */
-form.sign-in {
+form.sign-up {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,21 +67,27 @@ form.sign-in {
     width: 350px;
 }
 
-form.sign-in input::placeholder {
+form.sign-up input::placeholder {
     font-family: 'Inter', sans-serif;
     font-weight: 300;
     color: #999;
 }
 
-form.sign-in label {
+form.sign-up label {
     align-self: flex-start;
     margin-left: 25px;
 }
 
-form.sign-in input:not([type="checkbox"]) {
+form.sign-up input:not([type="checkbox"]) {
     width: 300px;
     height: 22px;
     box-sizing: border-box;
+}
+
+form.sign-up input,
+form.sign-up textarea {
+    font-family: 'Inter';
+    font-weight: 400;
 }
 
 /* Error List in Error Message */
@@ -91,7 +97,7 @@ form.sign-in input:not([type="checkbox"]) {
 }
 
 /* Password Helper Text */
-form.sign-in small {
+form.sign-up small {
     color: #666;
     font-size: 11px;
     display: block;
@@ -206,7 +212,7 @@ button.sign-up-submit:hover {
 
 /* Responsive adjustments */
 @media (max-width: 480px) {
-    .sign-in-form-container form.sign-in {
+    .sign-up-form-container form.sign-up {
         width: 90%;
         padding: 20px 15px;
     }

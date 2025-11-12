@@ -96,6 +96,12 @@ form.sign-in input:not([type="checkbox"]) {
     box-sizing: border-box;
 }
 
+form.sign-in input,
+form.sign-in textarea {
+    font-family: 'Inter';
+    font-weight: 400;
+}
+
 /* Password Input */
 .sign-in input[type="password"] {
     margin-bottom: 5px;
@@ -148,6 +154,7 @@ a.forgotpass {
     margin-left: 25px;
     align-self: flex-start;
     margin-bottom: 10px;
+    color: #AC5512;
 }
 
 /* Sign Up Link */
