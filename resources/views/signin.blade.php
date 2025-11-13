@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+     <script>
+      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
+      null);
+  </script>;
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

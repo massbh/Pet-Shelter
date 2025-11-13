@@ -1,12 +1,17 @@
 <header class="main-header">
     <div>
-        <a href="/"><img class="logo" src="../assets/Logo.png" style="height: 70px; width: 70px;"></a>
+        <a href="/"
+            ><img
+                class="logo"
+                src="../assets/Logo.png"
+                style="height: 70px; width: 70px"
+        /></a>
         <a href="/" class="logotext">HAPPINEST</a>
     </div>
 
     <div class="header-buttons">
         <a href="/signin" class="sign-in-btn">
-            <img class="sign-in-btn-icon" src="../assets/Sign-in-profile.png">
+            <img class="sign-in-btn-icon" src="../assets/Sign-in-profile.png" />
             <p class="sign-in-text">Sign-In</p>
         </a>
     </div>
@@ -18,3 +23,16 @@
     <a href="/contact">CONTACT US</a>
     <a href="/qa">Q&A</a>
 </nav>
+<script>
+    const headerBtn = document.querySelector(".header-buttons .sign-up-btn p");
+
+    if (window.user) {
+        headerBtn.textContent = window.user.name;
+
+        document.querySelector(".header-buttons .sign-up-btn").href =
+            "/dashboard";
+    } else {
+        headerBtn.textContent = "Sign In";
+        document.querySelector(".header-buttons .sign-up-btn").href = "/signin";
+    }
+</script>

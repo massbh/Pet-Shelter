@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html>
+     <script>
+      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
+      null);
+  </script>;
     <head>
         <meta charset="utf-8" />
         <title>{{ $pet->name ?? 'Pet' }} - Adopt Me</title>
