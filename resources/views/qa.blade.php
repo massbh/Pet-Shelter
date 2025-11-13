@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
-     <script>
-      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
-      null);
-  </script>;
+
     <head>
         <title>Happinest - FAQs</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/qa.css') }}">
         <script src="{{ asset('js/qa_filter.js') }}"></script>
+        <script>
+    
+    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+</script>
+
     </head>
     <body>
         

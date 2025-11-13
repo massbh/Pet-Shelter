@@ -24,15 +24,23 @@
     <a href="/qa">Q&A</a>
 </nav>
 <script>
-    const headerBtn = document.querySelector(".header-buttons .sign-up-btn p");
+    // window.user is set in your Laravel view like:
+    // window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
 
-    if (window.user) {
-        headerBtn.textContent = window.user.name;
+    document.addEventListener("DOMContentLoaded", function () {
+        const user = window.user;
+        const signInBtnText = document.querySelector(".sign-in-text");
+        const signInBtnLink = document.querySelector(".sign-in-btn");
 
-        document.querySelector(".header-buttons .sign-up-btn").href =
-            "/dashboard";
-    } else {
-        headerBtn.textContent = "Sign In";
-        document.querySelector(".header-buttons .sign-up-btn").href = "/signin";
-    }
+        if (user && user.name) {
+            // Change button text to user's name
+            signInBtnText.textContent = user.name;
+            // Optionally redirect to profile page when clicked
+            signInBtnLink.setAttribute("href", "/profile");
+        } else {
+            // Keep default "Sign-In" text and link
+            signInBtnText.textContent = "Sign-In";
+            signInBtnLink.setAttribute("href", "/signin");
+        }
+    });
 </script>

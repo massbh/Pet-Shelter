@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-   <script>
-      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
-      null);
-  </script>;
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -11,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <script>
+    
+    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+</script>
+
   </head>
   <body>
 

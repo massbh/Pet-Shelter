@@ -1,13 +1,15 @@
-
 <!DOCTYPE html>
 <html>
-      <script>
-      window.user = @json(auth()->user() ? ['name' => auth()->user()->name] :
-      null);
-  </script>;
     <head>
         <title>Happinest - About Us</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/header.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/about.css') }}">
+        <script>
+    
+    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+</script>
+
     </head>
     <body>
         
@@ -121,7 +123,6 @@
         
         <!-- Script to load components -->
         <script src="{{ asset('js/loadComponents.js') }}"></script>
-    </body>
- 
 
+    </body>
 </html>
