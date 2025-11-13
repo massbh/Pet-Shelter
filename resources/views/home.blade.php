@@ -10,7 +10,6 @@
         <script src="{{ asset('js/loadComponents.js') }}" defer></script>
     </head>
     <body>
-        <!-- Header Container -->
         <div id="header-container"></div>
 
         <main>
@@ -98,8 +97,7 @@
                 <div class="cards" id="cards"></div>
             </section>
         </main>
-        
-        <!-- Footer Container -->
+
         <div id="footer-container"></div>
     </body>
 </html>

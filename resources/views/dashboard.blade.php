@@ -2,152 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Pet Shelter</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
-    <style>
-        .dashboard-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 2rem;
-        }
-        .user-info {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-        }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 4px;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-        .badge-admin { background: #dc3545; color: white; }
-        .badge-user { background: #28a745; color: white; }
-        .badge-pending { background: #ffc107; color: #000; }
-        .badge-approved { background: #28a745; color: white; }
-        .badge-rejected { background: #dc3545; color: white; }
-        .requests-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        .requests-table th,
-        .requests-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid #dee2e6;
-        }
-        .requests-table th {
-            background: #f8f9fa;
-            font-weight: 600;
-        }
-        .btn {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            margin-right: 0.25rem;
-        }
-        .btn-primary { background: #007bff; color: white; }
-        .btn-success { background: #28a745; color: white; }
-        .btn-danger { background: #dc3545; color: white; }
-            .btn-warning { background: #ffc107; color: #000; }
-        .alert {
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.5);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 10% auto;
-            padding: 2rem;
-            border-radius: 8px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        .close {
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            background: none;
-            color: #aaa;
-        }
-        .close:hover {
-            color: #000;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-        .form-group textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: inherit;
-            font-size: 0.95rem;
-            resize: vertical;
-            min-height: 100px;
-        }
-        .modal-actions {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: flex-end;
-            margin-top: 1rem;
-        }
-        .section {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            border: 1px solid #dee2e6;
-        }
-        .stats {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        .stat-box {
-            padding: 1rem;
-            background: #f8f9fa;
-            border-radius: 4px;
-            flex: 1;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+    <script src="{{ asset('js/loadComponents.js') }}"></script>
 </head>
 <body>
     <div id="header-container"></div>
@@ -158,23 +17,26 @@
         @endif
 
         <div class="user-info">
-            <h1>Welcome, {{ $user->name }}!</h1>
-            <p>
-                <strong>Email:</strong> {{ $user->email }}<br>
-                <strong>Role:</strong> 
-                <span class="badge badge-{{ $user->role }}">{{ ucfirst($user->role) }}</span>
-            </p>
-            <form action="{{ route('logout') }}" method="POST" style="display: inline;">
-                @csrf
-                <button type="submit" class="btn btn-danger">Logout</button>
-            </form>
+            <div class="user-info-content">
+                <div class="user-info-header">
+                    <h1>Welcome, {{ $user->name }}!</h1>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn btn-danger">Logout</button>
+                    </form>
+                </div>
+                <p>
+                    <strong>Email:</strong> {{ $user->email }}
+                    <span style="margin-left: 2rem;"><strong>Role:</strong> 
+                    <span class="badge badge-{{ $user->role }}">{{ ucfirst($user->role) }}</span></span>
+                </p>
+            </div>
         </div>
 
         {{-- ADMIN VIEW --}}
         @if($user->isAdmin())
             <div class="section">
-                <h2>📋 All Adoption Requests (Admin View)</h2>
-                <p style="color: #666; margin-bottom: 1rem;">Viewing requests from all users in the system</p>
+                <h2>📋 Adoption Requests</h2>
                 
                 <div class="stats">
                     <div class="stat-box">
@@ -230,17 +92,14 @@
                                     <td>{{ $request->created_at->format('M d, Y') }}</td>
                                     <td>
                                         @if($request->status === 'pending')
-                                            <button type="button" class="btn btn-success" onclick="openModal({{ $request->id }}, 'approved', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
+                                            <button type="button" class="btn btn-success btn-block" onclick="openModal({{ $request->id }}, 'approved', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
                                                 Approve
                                             </button>
-                                            <button type="button" class="btn btn-danger" onclick="openModal({{ $request->id }}, 'rejected', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
+                                            <button type="button" class="btn btn-danger btn-block" onclick="openModal({{ $request->id }}, 'rejected', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
                                                 Reject
                                             </button>
                                         @else
                                             <span class="badge badge-{{ $request->status }}">{{ ucfirst($request->status) }}</span>
-                                            @if($request->admin_notes)
-                                                <br><small style="color: #666; margin-top: 0.25rem; display: block;">{{ $request->admin_notes }}</small>
-                                            @endif
                                         @endif
                                     </td>
                                 </tr>
@@ -257,7 +116,6 @@
         @if(!$user->isAdmin())
         <div class="section">
             <h2>🐾 My Adoption Requests</h2>
-            <p style="color: #666; margin-bottom: 1rem;">Your personal adoption requests</p>
             
             @if($adoptionRequests->count() > 0)
                 <div class="stats">
@@ -321,10 +179,8 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger" onclick="return confirm('Cancel this request?')">Cancel</button>
                                         </form>
-                                    @elseif($request->status === 'approved')
-                                        <span style="color: #28a745; font-weight: bold;">✓ Approved!</span>
-                                    @elseif($request->status === 'rejected')
-                                        <span style="color: #dc3545;">✗ Rejected</span>
+                                    @else
+                                        <span style="color: #6c757d;">Closed Request</span>
                                     @endif
                                 </td>
                             </tr>
@@ -340,7 +196,6 @@
     </div>
 
     @if($user->isAdmin())
-    <!-- Modal for Admin Notes -->
     <div id="statusModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -353,7 +208,7 @@
                 <input type="hidden" name="status" id="modalStatus">
                 
                 <div class="form-group">
-                    <label for="admin_notes">Admin Notes <small>(Optional)</small></label>
+                    <label for="admin_notes">Admin Notes</label>
                     <textarea 
                         name="admin_notes" 
                         id="admin_notes" 
@@ -414,6 +269,5 @@
     @endif
 
     <div id="footer-container"></div>
-    <script src="{{ asset('js/loadComponents.js') }}"></script>
 </body>
 </html>

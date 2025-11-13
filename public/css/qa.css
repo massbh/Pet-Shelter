@@ -1,4 +1,10 @@
-/* Q&A Page Styles */
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Figtree', sans-serif;
+}
 
 .qa-hero {
     background: linear-gradient(135deg, #AC5512 0%, #d4691b 100%);
@@ -12,7 +18,6 @@
     color: white;
     font-size: 2.5rem;
     margin-bottom: 15px;
-    font-family: 'Figtree', sans-serif;
     font-weight: 800;
 }
 
@@ -21,7 +26,6 @@
     opacity: 0.9;
     max-width: 600px;
     margin: 0 auto;
-    font-family: 'Inter', sans-serif;
     font-weight: 400;
 }
 
@@ -29,7 +33,6 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
-    font-family: 'Inter', sans-serif;
 }
 
 .qa-search button {
@@ -63,7 +66,6 @@
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 14px;
 }
@@ -119,7 +121,6 @@
     color: #AC5512;
     font-size: 1.2rem;
     font-weight: 600;
-    font-family: 'Figtree', sans-serif;
 }
 
 .qa-item.active .question h3 {
@@ -182,7 +183,6 @@
 .qa-contact h2 {
     color: #AC5512;
     margin-bottom: 15px;
-    font-family: 'Figtree', sans-serif;
     font-weight: 700;
     font-size: 2rem;
 }
@@ -209,7 +209,6 @@
 .contact-option h4 {
     color: #AC5512;
     margin-bottom: 10px;
-    font-family: 'Figtree', sans-serif;
     font-weight: 600;
     font-size: 1.2rem;
 }
@@ -228,7 +227,6 @@
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    font-family: 'Inter', sans-serif;
 }
 
 .contact-btn:hover {
