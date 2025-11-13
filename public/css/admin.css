@@ -268,7 +268,7 @@
 }
 
 .view-pet-btn { 
-    width: 35%;
+    width: 25%;
     background-color: #249c40;
     color: white;
     border: none;
@@ -291,7 +291,7 @@
 }
 
 .delete-pet-btn {
-    width: 45%;
+    width: 30%;
     background-color: #ac2828;
     color: white;
     border: none;

@@ -211,21 +211,21 @@ function displayAnimals(animals) {
             <img src="${animal.imageUrl}" alt="${animal.name}" onclick="${imgOnClick}" style="cursor: pointer;">
             <div class="card-name-row">
                 <p>${animal.name}</p>
-                ${isAdminGallery ? `
-                <div style="display: flex; justify-content: flex-end; gap: 6px;">
-                    <button class="view-pet-btn" onclick="event.stopPropagation(); openPetDetail(${animal.id})" title="View ${animal.name}'s adoption page">
-                        View
-                    </button>
-                    <button class="delete-pet-btn" onclick="event.stopPropagation(); deletePet(${animal.id}, '${animal.name}')" title="Delete ${animal.name}">
-                        Delete
-                    </button>
-                </div>
-                ` : ''}
             </div>
             <div class="card-info-row">
                 <span class="badge">${animal.age} ${animal.age == 1 ? "year" : "years"}</span>
                 <span>${animal.sex}</span>
             </div>
+            ${isAdminGallery ? `
+            <div style="display: flex; justify-content: left; margin: 0px 6px; gap: 6px;">
+                <button class="view-pet-btn" onclick="event.stopPropagation(); openPetDetail(${animal.id})" title="View ${animal.name}'s adoption page">
+                    View
+                </button>
+                <button class="delete-pet-btn" onclick="event.stopPropagation(); deletePet(${animal.id}, '${animal.name}')" title="Delete ${animal.name}">
+                    Delete
+                </button>
+            </div>
+            ` : ''}
         </div>
         `;
     }
