@@ -12,9 +12,13 @@ class AdoptionRequest extends Model
     protected $fillable = [
         'user_id',
         'pet_id',
+        'name',
+        'email',
+        'visitDate',
+        'visitTime',
         'message',
         'status',
-        'admin_notes',
+        'admin_notes'
     ];
 
     public function user()

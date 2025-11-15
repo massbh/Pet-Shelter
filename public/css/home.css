@@ -181,6 +181,11 @@
     background-color: #f2d8c3;
 }
 
+.title-p {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9), 0px 0px 12px rgba(0,0,0,0.8);
+    font-weight: 400;
+}
+
 /* Reset Search Button */
 .reset-search-container {
     display: flex;

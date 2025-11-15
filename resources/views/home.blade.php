@@ -23,8 +23,8 @@
                 <img src="{{ asset('assets/Front-image.png') }}" id="frontpage-hero-image" alt="Cuddling cat and dog">
                 <div id="front-image-bar"></div>
                 <div id="hero-frontpage-overlay">
-                    <h1>Every Pet Deserves a Second Chance — Maybe You are Theirs.</h1>
-                    <p>Adopt pets ready to fill your home with love and laughter. Help us make a difference.</p>
+                    <h1>Every Pet Deserves a Second Chance - Maybe You are Theirs</h1>
+                    <p class="title-p">Adopt pets ready to fill your home with love and laughter. Help us make a difference.</p>
 
                     <div>
                         <div class="query-search">
