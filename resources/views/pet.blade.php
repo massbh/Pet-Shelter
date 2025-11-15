@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8" />
         <title>{{ $pet->name ?? 'Pet' }} - Adopt Me</title>
@@ -7,6 +8,11 @@
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/pet.css') }}">
         <script src="{{ asset('js/loadComponents.js') }}" defer></script>
+        <script>
+    
+    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+</script>
+
     </head>
     <body>
         <main>

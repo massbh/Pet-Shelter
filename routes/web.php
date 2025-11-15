@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\AdoptionRequestController;
 use App\Models\Pet;
@@ -22,6 +23,10 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+
+Route::post('/contact', [ContactUsController::class, 'contactFormSubmit'])
+    ->name('contact.submit')
+    ->middleware( 'throttle:3,1'); //Only 3 contact forms per minutes just in case
 
 Route::get('/privacy-policy', function () {
     return view('privacy-policy');

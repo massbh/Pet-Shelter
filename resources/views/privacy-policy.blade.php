@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <title>Happinest - Privacy Policy</title>
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/privacy.css') }}">
+        <script>
+    
+    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+</script>
+
     </head>
     <body>
         

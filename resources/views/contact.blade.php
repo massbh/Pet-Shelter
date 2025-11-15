@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -7,6 +8,11 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
+    <script>
+    
+    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+</script>
+
   </head>
   <body>
 
@@ -220,23 +226,58 @@
 
         // Form submission
         const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', async function(e) {
           e.preventDefault();
           
           // Validate form before checking authentication
           if (!validateForm()) {
-            return; // Stop if form is invalid
+            return;
           }
           
           // Check if user is authenticated
           if (!isAuthenticated) {
-            saveFormData(); // Save before redirecting to sign in
+            saveFormData();
             showAuthRequiredModal();
             return;
           }
           
-          // If authenticated and form is valid, proceed with submission
-          showConfirmation();
+          // Prepare form data
+          const formData = new FormData(contactForm);
+          
+          try {
+            // Send data to server
+            const response = await fetch('/contact', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+              }
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok && result.success) {
+              // Show success confirmation
+              showConfirmation();
+              clearSavedFormData();
+              contactForm.reset();
+              document.getElementById('charCount').textContent = '0';
+              document.getElementById('visitSchedule').classList.add('hidden');
+            } else {
+              // Show error message
+              alert(result.message || 'An error occurred. Please try again.');
+              
+              // Display validation errors if any
+              if (result.errors) {
+                Object.keys(result.errors).forEach(field => {
+                  showError(field, result.errors[field][0]);
+                });
+              }
+            }
+          } catch (error) {
+            console.error('Error:', error);
+            alert('Network error. Please check your connection and try again.');
+          }
         });
 
         // Close modals when clicking outside

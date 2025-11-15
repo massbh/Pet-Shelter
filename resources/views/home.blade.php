@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
     <head>
         <meta charset="utf-8" />
         <title>Home Page</title>
@@ -8,9 +9,13 @@
         <link rel="stylesheet" href="{{ asset('css/home.css') }}">
         <script src="{{ asset('js/home_filter.js') }}" defer></script>
         <script src="{{ asset('js/loadComponents.js') }}" defer></script>
+        <script>
+    
+    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+</script>
+
     </head>
     <body>
-        <!-- Header Container -->
         <div id="header-container"></div>
 
         <main>
@@ -18,8 +23,8 @@
                 <img src="{{ asset('assets/Front-image.png') }}" id="frontpage-hero-image" alt="Cuddling cat and dog">
                 <div id="front-image-bar"></div>
                 <div id="hero-frontpage-overlay">
-                    <h1>Every Pet Deserves a Second Chance - Maybe You are Theirs.</h1>
-                    <p>Adopt pets ready to fill your home with love and laughter. Help us make a difference.</p>
+                    <h1>Every Pet Deserves a Second Chance - Maybe You are Theirs</h1>
+                    <p class="title-p">Adopt pets ready to fill your home with love and laughter. Help us make a difference.</p>
 
                     <div>
                         <div class="query-search">
@@ -98,8 +103,7 @@
                 <div class="cards" id="cards"></div>
             </section>
         </main>
-        
-        <!-- Footer Container -->
+
         <div id="footer-container"></div>
     </body>
 </html>

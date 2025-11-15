@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Pet;
 use App\Models\AdoptionRequest;
 use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class AdoptionRequestSeeder extends Seeder
 {
@@ -86,41 +87,74 @@ class AdoptionRequestSeeder extends Seeder
             AdoptionRequest::create([
                 'user_id' => $jane->id,
                 'pet_id' => $pets[0]['id'] ?? Pet::first()->id,
-                'message' => 'I have experience with turtles and would love to adopt Nora.',
+                'name' => $jane->name,
+                'email' => $jane->email,
+                'visitDate' => Carbon::now()->addDays(3)->format('Y-m-d'),
+                'visitTime' => '10:00',
+                'message' => 'I have experience with dogs and would love to adopt Max. I have a large backyard and plenty of time for walks.',
                 'status' => 'pending',
             ]);
 
             AdoptionRequest::create([
                 'user_id' => $jane->id,
                 'pet_id' => $pets[1]['id'] ?? Pet::skip(1)->first()->id,
-                'message' => 'I am looking for a calm companion. Milo seems perfect for my apartment.',
+                'name' => $jane->name,
+                'email' => $jane->email,
+                'visitDate' => Carbon::now()->addDays(5)->format('Y-m-d'),
+                'visitTime' => '14:00',
+                'message' => 'I am looking for a calm companion. Luna seems perfect for my apartment.',
                 'status' => 'approved',
-                'admin_notes' => 'Approved - Great fit for Milo!',
+                'admin_notes' => 'Approved - Great fit for Luna! Home visit scheduled.',
             ]);
 
+            // Create adoption requests for John
             AdoptionRequest::create([
                 'user_id' => $john->id,
                 'pet_id' => $pets[2]['id'] ?? Pet::skip(2)->first()->id,
-                'message' => 'I have two children and looking for a family-friendly dog. Bella would be perfect.',
+                'name' => $john->name,
+                'email' => $john->email,
+                'visitDate' => Carbon::now()->addDays(7)->format('Y-m-d'),
+                'visitTime' => '11:00',
+                'message' => 'I have two children and looking for a family-friendly dog. Charlie would be perfect for our family.',
                 'status' => 'pending',
             ]);
 
             AdoptionRequest::create([
                 'user_id' => $john->id,
                 'pet_id' => $pets[3]['id'] ?? Pet::skip(3)->first()->id,
-                'message' => 'I want to adopt Simba for my daughter.',
+                'name' => $john->name,
+                'email' => $john->email,
+                'visitDate' => Carbon::now()->addDays(2)->format('Y-m-d'),
+                'visitTime' => '09:00',
+                'message' => 'I want to adopt Bella for my daughter. We have experience with cats.',
                 'status' => 'rejected',
-                'admin_notes' => 'Unfortunately, we need more information about your living situation.',
+                'admin_notes' => 'Unfortunately, we need more information about your living situation and references.',
             ]);
 
             AdoptionRequest::create([
                 'user_id' => $john->id,
                 'pet_id' => $pets[4]['id'] ?? Pet::skip(4)->first()->id,
-                'message' => 'Daisy seems like a great flat dog.',
+                'name' => $john->name,
+                'email' => $john->email,
+                'visitDate' => Carbon::now()->addDays(10)->format('Y-m-d'),
+                'visitTime' => '15:00',
+                'message' => 'Rocky seems like a great dog for an active lifestyle. I go jogging every morning.',
+                'status' => 'pending',
+            ]);
+
+            // Create an adoption request without a specific pet (general interest)
+            AdoptionRequest::create([
+                'user_id' => $jane->id,
+                'pet_id' => $pets[5]['id'] ?? Pet::skip(4)->first()->id,
+                'name' => $jane->name,
+                'email' => $jane->email,
+                'visitDate' => Carbon::now()->addDays(4)->format('Y-m-d'),
+                'visitTime' => '13:00',
+                'message' => 'I would like to visit the shelter to see all available cats. I am open to adopting any friendly cat.',
                 'status' => 'pending',
             ]);
         }
 
-        $this->command->info('Adoption requests seeded successfully!');
+        $this->command->info('Adoption requests seeded successfully with visit dates and times!');
     }
 }

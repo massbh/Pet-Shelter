@@ -1,12 +1,17 @@
 <header class="main-header">
     <div>
-        <a href="/"><img class="logo" src="../assets/Logo.png" style="height: 70px; width: 70px;"></a>
+        <a href="/"
+            ><img
+                class="logo"
+                src="../assets/Logo.png"
+                style="height: 70px; width: 70px"
+        /></a>
         <a href="/" class="logotext">HAPPINEST</a>
     </div>
 
     <div class="header-buttons">
         <a href="/signin" class="sign-in-btn">
-            <img class="sign-in-btn-icon" src="../assets/Sign-in-profile.png">
+            <img class="sign-in-btn-icon" src="../assets/Sign-in-profile.png" />
             <p class="sign-in-text">Sign-In</p>
         </a>
     </div>
@@ -18,3 +23,24 @@
     <a href="/contact">CONTACT US</a>
     <a href="/qa">Q&A</a>
 </nav>
+<script>
+    // window.user is set in your Laravel view like:
+    // window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const user = window.user;
+        const signInBtnText = document.querySelector(".sign-in-text");
+        const signInBtnLink = document.querySelector(".sign-in-btn");
+
+        if (user && user.name) {
+            // Change button text to user's name
+            signInBtnText.textContent = user.name;
+            // Optionally redirect to profile page when clicked
+            signInBtnLink.setAttribute("href", "/profile");
+        } else {
+            // Keep default "Sign-In" text and link
+            signInBtnText.textContent = "Sign-In";
+            signInBtnLink.setAttribute("href", "/signin");
+        }
+    });
+</script>

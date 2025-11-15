@@ -183,21 +183,6 @@
 /* Sign in pop-up (contact page) */
 
 
-.sign-in-btn {
-    background-color: #AC5512;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
-}
-
-.sign-in-btn:hover {
-    background-color: #8a4510;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
 
