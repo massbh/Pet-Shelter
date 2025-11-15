@@ -43,7 +43,7 @@
                                 <p>Other Animals</p>
                             </button>
 
-                            <button class="filter-btn filter-btn-design" id="detailed-search-btn">
+                            <button class="filter-btn filter-btn-design detailed-search-btn">
                                 <img src="{{ asset('assets/Filter-logo.png') }}" alt="Filter icon">
                                 <p>Detailed search</p>
                             </button>
@@ -58,12 +58,12 @@
 
                         <!-- Detailed search form -->
                         <form class="detailed-search-form hidden" id="advanced-filter-form">
-                            <button type="button" id="close-detailed-search">&lt;</button> 
+                            <button type="button" class="close-detailed-search">🡨</button> 
                             <h2 id="filter-title">Detailed Search</h2>
                             
                             <div class="filter-fieldsets">
                                 <!-- Filter by Animal -->
-                                <fieldset>
+                                <fieldset class="fieldset-animal">
                                     <Legend>Animal</Legend>
                                     <div id="speciesButtons" class="dse-btns"></div>
                                 </fieldset>

@@ -52,6 +52,37 @@ p {
     text-align: center;
 }
 
+/* Set margin and padding to 0 so there´s no blank spaces*/
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    background: linear-gradient(135deg, #AC5512 0%, #d4691b 100%);
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-family: 'Figtree', sans-serif;
+    font-weight: 800;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
 #cards {
     display: grid;
     grid-template-columns: repeat(4, auto);
@@ -74,6 +105,12 @@ p {
     transition: transform 220ms cubic-bezier(.2,.8,.2,1), box-shadow 220ms cubic-bezier(.2,.8,.2,1);
     will-change: transform, box-shadow;
     cursor: pointer;
+}
+
+/* Allow cards with delete button to expand */
+.card:has(.delete-pet-btn) {
+    height: auto;
+    min-height: 250px;
 }
 
 .card:hover {
@@ -99,26 +136,30 @@ p {
     margin-top: 0px;
 }
 
+.card-name-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 0 6px;
+}
+
+.card-name-row p {
+    margin: 0;
+    flex: 1;
+}
+
 .card > div:last-child {
     display: flex;
     align-items: center;
     gap: 5px;
 }
 
-.card > div:last-child a {
-    margin-left: auto;
-    margin-right: 10px;
-    background-color: rgb(228, 224, 222); 
-    border-radius: 10px;
-    padding: 5px;
-    text-decoration: none;
-    color: black;
+.card span,
+.card p {
+    color: rgb(255, 255, 255);
 }
 
-.card > div:last-child a:hover {
-    background-color: rgb(209, 209, 209); 
-    cursor: pointer;
-}
 
 div.cards {
     font-family: 'Figtree', sans-serif;
@@ -225,4 +266,305 @@ footer {
 
 .hidden { 
     display: none !important; 
+}
+
+.detailed-search-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fafafa 100%;
+    border-radius: 16px;
+    color: #222;
+    width: min(680px, 92%);
+    max-height: 520px;
+    border: 1px solid rgba(0,0,0,0.08);
+    padding: 32px 28px;
+    margin: 30px auto 80px auto;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    overflow: visible;
+    position: relative;
+    font-family: 'Inter', sans-serif;
+}
+
+#filter-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #AC5512;
+    margin: 0 0 24px 0;
+    font-family: 'Figtree', sans-serif;
+}
+
+.filter-fieldsets {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.fieldset-animal {
+    max-height: 200px;
+    overflow: auto;
+    padding-right: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: #AC5512 #f0f0f0;
+}
+
+.fieldset-animal::-webkit-scrollbar {
+    width: 6px;
+}
+
+.fieldset-animal::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+}
+
+.fieldset-animal::-webkit-scrollbar-thumb {
+    background: #AC5512;
+    border-radius: 10px;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+fieldset > legend {
+    font-weight: 700;
+    font-size: 15px;
+    color: #333;
+    font-family: 'Inter', sans-serif;
+}
+
+.close-detailed-search {
+    position: absolute;
+    top: -16px;
+    left: -16px;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #AC5512, #8a4510);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 16px rgba(172,85,18,0.3);
+    font-size: 18px;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.close-detailed-search:hover {
+    transform: scale(1.08) rotate(-5deg);
+    box-shadow: 0 8px 20px rgba(172,85,18,0.4);
+}
+
+.advanced-filter-btn {
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #AC5512, #8a4510);
+    color: white;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 8px;
+    box-shadow: 0 8px 20px rgba(172,85,18,0.2);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+    font-family: 'Inter', sans-serif;
+}
+
+.advanced-filter-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(172,85,18,0.3);
+}
+
+.detailed-search > section {
+    min-width: 100%;
+    margin-top: 8px;
+}
+
+.detailed-search div section {
+    border-radius: 10px;
+    padding: 12px;
+}
+
+/* DSE Buttons (Filter Options)*/
+.dse-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.dse-btns label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    margin: 0;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #fff;
+    color: #555;
+    border-radius: 999px;
+    border: 1.5px solid rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    transition: all 160ms cubic-bezier(0.4, 0, 0.2, 1);
+    font-family: 'Inter', sans-serif;
+}
+
+.dse-btns input[type="radio"] {
+    display: none;
+}
+
+.dse-btns input[type="radio"]:checked + label {
+    background: linear-gradient(135deg, #AC5512, #8a4510);
+    color: #fff;
+    border-color: #AC5512;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 20px rgba(172,85,18,0.22);
+}
+
+.dse-btns label:hover {
+    background-color: #fff5ed;
+    border-color: #AC5512;
+    transform: translateY(-1px);
+}
+
+/* Age Slider*/
+.age-slider {
+    width: 100%;
+    max-width: 100%;
+    border: none;
+    margin-top: 0;
+}
+
+.drange {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    height: 60px;
+    margin: 8px 0;
+}
+
+.drange input[type="range"] {
+    position: absolute;
+    width: calc(100% - 80px);
+    left: 40px;
+    pointer-events: none;
+    appearance: none;
+    background: none;
+}
+
+.drange input[type=range]::-webkit-slider-thumb {
+    pointer-events: all;
+    appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #AC5512, #8a4510);
+    cursor: grab;
+    box-shadow: 0 4px 12px rgba(172,85,18,0.3);
+    transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.drange input[type=range]::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 6px 16px rgba(172,85,18,0.4);
+}
+
+.drange input[type=range]::-webkit-slider-thumb:active {
+    cursor: grabbing;
+    transform: scale(1.05);
+}
+
+.drange input[type=range]::-moz-range-thumb {
+    pointer-events: all;
+    width: 22px;
+    height: 22px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #AC5512, #8a4510);
+    cursor: grab;
+    box-shadow: 0 4px 12px rgba(172,85,18,0.3);
+}
+
+.drange input[type=range]:focus {
+    outline: none;
+}
+
+/* CUSTOM TRACK */
+.drange input[type=range]:first-child::-webkit-slider-runnable-track {
+    background: linear-gradient(to right, #e0e0e0, #c0c0c0);
+    border-radius: 10px;
+}
+
+.drange input[type=range]:first-child::-moz-range-track {
+    background: linear-gradient(to right, #e0e0e0, #c0c0c0);
+    border-radius: 10px;
+}
+
+.drange input[type=range]::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 10px;
+}
+
+.drange input[type=range]::-moz-range-track {
+    height: 8px;
+    border-radius: 10px;
+}
+
+.drange input[type=range]::-webkit-slider-thumb {
+    margin-top: -7px;
+}
+
+/* MIN/MAX VALUE BADGES */
+.drange .dmin,
+.drange .dmax {
+    position: absolute;
+    bottom: -2px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #666;
+    background: #f5f5f5;
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    font-family: 'Inter', sans-serif;
+}
+
+.drange .dmin {
+    left: 0;
+}
+
+.drange .dmax {
+    right: 0;
+}
+
+/* Responsive adjustments for form */
+@media (max-width: 640px) {
+    .filter-fieldsets {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .detailed-search-form {
+        padding: 24px 20px;
+        width: 94%;
+    }
+    
+    .close-detailed-search {
+        top: 10px;
+        left: 10px;
+        width: 38px;
+        height: 38px;
+    }
 }
