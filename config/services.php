@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'resend' => [
+    'key' => env('re_hFmnZPvf_AzDBAoN7ypKGenNpfcVw6ztB'),
+    ],
+
 ];
