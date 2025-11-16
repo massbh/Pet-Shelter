@@ -38,6 +38,27 @@
     font-weight: 400;
 }
 
+.status-badge {
+    font-size: 13px;
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 999px;
+    margin: auto;
+}
+
+/* Status badges in cards */
+.badge-available {
+    background-color: #28A745;
+}
+
+.badge-pending {
+    background-color: #dfa800;
+}
+
+.badge-adopted {
+    background-color: #6c757d;
+}
+
 /* Flash Messages */
 .flash-message {
     max-width: 1100px;
@@ -269,7 +290,7 @@
 
 .view-pet-btn { 
     width: 25%;
-    background-color: #249c40;
+    background-color: #28A745;
     color: white;
     border: none;
     border-radius: 6px;
@@ -292,7 +313,7 @@
 
 .delete-pet-btn {
     width: 30%;
-    background-color: #ac2828;
+    background-color: #C92A2A;
     color: white;
     border: none;
     border-radius: 6px;
@@ -309,7 +330,7 @@
 }
 
 .delete-pet-btn:hover {
-    background-color: rgb(133, 31, 39);
+    background-color: #A71E1E;
     box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
 }
 

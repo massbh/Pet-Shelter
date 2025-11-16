@@ -1,23 +1,28 @@
 let allAnimals = [];
 let activeSpeciesFilter = null;
 
+// Determine API endpoint based on view
+const isAdminGallery = window.isAdminGallery || false;
+const apiUrl = isAdminGallery ? "/api/pets?show_all=true" : "/api/pets";
+
 // Load animals from database API
-fetch("/api/pets")
+fetch(apiUrl)
     .then(response => response.json())
     .then(animals => {
-    // Transform database fields to match expected format
-    allAnimals = animals.map(pet => ({
-        id: pet.id,
-        name: pet.name,
-        species: pet.species,
-        age: pet.age,
-        sex: pet.sex,
-        imageUrl: pet.image_url,
-        description: pet.description
-    }));
-    displayAnimals(allAnimals);
-    populateSpecies(allAnimals);
-    initializeButtonStyles();
+        // Transform database fields to match expected format
+        allAnimals = animals.map(pet => ({
+            id: pet.id,
+            name: pet.name,
+            species: pet.species,
+            age: pet.age,
+            sex: pet.sex,
+            imageUrl: pet.image_url,
+            description: pet.description,
+            status: pet.status
+        }));
+        displayAnimals(allAnimals);
+        populateSpecies(allAnimals);
+        initializeButtonStyles();
     })
     .catch(err => console.error("Error loading pets from database", err));
 
@@ -38,7 +43,7 @@ function toggleDetailedSearch() {
     document.querySelector(".detailed-search-form").classList.toggle("hidden");
     document.querySelector(".reset-search-container").classList.toggle("hidden");
     document.querySelector(".animal-adoption").classList.toggle("filter-open");
-};
+}
 
 // Advanced filtering
 document.getElementById("advanced-filter-form").addEventListener("submit", (e) => {
@@ -46,9 +51,11 @@ document.getElementById("advanced-filter-form").addEventListener("submit", (e) =
     
     const selectedSpecies = document.querySelector('input[name="animal"]:checked');
     const selectedSex = document.querySelector('input[name="sex"]:checked');
+    const selectedStatus = document.querySelector('input[name="status"]:checked'); // Status filter for admins
 
     filterState.species = selectedSpecies ? selectedSpecies.value : null;
     filterState.sex = selectedSex ? selectedSex.value : null;
+    filterState.status = selectedStatus ? selectedStatus.value : null; // Status filter for admins
     filterState.age.minAge = +document.getElementById("sliderMinValue").value;
     filterState.age.maxAge = +document.getElementById("sliderMaxValue").value;
 
@@ -113,6 +120,7 @@ function resetFilters() {
 
     filterState.species = null;
     filterState.sex = null;
+    filterState.status = null; // Status filter for admins
     filterState.age.minAge = null;
     filterState.age.maxAge = null;
     
@@ -145,7 +153,7 @@ function resetFilters() {
 function deselectRadioButtons() {
   const radios = document.querySelectorAll('.detailed-search-form input[type="radio"]');
   radios.forEach(radio => radio.checked = false);
-};
+}
 
 function populateSpecies(animals) {
     let species = [...new Set(animals.map(a => a.species))];
@@ -158,13 +166,13 @@ function populateSpecies(animals) {
             `;
     });
     document.getElementById("speciesButtons").innerHTML = speciesButtons;
-};
+}
 
 const filterState = {
     species: null,
     sex: null,
     age: { minAge: null, maxAge: null }
-};
+}
 
 function advancedFilter(filterState) {
     let filteredAnimals = allAnimals;
@@ -177,12 +185,15 @@ function advancedFilter(filterState) {
 
     if (filterState.sex != null)
         filteredAnimals = filteredAnimals.filter(a => a.sex == filterState.sex);
+    
+    if (filterState.status != null)
+        filteredAnimals = filteredAnimals.filter(a => a.status == filterState.status);
 
     if (filterState.age.minAge != null && filterState.age.maxAge != null)
         filteredAnimals = filteredAnimals.filter(a => a.age >= filterState.age.minAge && a.age <= filterState.age.maxAge);
 
     displayAnimals(filteredAnimals);
-};
+}
 
 // These two functions return the route to pet detail view based on its id either for users or admins
 function openPetDetail(petId) {
@@ -197,13 +208,18 @@ function openPetAdminEdit(petId) {
 function displayAnimals(animals) {
     let output = "";
 
-    const isAdminGallery = window.location.pathname.startsWith('/admin/pet-gallery');
+    const isAdminGallery = window.isAdminGallery || window.location.pathname.startsWith('/admin/pet-gallery');
 
     for (let animal of animals) {
-        // Determine where to go when the image is clicked based on if it´s admin gallery or not
+        // Determine where to go when the image is clicked based on if it's admin gallery or not
         const imgOnClick = isAdminGallery
             ? `openPetAdminEdit(${animal.id})`
             : `openPetDetail(${animal.id})`;
+
+        // Add status badge for admin view
+        const statusBadge = isAdminGallery && animal.status
+            ? `<span class="status-badge badge-${animal.status}">${animal.status.charAt(0).toUpperCase() + animal.status.slice(1)}</span>`
+            : '';
 
         // Create the card HTML, with admin buttons if in admin gallery
         output += `
@@ -224,6 +240,7 @@ function displayAnimals(animals) {
                 <button class="delete-pet-btn" onclick="event.stopPropagation(); deletePet(${animal.id}, '${animal.name}')" title="Delete ${animal.name}">
                     Delete
                 </button>
+                ${statusBadge}
             </div>
             ` : ''}
         </div>
@@ -249,7 +266,7 @@ function deletePet(petId, petName) {
     .then(data => {
         if (data.success) {
             // Reload the animals from the API after deleting one
-            fetch("/api/pets")
+            fetch(apiUrl)
                 .then(response => response.json())
                 .then(animals => {
                     allAnimals = animals.map(pet => ({
@@ -259,7 +276,8 @@ function deletePet(petId, petName) {
                         age: pet.age,
                         sex: pet.sex,
                         imageUrl: pet.image_url,
-                        description: pet.description
+                        description: pet.description,
+                        status: pet.status
                     }));
                     displayAnimals(allAnimals);
                     populateSpecies(allAnimals);
