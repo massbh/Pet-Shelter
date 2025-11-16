@@ -111,9 +111,21 @@ class PetController extends Controller
         return redirect()->route('pets.gallery')->with('success', 'Pet deleted successfully!');
     }
 
-    public function getPetsJson()
+    public function getPetsJson(Request $request)
     {
-        $pets = Pet::where('status', 'available')->get();
+        $query = Pet::query();
+        
+        // Check if we should show all statuses (for admin gallery)
+        $showAll = $request->query('show_all', false);
+        
+        if ($showAll === 'true' || $showAll === '1') {
+            // Admin view - show all pets regardless of status
+            $pets = $query->get();
+        } else {
+            // Public view - only show available and pending pets
+            $pets = $query->whereIn('status', ['available', 'pending'])->get();
+        }
+        
         return response()->json($pets);
     }
 }

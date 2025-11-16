@@ -7,6 +7,10 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/admin.css') }}">
+        <script>
+            // Set flag for admin gallery view
+            window.isAdminGallery = true;
+        </script>
         <script src="{{ asset('js/home_filter.js') }}" defer></script>
     </head>
     <body>
@@ -19,19 +23,19 @@
             
                 <div class="query-search">
                     <button class="filter-btn filter-btn-design" data-species="Dog">
-                        <img src="{{ asset('assets/Query-dog.png') }}" alt="Dogs face">
+                        <img src="{{ asset('assets/Query-dog.png') }}" alt="Filter by dogs">
                         <p>Dogs</p>
                     </button>
                     <button class="filter-btn filter-btn-design" data-species="Cat">
-                        <img src="{{ asset('assets/Query-cat.png') }}" alt="Cats face">
+                        <img src="{{ asset('assets/Query-cat.png') }}" alt="Filter by cats">
                         <p>Cats</p>
                     </button>
                     <button class="filter-btn filter-btn-design" data-species="Other">
-                        <img src="{{ asset('assets/Query-paw.png') }}" alt="Paw">
+                        <img src="{{ asset('assets/Query-paw.png') }}" alt="Filter by other animals">
                         <p>Other Animals</p>
                     </button>
                     <button class="filter-btn filter-btn-design detailed-search-btn">
-                        <img src="{{ asset('assets/Filter-logo.png') }}" alt="Filter icon">
+                        <img src="{{ asset('assets/Filter-logo.png') }}" alt="Open detailed search">
                         <p>Detailed search</p>
                     </button>
                 </div>
@@ -41,12 +45,19 @@
                 <button type="button" class="close-detailed-search">&lt;</button> 
                 <h2 id="filter-title">Detailed Search</h2>
                 <div class="filter-fieldsets">
-                    <fieldset class="fieldset-animal">
-                        <Legend>Animal</Legend>
-                        <div id="speciesButtons" class="dse-btns"></div>
+                    <fieldset>
+                        <legend>Status</legend>
+                        <div class="dse-btns">
+                            <input type="radio" id="status-available" name="status" value="available">
+                            <label for="status-available">Available</label>
+                            <input type="radio" id="status-pending" name="status" value="pending">
+                            <label for="status-pending">Pending</label>
+                            <input type="radio" id="status-adopted" name="status" value="adopted">
+                            <label for="status-adopted">Adopted</label>
+                        </div>
                     </fieldset>
                     <fieldset>
-                        <Legend>Gender</Legend>
+                        <legend>Gender</legend>
                         <div class="dse-btns">
                             <input type="radio" id="sex-male" name="sex" value="Male">
                             <label for="sex-male">Male</label>
@@ -54,16 +65,20 @@
                             <label for="sex-female">Female</label>
                         </div>
                     </fieldset>
+                    <fieldset class="fieldset-animal">
+                        <legend>Animal</legend>
+                        <div id="speciesButtons" class="dse-btns"></div>
+                    </fieldset>
+                    <fieldset class="age-slider">
+                        <legend>Age</legend>
+                        <div class="drange">
+                            <input type="range" min="1" max="20" value="1" id="sliderMinValue">
+                            <input type="range" min="1" max="20" value="20" id="sliderMaxValue">
+                            <div class="dmin">0</div>
+                            <div class="dmax">0</div>
+                        </div>
+                    </fieldset>
                 </div>
-                <fieldset class="age-slider">
-                    <legend>Age</legend>
-                    <div class="drange">
-                        <input type="range" min="1" max="20" value="1" id="sliderMinValue">
-                        <input type="range" min="1" max="20" value="20" id="sliderMaxValue">
-                        <div class="dmin">0</div>
-                        <div class="dmax">0</div>
-                    </div>
-                </fieldset>
                 <button type="submit" class="advanced-filter-btn">Filter</button>
             </form>
 
@@ -78,7 +93,6 @@
             @if(session('success'))
                 <div class="flash-message success">{{ session('success') }}</div>
             @endif
-            <h2 class="caption">Pets Available &gt;</h2>
             <div class="cards" id="cards"></div>
         </main>
     </body>

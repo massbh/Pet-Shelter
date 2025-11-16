@@ -335,6 +335,9 @@ fieldset > legend {
     font-size: 15px;
     color: #333;
     font-family: 'Inter', sans-serif;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 12px;
 }
 
 .close-detailed-search {
@@ -397,6 +400,7 @@ fieldset > legend {
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 10px;
+    justify-content: center;
 }
 
 .dse-btns label {

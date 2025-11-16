@@ -29,22 +29,22 @@
                     <div>
                         <div class="query-search">
                             <button class="filter-btn filter-btn-design" data-species="Dog">
-                                <img src="{{ asset('assets/Query-dog.png') }}" alt="Dogs face">
+                                <img src="{{ asset('assets/Query-dog.png') }}" alt="Filter by dogs">
                                 <p>Dogs</p>
                             </button>
 
                             <button class="filter-btn filter-btn-design" data-species="Cat">
-                                <img src="{{ asset('assets/Query-cat.png') }}" alt="Cats face">
+                                <img src="{{ asset('assets/Query-cat.png') }}" alt="Filter by cats">
                                 <p>Cats</p>
                             </button>
 
                             <button class="filter-btn filter-btn-design" data-species="Other">
-                                <img src="{{ asset('assets/Query-paw.png') }}" alt="Paw">
+                                <img src="{{ asset('assets/Query-paw.png') }}" alt="Filter by other animals">
                                 <p>Other Animals</p>
                             </button>
 
                             <button class="filter-btn filter-btn-design detailed-search-btn">
-                                <img src="{{ asset('assets/Filter-logo.png') }}" alt="Filter icon">
+                                <img src="{{ asset('assets/Filter-logo.png') }}" alt="Open detailed search">
                                 <p>Detailed search</p>
                             </button>
                         </div>
