@@ -7,11 +7,6 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/pet.css') }}">
-        <script src="{{ asset('js/loadComponents.js') }}" defer></script>
-        <script>
-    
-    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
-</script>
 
     </head>
     <body>

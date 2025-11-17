@@ -8,15 +8,14 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/contact.css') }}">
-    <script>
-    
-    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
-</script>
+
 
   </head>
   <body>
 
-    <div id="header-container"></div>
+  
+    @include('components.header')
+
 
     <main id="main-content">
       <section class="contact-hero" aria-labelledby="contact-page-title">
@@ -173,10 +172,11 @@
     </main>
 
     <!-- Footer -->
-    <footer id="footer-container"></footer>
+ 
+    @include('components.footer')
 
     <!-- Scripts -->
-    <script src="{{ asset('js/loadComponents.js') }}"></script>
+  
     <script>
       // Check if user is authenticated (PHP variable passed to JavaScript)
       const isAuthenticated = {{ auth()->check() ? 'true' : 'false' }};

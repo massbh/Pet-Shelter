@@ -10,16 +10,14 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     
     <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-    
-    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
-</script>
 
 
 </head>
 
 <body>
-    <div id="header-container"></div>
+    
+    @include('components.header')
+
 
     <div class="dashboard-container">
         @if(session('success'))
@@ -103,8 +101,9 @@
         </div>
     </div>
 
-    <div id="footer-container"></div>
-    <script src="{{ asset('js/loadComponents.js') }}"></script>
+    
+    @include('components.footer')
+    
     <script>lucide.createIcons();</script>
 
 </body>

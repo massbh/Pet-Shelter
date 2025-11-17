@@ -6,16 +6,15 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/privacy.css') }}">
-        <script>
-    
-    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
-</script>
+
 
     </head>
     <body>
         
         <!-- Header Container -->
-        <div id="header-container"></div>
+        
+        @include('components.header')
+
         
         <!-- Content -->
         <div class="privacy-hero">
@@ -184,9 +183,10 @@
         </div>
 
         <!-- Footer Container -->
-        <div id="footer-container"></div>
+        
+        @include('components.footer')
         
         <!-- Script to load components -->
-        <script src="{{ asset('js/loadComponents.js') }}"></script>
+        
     </body>
 </html>

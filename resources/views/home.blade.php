@@ -8,15 +8,12 @@
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/home.css') }}">
         <script src="{{ asset('js/home_filter.js') }}" defer></script>
-        <script src="{{ asset('js/loadComponents.js') }}" defer></script>
-        <script>
-    
-    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
-</script>
+
 
     </head>
     <body>
-        <div id="header-container"></div>
+        
+         @include('components.header')
 
         <main>
             <section class="hero-frontpage">
@@ -104,6 +101,7 @@
             </section>
         </main>
 
-        <div id="footer-container"></div>
+    
+          @include('components.footer')
     </body>
 </html>
