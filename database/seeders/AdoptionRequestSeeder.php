@@ -138,7 +138,7 @@ class AdoptionRequestSeeder extends Seeder
                 'email' => $john->email,
                 'visitDate' => Carbon::now()->addDays(10)->format('Y-m-d'),
                 'visitTime' => '15:00',
-                'message' => 'Rocky seems like a great dog for an active lifestyle. I go jogging every morning.',
+                'message' => 'Milo seems like a great cat for my lifestyle. I like to stay at home watching tv shows.',
                 'status' => 'pending',
             ]);
 
