@@ -7,16 +7,15 @@
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/qa.css') }}">
         <script src="{{ asset('js/qa_filter.js') }}"></script>
-        <script>
-    
-    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
-</script>
+
 
     </head>
     <body>
         
         <!-- Header Container -->
-        <div id="header-container"></div>
+    
+        @include('components.header')
+
 
         <!-- Content -->
         <div class="qa-hero">
@@ -204,9 +203,8 @@
         </section>
 
         <!-- Footer Container -->
-        <footer id="footer-container"></footer>
         
-        <!-- Script to load components -->
-        <script src="js/loadComponents.js"></script>       
+        @include('components.footer')
+               
     </body>
 </html>

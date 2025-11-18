@@ -8,10 +8,7 @@
     
     <link rel="stylesheet" href="{{ asset('css/sign-in-up-header.css') }}">
     <link rel="stylesheet" href="{{ asset('css/signup.css') }}">
-    <script>
-    
-    window.user = @json(auth()->user() ? ['name' => auth()->user()->name] : null);
-</script>
+
 
 </head>
 
