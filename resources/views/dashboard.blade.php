@@ -56,12 +56,13 @@
                 <button type="submit" class="btn btn-danger"><i data-lucide="log-out"></i> Logout</button>
             </form>
             @if($user->isAdmin())
-                <a href="{{ route('admin.adoption-requests.index') }}" class="btn btn-primary"><i data-lucide="file-text"></i> Manage Requests</a>
                 <a href="{{ route('pets.create') }}" class="btn btn-primary"><i data-lucide="plus-circle"></i> Add New Pet</a>
+                <a href="/admin/pet-gallery" class="btn btn-primary"><i data-lucide="paw-print"></i> Manage Pets</a>
             @endif
         </div>
 
-        <div>
+        @if (!$user->isAdmin())
+            <div>
             <h2 style="color:#FF6B00;">My Adoption Requests</h2>
             @if($adoptionRequests->count() > 0)
                 <table class="requests-table">
@@ -98,9 +99,121 @@
                 </table>
             @else
                 <p>You haven't submitted any adoption requests yet.</p>
-                <a href="{{ route('pets.index') }}" class="btn btn-primary"><i data-lucide="paw-print"></i> Browse Available Pets</a>
+                <a href="/admin/pet-gallery" class="btn btn-primary"><i data-lucide="paw-print"></i> Browse Available Pets</a>
             @endif
         </div>
+        @else
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <i data-lucide="paw-print"></i>
+                    <div>
+                        <h4>Total Pets</h4>
+                        <p class="stat-number">{{ \App\Models\Pet::count() }}</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i data-lucide="check-circle"></i>
+                    <div>
+                        <h4>Available</h4>
+                        <p class="stat-number">{{ \App\Models\Pet::where('status', 'available')->count() }}</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i data-lucide="clock"></i>
+                    <div>
+                        <h4>Pending Requests</h4>
+                        <p class="stat-number">{{ \App\Models\AdoptionRequest::where('status', 'pending')->count() }}</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i data-lucide="users"></i>
+                    <div>
+                        <h4>Total Users</h4>
+                        <p class="stat-number">{{ \App\Models\User::count() }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <h2>📋 All Adoption Requests</h2>
+                <p style="color: #666; margin-bottom: 1rem;">Viewing requests from all users in the system</p>
+                
+                <div class="stats">
+                    <div class="stat-box">
+                        <strong>Total:</strong> {{ $allRequests->count() }}
+                    </div>
+                    <div class="stat-box">
+                        <strong>Pending:</strong> {{ $allRequests->where('status', 'pending')->count() }}
+                    </div>
+                    <div class="stat-box">
+                        <strong>Approved:</strong> {{ $allRequests->where('status', 'approved')->count() }}
+                    </div>
+                    <div class="stat-box">
+                        <strong>Rejected:</strong> {{ $allRequests->where('status', 'rejected')->count() }}
+                    </div>
+                </div>
+
+                @if($allRequests->count() > 0)
+                    <table class="requests-table">
+                        <thead>
+                            <tr>
+                                <th>Pet Name</th>
+                                <th>Species/Age</th>
+                                <th>Requester</th>
+                                <th>Email</th>
+                                <th>User Message</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($allRequests as $request)
+                                <tr>
+                                    <td><strong>{{ $request->pet->name }}</strong></td>
+                                    <td>{{ $request->pet->species }}, {{ $request->pet->age }}y</td>
+                                    <td>{{ $request->user->name }}</td>
+                                    <td>{{ $request->user->email }}</td>
+                                    <td>
+                                        @if($request->message)
+                                            <details>
+                                                <summary style="cursor: pointer; color: #007bff;">Read message</summary>
+                                                <p style="margin-top: 0.5rem; font-size: 0.9rem;">{{ $request->message }}</p>
+                                            </details>
+                                        @else
+                                            <em style="color: #999;">No message</em>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <span class="badge badge-{{ $request->status }}">
+                                            {{ ucfirst($request->status) }}
+                                        </span>
+                                    </td>
+                                    <td>{{ $request->created_at->format('M d, Y') }}</td>
+                                    <td>
+                                        @if($request->status === 'pending')
+                                            <button type="button" class="btn btn-success" onclick="openModal({{ $request->id }}, 'approved', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
+                                                Approve
+                                            </button>
+                                            <button type="button" class="btn btn-danger" onclick="openModal({{ $request->id }}, 'rejected', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
+                                                Reject
+                                            </button>
+                                        @else
+                                            <span class="badge badge-{{ $request->status }}">{{ ucfirst($request->status) }}</span>
+                                            @if($request->admin_notes)
+                                                <br><small style="color: #666; margin-top: 0.25rem; display: block;">{{ $request->admin_notes }}</small>
+                                            @endif
+                                        @endif
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <p>No adoption requests in the system yet.</p>
+                @endif
+            </div>
+        @endif
+        
     </div>
 
     <div id="footer-container"></div>
