@@ -91,7 +91,7 @@ class AdoptionRequestSeeder extends Seeder
                 'email' => $jane->email,
                 'visitDate' => Carbon::now()->addDays(3)->format('Y-m-d'),
                 'visitTime' => '10:00',
-                'message' => 'I have experience with dogs and would love to adopt Max. I have a large backyard and plenty of time for walks.',
+                'message' => 'I have experience with dogs and would love to adopt Baris. I have a large backyard and plenty of time for walks.',
                 'status' => 'pending',
             ]);
 
@@ -115,7 +115,7 @@ class AdoptionRequestSeeder extends Seeder
                 'email' => $john->email,
                 'visitDate' => Carbon::now()->addDays(7)->format('Y-m-d'),
                 'visitTime' => '11:00',
-                'message' => 'I have two children and looking for a family-friendly dog. Charlie would be perfect for our family.',
+                'message' => 'I have two children and looking for a family-friendly turtle.',
                 'status' => 'pending',
             ]);
 
@@ -126,7 +126,7 @@ class AdoptionRequestSeeder extends Seeder
                 'email' => $john->email,
                 'visitDate' => Carbon::now()->addDays(2)->format('Y-m-d'),
                 'visitTime' => '09:00',
-                'message' => 'I want to adopt Bella for my daughter. We have experience with cats.',
+                'message' => 'I want to adopt Charlie for my daughter. We have experience with dogs.',
                 'status' => 'rejected',
                 'admin_notes' => 'Unfortunately, we need more information about your living situation and references.',
             ]);
