@@ -23,7 +23,7 @@
                         <div class="pet-basic-info">
                             <div class="info-badges">
                                 <span class="age-badge">{{ $pet->age ?? '?' }}{{ isset($pet->age) && $pet->age == 1 ? ' year' : ' years' }}</span>
-                                <span class="gender-badge">
+                                <span class="gender-badge {{ isset($pet->sex) ? strtolower($pet->sex) : '' }}">
                                     @if(isset($pet->sex))
                                         @if($pet->sex === 'Male')
                                             ♂

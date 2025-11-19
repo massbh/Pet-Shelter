@@ -17,7 +17,7 @@
         <!-- Content -->
         <div class="about-hero">
             <h1>About Happinest Pet Shelter</h1>
-            <p>Creating forever homes for pets in need since 2010</p>
+            <p>Creating forever homes for pets in need since 2018</p>
         </div>
 
         <div class="about-container">

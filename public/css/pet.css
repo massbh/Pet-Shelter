@@ -75,6 +75,17 @@
     padding: 8px 14px;
 }
 
+/* Gender icons */
+.gender-badge.male {
+    background: #99CCFF;
+    color: #003d7a;
+}
+
+.gender-badge.female {
+    background: #FFB6C1;
+    color: #7a0026;
+}
+
 .species-badge {
     background: #99CCFF;
     color: #003d7a;
