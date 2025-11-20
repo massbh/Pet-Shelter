@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     
     <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="{{ asset('js/dashboard_modal.js') }}" defer></script>
 
 
 </head>
@@ -154,14 +155,14 @@
                     <table class="requests-table">
                         <thead>
                             <tr>
-                                <th>Pet Name</th>
-                                <th>Species/Age</th>
-                                <th>Requester</th>
-                                <th>Email</th>
-                                <th>User Message</th>
-                                <th>Status</th>
-                                <th>Date</th>
-                                <th>Actions</th>
+                                <th style="white-space: nowrap;">Pet Name</th>
+                                <th style="white-space: nowrap;">Species/Age</th>
+                                <th style="white-space: nowrap;">Requester</th>
+                                <th style="white-space: nowrap;">Email</th>
+                                <th style="white-space: nowrap;">User Message</th>
+                                <th style="white-space: nowrap;">Status</th>
+                                <th style="white-space: nowrap;">Date</th>
+                                <th style="white-space: nowrap;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,10 +174,9 @@
                                     <td>{{ $request->user->email }}</td>
                                     <td>
                                         @if($request->message)
-                                            <details>
-                                                <summary style="cursor: pointer; color: #007bff;">Read message</summary>
-                                                <p style="margin-top: 0.5rem; font-size: 0.9rem;">{{ $request->message }}</p>
-                                            </details>
+                                            <button type="button" class="btn btn-info btn-sm" onclick="showMessage('{{ addslashes($request->message) }}')">
+                                                <i data-lucide="message-circle"></i> Read
+                                            </button>
                                         @else
                                             <em style="color: #999;">No message</em>
                                         @endif
@@ -188,19 +188,24 @@
                                     </td>
                                     <td>{{ $request->created_at->format('M d, Y') }}</td>
                                     <td>
-                                        @if($request->status === 'pending')
-                                            <button type="button" class="btn btn-success" onclick="openModal({{ $request->id }}, 'approved', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
-                                                Approve
-                                            </button>
-                                            <button type="button" class="btn btn-danger" onclick="openModal({{ $request->id }}, 'rejected', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
-                                                Reject
-                                            </button>
-                                        @else
-                                            <span class="badge badge-{{ $request->status }}">{{ ucfirst($request->status) }}</span>
-                                            @if($request->admin_notes)
-                                                <br><small style="color: #666; margin-top: 0.25rem; display: block;">{{ $request->admin_notes }}</small>
+                                        <div style="display: flex; gap: 0.5rem; align-items: center;">
+                                            @if($request->status === 'pending')
+                                                <button type="button" class="btn btn-success" onclick="openModal({{ $request->id }}, 'approved', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
+                                                    Approve
+                                                </button>
+                                                <button type="button" class="btn btn-danger" onclick="openModal({{ $request->id }}, 'rejected', '{{ $request->user->name }}', '{{ $request->pet->name }}')">
+                                                    Reject
+                                                </button>
+                                            @else
+                                                @if($request->admin_notes)
+                                                    <button type="button" class="btn btn-info btn-sm" onclick="showAdminNotes('{{ addslashes($request->admin_notes) }}')">
+                                                        <i data-lucide="file-text"></i> Read Notes
+                                                    </button>
+                                                @else
+                                                    <em style="color: #999;">No notes</em>
+                                                @endif
                                             @endif
-                                        @endif
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach
@@ -217,7 +222,69 @@
     
     @include('components.footer')
     
-    <script>lucide.createIcons();</script>
+    <!-- Action Confirmation Modal -->
+    <div id="actionModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="actionModalTitle"><i data-lucide="alert-circle"></i> Confirm Action</h3>
+                <span class="close" onclick="closeActionModal()">&times;</span>
+            </div>
+            <form id="actionForm" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <p id="actionConfirmText"></p>
+                    <div style="margin-top: 1rem;">
+                        <label for="admin_notes" style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Admin Notes (Optional)</label>
+                        <textarea 
+                            id="admin_notes" 
+                            name="admin_notes" 
+                            rows="3" 
+                            placeholder="Add any notes about this decision..."
+                            style="width: 100%; padding: 0.5rem; border: 1px solid #ffd3a1; border-radius: 6px; font-family: inherit;"
+                        ></textarea>
+                    </div>
+                    <input type="hidden" name="status" id="actionStatus">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeActionModal()">Cancel</button>
+                    <button type="submit" class="btn" id="actionSubmitBtn">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Modal -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i data-lucide="message-circle"></i> User Message</h3>
+                <span class="close" onclick="closeMessageModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="messageText"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeMessageModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Notes Modal -->
+    <div id="adminNotesModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i data-lucide="file-text"></i> Admin Notes</h3>
+                <span class="close" onclick="closeAdminNotesModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="adminNotesText"></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeAdminNotesModal()">Close</button>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

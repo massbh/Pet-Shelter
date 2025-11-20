@@ -122,8 +122,8 @@ class PetController extends Controller
             // Admin view - show all pets regardless of status
             $pets = $query->get();
         } else {
-            // Public view - only show available and pending pets
-            $pets = $query->whereIn('status', ['available', 'pending'])->get();
+            // Public view - only show available pets (hide adopted and pending ones)
+            $pets = $query->where('status', 'available')->get();
         }
         
         return response()->json($pets);

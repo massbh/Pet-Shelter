@@ -108,13 +108,18 @@ class AdoptionRequestController extends Controller
             'admin_notes' => $validated['admin_notes'] ?? null,
         ]);
 
+        // Update pet status based on adoption request status
         if ($validated['status'] === 'approved') {
+            // Mark pet as adopted - will no longer appear in public home view
             $adoptionRequest->pet->update(['status' => 'adopted']);
+        } elseif ($validated['status'] === 'rejected') {
+            // Keep pet available for other potential adopters
+            $adoptionRequest->pet->update(['status' => 'available']);
         }
 
         $statusMessage = ucfirst($validated['status']);
         return redirect()->route('dashboard')
-            ->with('success', "Adoption request {$statusMessage} successfully!");
+            ->with('success', "Adoption request {$statusMessage} successfully! Pet status updated.");
     }
 
     /**
