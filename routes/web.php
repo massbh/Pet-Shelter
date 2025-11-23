@@ -46,7 +46,6 @@ Route::post('/signin', [AuthController::class, 'login']);
 Route::get('/signup', [AuthController::class, 'showRegisterForm'])->name('register');
 Route::post('/signup', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-Route::get('/pets', [PetController::class, 'index'])->name('pets.index');
 Route::get('/api/pets', [PetController::class, 'getPetsJson'])->name('api.pets');
 
 // Protected routes - require authentication

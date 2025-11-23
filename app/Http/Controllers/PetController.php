@@ -8,27 +8,6 @@ use Illuminate\Support\Facades\Storage;
 
 class PetController extends Controller
 {
-    public function index(Request $request)
-    {
-        $query = Pet::query();
-
-        if ($request->has('species') && $request->species != '') {
-            $query->where('species', $request->species);
-        }
-
-        if ($request->has('status') && $request->status != '') {
-            $query->where('status', $request->status);
-        }
-
-        if ($request->has('search') && $request->search != '') {
-            $query->where('name', 'like', '%' . $request->search . '%');
-        }
-
-        $pets = $query->latest()->paginate(12);
-
-        return view('pets.index', compact('pets'));
-    }
-
     public function create()
     {
         return view('pets.create');
