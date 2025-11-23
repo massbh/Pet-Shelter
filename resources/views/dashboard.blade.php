@@ -78,7 +78,7 @@
                         @foreach($adoptionRequests as $request)
                             <tr>
                                 <td>
-                                    <a href="{{ route('pets.show', $request->pet) }}" style="color:#FF6B00; font-weight:600;">
+                                    <a href="#" onclick="showPetDetails({{ $request->pet->id }}); return false;" style="color:#FF6B00; font-weight:600; cursor: pointer;">
                                         {{ $request->pet->name }}
                                     </a>
                                 </td>
@@ -282,6 +282,24 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" onclick="closeAdminNotesModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pet Details Modal -->
+    <div id="petDetailsModal" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h3><i data-lucide="paw-print"></i> Pet Details</h3>
+                <span class="close" onclick="closePetDetailsModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="petDetailsContent">
+                <div style="text-align: center; padding: 2rem;">
+                    <p>Loading...</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closePetDetailsModal()">Close</button>
             </div>
         </div>
     </div>

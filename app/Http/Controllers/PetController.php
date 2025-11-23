@@ -56,11 +56,6 @@ class PetController extends Controller
         return redirect()->route('pets.gallery')->with('success', 'Pet added successfully!');
     }
 
-    public function show(Pet $pet)
-    {
-        return view('pets.show', compact('pet'));
-    }
-
     public function edit(Pet $pet)
     {
         return view('pets.edit', compact('pet'));

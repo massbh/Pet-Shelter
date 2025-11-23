@@ -1,0 +1,158 @@
+@startuml Pet-Shelter-Class-Diagram
+
+' Style Configuration
+skinparam classAttributeIconSize 0
+skinparam class {
+    BackgroundColor<<Model>> LightBlue
+    BackgroundColor<<Controller>> LightGreen
+    BackgroundColor<<Middleware>> LightYellow
+    BorderColor Black
+    ArrowColor Black
+}
+
+' ============= MODELS =============
+
+class User <<Model>> {
+    - id: int
+    - name: string
+    - email: string
+    - password: string
+    - role: string
+    - email_verified_at: datetime
+    - remember_token: string
+    - created_at: timestamp
+    - updated_at: timestamp
+    --
+    + isAdmin(): bool
+    + isUser(): bool
+    + isGuest(): bool
+    + adoptionRequests(): HasMany
+}
+
+class Pet <<Model>> {
+    - id: int
+    - name: string
+    - species: string
+    - age: integer
+    - sex: string
+    - image_url: string
+    - description: text
+    - status: string
+    - created_at: timestamp
+    - updated_at: timestamp
+    --
+    + adoptionRequests(): HasMany
+}
+
+class AdoptionRequest <<Model>> {
+    - id: int
+    - user_id: int
+    - pet_id: int
+    - name: string
+    - email: string
+    - visitDate: date
+    - visitTime: string
+    - message: text
+    - status: string
+    - admin_notes: text
+    - created_at: timestamp
+    - updated_at: timestamp
+    --
+    + user(): BelongsTo
+    + pet(): BelongsTo
+}
+
+' ============= CONTROLLERS =============
+
+class Controller <<Controller>> {
+}
+
+class AuthController <<Controller>> {
+    + showLoginForm(): View
+    + login(request: Request): RedirectResponse
+    + showRegisterForm(): View
+    + register(request: Request): RedirectResponse
+    + logout(request: Request): RedirectResponse
+    + dashboard(): View
+}
+
+class PetController <<Controller>> {
+    + index(request: Request): View
+    + create(): View
+    + store(request: Request): RedirectResponse
+    + show(pet: Pet): View
+    + edit(pet: Pet): View
+    + update(request: Request, pet: Pet): RedirectResponse
+    + destroy(pet: Pet): RedirectResponse|JsonResponse
+    + getPetsJson(request: Request): JsonResponse
+}
+
+class AdoptionRequestController <<Controller>> {
+    + index(): View
+    + create(pet: Pet): View
+    + store(request: Request): RedirectResponse
+    + show(adoptionRequest: AdoptionRequest): View
+    + updateStatus(request: Request, adoptionRequest: AdoptionRequest): RedirectResponse
+    + destroy(adoptionRequest: AdoptionRequest): RedirectResponse
+    + myRequests(): View
+}
+
+class ContactUsController <<Controller>> {
+    + contactFormSubmit(request: Request): RedirectResponse|JsonResponse
+    + show(): View
+}
+
+' ============= MIDDLEWARE =============
+
+class CheckRole <<Middleware>> {
+    + handle(request: Request, next: Closure, ...roles: string): Response
+}
+
+' ============= RELATIONSHIPS =============
+
+' Model Relationships
+User "1" --> "0..*" AdoptionRequest : has many
+Pet "1" --> "0..*" AdoptionRequest : has many
+AdoptionRequest "0..*" --> "1" User : belongs to
+AdoptionRequest "0..*" --> "1" Pet : belongs to
+
+' Controller Inheritance
+AuthController --|> Controller
+PetController --|> Controller
+AdoptionRequestController --|> Controller
+ContactUsController --|> Controller
+
+' Controller-Model Dependencies
+AuthController ..> User : uses
+PetController ..> Pet : uses
+AdoptionRequestController ..> AdoptionRequest : uses
+AdoptionRequestController ..> Pet : uses
+ContactUsController ..> AdoptionRequest : uses
+ContactUsController ..> Pet : uses
+
+' Middleware-Model Dependencies
+CheckRole ..> User : checks
+
+' Notes
+note right of User
+  Roles: admin, user, guest
+  Uses Laravel Authentication
+  Password is hashed
+end note
+
+note right of Pet
+  Status: available, adopted, pending
+  Images stored in public/storage/pets
+end note
+
+note right of AdoptionRequest
+  Status: pending, approved, rejected
+  Links users with pets for adoption
+end note
+
+note right of CheckRole
+  Protects routes based on user roles
+  Used in route middleware
+end note
+
+@enduml
