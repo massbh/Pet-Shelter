@@ -89,7 +89,14 @@
                                 </td>
                                 <td>{{ $request->created_at->format('M d, Y') }}</td>
                                 <td>
-                                    <a href="{{ route('adoption-requests.show', $request) }}" class="btn btn-primary"><i data-lucide="eye"></i> View</a>
+                                <form action="{{ route('adoption-requests.destroy', $request) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this adoption request?');">
+                                        <i data-lucide="trash-2"></i> Delete
+                                    </button>
+                                </form>
                                 </td>
                             </tr>
                         @endforeach
