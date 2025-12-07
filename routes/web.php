@@ -6,6 +6,7 @@ use App\Http\Controllers\PetController;
 use App\Http\Controllers\AdoptionRequestController;
 use App\Models\Pet;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChartController;
 
 // Public routes
 Route::get('/', function () {
@@ -39,6 +40,10 @@ Route::get('/qa', function () {
 Route::get('/terms', function () {
     return view('terms-conditions');
 })->name('terms');
+
+// Public chart data (available pets only)
+Route::get('/api/charts/available-pets-species', [ChartController::class, 'availablePetsBySpecies']);
+Route::get('/api/charts/available-pets-age', [ChartController::class, 'petsByAge']);
 
 // Authentication routes
 Route::get('/signin', [AuthController::class, 'showLoginForm'])->name('login');
@@ -78,6 +83,25 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Adoption request management
     Route::get('/admin/adoption-requests', [AdoptionRequestController::class, 'index'])->name('admin.adoption-requests.index');
     Route::put('/admin/adoption-requests/{adoptionRequest}/status', [AdoptionRequestController::class, 'updateStatus'])->name('admin.adoption-requests.update-status');
+
+    // Chart builder
+    Route::get('/admin/chart-builder', [ChartController::class, 'builder'])->name('charts.builder');
+    
+    // Chart data endpoints
+    Route::get('/api/charts/pets-species', [ChartController::class, 'petsBySpecies']);
+    Route::get('/api/charts/pets-status', [ChartController::class, 'petsByStatus']);
+    Route::get('/api/charts/pets-age', [ChartController::class, 'petsByAge']);
+    Route::get('/api/charts/pets-gender', [ChartController::class, 'petsByGender']);
+    Route::get('/api/charts/adoption-requests-status', [ChartController::class, 'adoptionRequestsByStatus']);
+    Route::get('/api/charts/adoption-requests-month', [ChartController::class, 'adoptionRequestsByMonth']);
+    Route::get('/api/charts/most-requested-pets', [ChartController::class, 'mostRequestedPets']);
+});
+
+// Chart API routes (these should be separate from the builder route)
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::post('/charts', [ChartController::class, 'store'])->name('charts.store');
+    Route::get('/api/charts/saved', [ChartController::class, 'index'])->name('charts.index');
+    Route::delete('/charts/{id}', [ChartController::class, 'destroy'])->name('charts.destroy');
 });
 
 // Legacy route for backwards compatibility - now uses database

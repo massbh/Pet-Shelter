@@ -57,6 +57,7 @@
             @if($user->isAdmin())
                 <a href="{{ route('pets.create') }}" class="btn btn-primary"><i data-lucide="plus-circle"></i> Add New Pet</a>
                 <a href="/admin/pet-gallery" class="btn btn-primary"><i data-lucide="paw-print"></i> Manage Pets</a>
+                <a href="{{ route('charts.builder') }}" class="btn btn-primary"><i data-lucide="bar-chart-2"></i> View Charts</a>
             @endif
         </div>
 
