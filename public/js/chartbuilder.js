@@ -261,7 +261,17 @@ function getTitleFromDataSource(dataSource) {
         'pets-gender': 'Pets by Gender',
         'adoption-requests-status': 'Adoption Requests by Status',
         'adoption-requests-month': 'Adoption Requests per Month',
-        'most-requested-pets': 'Most Requested Pets'
+        'most-requested-pets': 'Most Requested Pets',
+        'average-age-by-species': 'Average Age by Species',
+        'gender-distribution-by-species': 'Gender Distribution by Species',
+        'newest-pets': 'Newest Pets (Days Since Added)',
+        'oldest-pets': 'Oldest Pets (Days in Shelter)',
+        'pets-created-by-month': 'Pets Added Over Time',
+        'requests-by-user': 'Requests by User',
+        'most-requested-species': 'Most Requested Species',
+        'most-requested-age-groups': 'Most Requested Age Groups',
+        'user-registrations-over-time': 'User Registrations Over Time',
+        'seasonal-trends': 'Seasonal Adoption Trends'
     };
     return titles[dataSource] || 'Custom Chart';
 }
@@ -270,6 +280,20 @@ async function fetchChartData(dataSource) {
     try {
         const response = await fetch(`/api/charts/${dataSource}`);
         const data = await response.json();
+        
+        // Check if data has multiple datasets (for grouped charts)
+        if (data.datasets && Array.isArray(data.datasets)) {
+            return {
+                labels: data.labels,
+                datasets: data.datasets.map((dataset, index) => ({
+                    label: dataset.label,
+                    data: dataset.data,
+                    backgroundColor: index === 0 ? colors : colors.map(c => c + '99'),
+                    borderColor: colors,
+                    borderWidth: 1
+                }))
+            };
+        }
         
         return {
             labels: data.labels,

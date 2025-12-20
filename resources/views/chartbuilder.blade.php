@@ -44,13 +44,29 @@
                 <div class="control-group">
                     <label for="dataSource">Data Source</label>
                     <select id="dataSource">
-                        <option value="pets-species">Pets by Species</option>
-                        <option value="pets-status">Pets by Status</option>
-                        <option value="pets-age">Pets by Age</option>
-                        <option value="pets-gender">Pets by Gender</option>
-                        <option value="adoption-requests-status">Adoption Requests by Status</option>
-                        <option value="adoption-requests-month">Adoption Requests per Month</option>
-                        <option value="most-requested-pets">Most Requested Pets</option>
+                        <optgroup label="Pet Statistics">
+                            <option value="pets-species">Pets by Species</option>
+                            <option value="pets-status">Pets by Status</option>
+                            <option value="pets-age">Pets by Age Group</option>
+                            <option value="pets-gender">Pets by Gender</option>
+                            <option value="average-age-by-species">Average Age by Species</option>
+                            <option value="gender-distribution-by-species">Gender Distribution by Species</option>
+                            <option value="newest-pets">Newest Pets</option>
+                            <option value="oldest-pets">Oldest Pets</option>
+                            <option value="pets-created-by-month">Pets Added Over Time</option>
+                        </optgroup>
+                        <optgroup label="Adoption Requests">
+                            <option value="adoption-requests-status">Adoption Requests by Status</option>
+                            <option value="adoption-requests-month">Adoption Requests per Month</option>
+                            <option value="most-requested-pets">Most Requested Pets</option>
+                            <option value="most-requested-species">Most Requested Species</option>
+                            <option value="most-requested-age-groups">Most Requested Age Groups</option>
+                            <option value="requests-by-user">Requests by User</option>
+                            <option value="seasonal-trends">Seasonal Trends</option>
+                        </optgroup>
+                        <optgroup label="User Analytics">
+                            <option value="user-registrations-over-time">User Registrations Over Time</option>
+                        </optgroup>
                     </select>
                 </div>
 

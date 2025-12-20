@@ -95,6 +95,18 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/api/charts/adoption-requests-status', [ChartController::class, 'adoptionRequestsByStatus']);
     Route::get('/api/charts/adoption-requests-month', [ChartController::class, 'adoptionRequestsByMonth']);
     Route::get('/api/charts/most-requested-pets', [ChartController::class, 'mostRequestedPets']);
+    
+    // New chart data endpoints
+    Route::get('/api/charts/average-age-by-species', [ChartController::class, 'averageAgeBySpecies']);
+    Route::get('/api/charts/gender-distribution-by-species', [ChartController::class, 'genderDistributionBySpecies']);
+    Route::get('/api/charts/newest-pets', [ChartController::class, 'newestPets']);
+    Route::get('/api/charts/oldest-pets', [ChartController::class, 'oldestPets']);
+    Route::get('/api/charts/pets-created-by-month', [ChartController::class, 'petsCreatedByMonth']);
+    Route::get('/api/charts/requests-by-user', [ChartController::class, 'requestsByUser']);
+    Route::get('/api/charts/most-requested-species', [ChartController::class, 'mostRequestedSpecies']);
+    Route::get('/api/charts/most-requested-age-groups', [ChartController::class, 'mostRequestedAgeGroups']);
+    Route::get('/api/charts/user-registrations-over-time', [ChartController::class, 'userRegistrationsOverTime']);
+    Route::get('/api/charts/seasonal-trends', [ChartController::class, 'seasonalTrends']);
 });
 
 // Chart API routes (these should be separate from the builder route)
