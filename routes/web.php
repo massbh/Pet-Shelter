@@ -43,7 +43,8 @@ Route::get('/terms', function () {
 
 // Public chart data (available pets only)
 Route::get('/api/charts/available-pets-species', [ChartController::class, 'availablePetsBySpecies']);
-Route::get('/api/charts/available-pets-age', [ChartController::class, 'petsByAge']);
+Route::get('/api/charts/available-pets-age', [ChartController::class, 'availablePetsByAge']);
+Route::get('/api/charts/available-pets-gender', [ChartController::class, 'availablePetsByGender']);
 
 // Authentication routes
 Route::get('/signin', [AuthController::class, 'showLoginForm'])->name('login');

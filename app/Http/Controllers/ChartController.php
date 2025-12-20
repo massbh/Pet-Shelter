@@ -319,4 +319,52 @@ class ChartController extends Controller
             'values' => $data->pluck('count')
         ]);
     }
+
+    // Public-facing chart methods (only available pets)
+    public function availablePetsBySpecies()
+    {
+        $data = Pet::select('species', DB::raw('count(*) as count'))
+            ->where('status', 'available')
+            ->groupBy('species')
+            ->get();
+
+        return response()->json([
+            'labels' => $data->pluck('species'),
+            'values' => $data->pluck('count')
+        ]);
+    }
+
+    public function availablePetsByAge()
+    {
+        $data = Pet::select(
+            DB::raw('CASE 
+                WHEN age < 1 THEN "Puppy/Kitten"
+                WHEN age BETWEEN 1 AND 3 THEN "Young"
+                WHEN age BETWEEN 4 AND 7 THEN "Adult"
+                ELSE "Senior"
+            END as age_group'),
+            DB::raw('count(*) as count')
+        )
+        ->where('status', 'available')
+        ->groupBy('age_group')
+        ->get();
+
+        return response()->json([
+            'labels' => $data->pluck('age_group'),
+            'values' => $data->pluck('count')
+        ]);
+    }
+
+    public function availablePetsByGender()
+    {
+        $data = Pet::select('sex', DB::raw('count(*) as count'))
+            ->where('status', 'available')
+            ->groupBy('sex')
+            ->get();
+
+        return response()->json([
+            'labels' => $data->pluck('sex'),
+            'values' => $data->pluck('count')
+        ]);
+    }
 }
