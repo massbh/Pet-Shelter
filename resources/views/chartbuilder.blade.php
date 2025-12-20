@@ -62,6 +62,17 @@
                     <i data-lucide="save"></i> Save Chart
                 </button>
             </div>
+            
+            <!-- Dynamic Chart Area -->
+            <div id="customChartArea" style="display: none; margin-top: 2rem;">
+                <h2 class="caption">Custom Chart Preview</h2>
+                <div class="chart-card">
+                    <h3 id="customChartTitle">Custom Chart</h3>
+                    <div class="chart-wrapper" style="height: 400px;">
+                        <canvas id="customChart"></canvas>
+                    </div>
+                </div>
+            </div>
 
             <!-- Saved Charts Section -->
             <div id="savedChartsSection" style="margin-top: 2rem;">
@@ -111,17 +122,6 @@
                     <h3>Most Requested Pets</h3>
                     <div class="chart-wrapper">
                         <canvas id="chartMostRequested"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Dynamic Chart Area -->
-            <div id="customChartArea" style="display: none; margin-top: 2rem;">
-                <h2 class="caption">Custom Chart Preview</h2>
-                <div class="chart-card">
-                    <h3 id="customChartTitle">Custom Chart</h3>
-                    <div class="chart-wrapper" style="height: 400px;">
-                        <canvas id="customChart"></canvas>
                     </div>
                 </div>
             </div>

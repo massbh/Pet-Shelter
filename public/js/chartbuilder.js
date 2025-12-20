@@ -1,16 +1,11 @@
 // Color schemes
-const colors = {
-    primary: ['#FF6B00', '#FFA040', '#FFD580', '#AC5512', '#8a4510'],
-    status: {
-        available: '#28A745',
-        pending: '#dfa800',
-        adopted: '#6c757d'
-    },
-    rainbow: [
+const colors = [
         '#FF6B00', '#FFA040', '#28A745', '#007bff', 
-        '#dfa800', '#6c757d', '#17a2b8', '#e83e8c'
-    ]
-};
+        '#dfa800', '#6c757d', '#17a2b8', '#e83e8c',
+        '#fd7e14', '#20c997', '#6f42c1', '#dc3545',
+        '#ffc107', '#198754', '#0dcaf0', '#d63384',
+        '#795548', '#ff5722', '#9c27b0', '#3f51b5'
+    ];
 
 let customChartInstance = null;
 let currentCustomChart = null;
@@ -31,8 +26,8 @@ async function createChart(canvasId, endpoint, type, title) {
                 datasets: [{
                     label: title,
                     data: data.values,
-                    backgroundColor: colors.rainbow,
-                    borderColor: colors.rainbow,
+                    backgroundColor: colors,
+                    borderColor: colors,
                     borderWidth: 1
                 }]
             },
@@ -42,7 +37,8 @@ async function createChart(canvasId, endpoint, type, title) {
                 plugins: {
                     legend: {
                         display: type === 'pie' || type === 'doughnut',
-                        position: 'bottom'
+                        position: 'bottom',
+                        reverse: true
                     },
                     title: {
                         display: false
@@ -63,14 +59,16 @@ async function createChart(canvasId, endpoint, type, title) {
     }
 }
 
-// Initialize all default charts
+// Initialize all default charts - load in parallel
 async function initializeCharts() {
-    await createChart('chartSpecies', 'pets-species', 'doughnut', 'Pets by Species');
-    await createChart('chartStatus', 'pets-status', 'pie', 'Pets by Status');
-    await createChart('chartAdoptionStatus', 'adoption-requests-status', 'doughnut', 'Adoption Requests');
-    await createChart('chartAge', 'pets-age', 'bar', 'Age Distribution');
-    await createChart('chartMonthly', 'adoption-requests-month', 'line', 'Monthly Requests');
-    await createChart('chartMostRequested', 'most-requested-pets', 'bar', 'Most Requested');
+    await Promise.all([
+        createChart('chartSpecies', 'pets-species', 'doughnut', 'Pets by Species'),
+        createChart('chartStatus', 'pets-status', 'pie', 'Pets by Status'),
+        createChart('chartAdoptionStatus', 'adoption-requests-status', 'doughnut', 'Adoption Requests'),
+        createChart('chartAge', 'pets-age', 'bar', 'Age Distribution'),
+        createChart('chartMonthly', 'adoption-requests-month', 'line', 'Monthly Requests'),
+        createChart('chartMostRequested', 'most-requested-pets', 'bar', 'Most Requested')
+    ]);
 }
 
 // Generate custom chart
@@ -100,7 +98,17 @@ function saveCurrentChart() {
         return;
     }
     
-    const title = prompt('Enter a name for this chart:');
+    // Generate default name based on chart configuration
+    const chartTypeNames = {
+        'bar': 'Bar',
+        'pie': 'Pie',
+        'doughnut': 'Doughnut',
+        'line': 'Line'
+    };
+    
+    const defaultName = `${chartTypeNames[currentChartConfig.chart_type]} - ${getTitleFromDataSource(currentChartConfig.data_source)}`;
+    
+    const title = prompt('Enter a name for this chart:', defaultName);
     if (!title) return;
     
     const csrfToken = document.querySelector('meta[name="csrf-token"]').content;
@@ -131,31 +139,50 @@ function saveCurrentChart() {
     });
 }
 
-function loadSavedCharts() {
-    fetch('/api/charts/saved')
-        .then(response => response.json())
-        .then(charts => {
-            const grid = document.getElementById('savedChartsGrid');
-            grid.innerHTML = '';
-            
-            if (charts.length === 0) {
-                document.getElementById('savedChartsSection').style.display = 'none';
-                return;
-            }
-            
-            document.getElementById('savedChartsSection').style.display = 'block';
-            
-            charts.forEach(chart => {
-                const card = createSavedChartCard(chart);
-                grid.appendChild(card);
+async function loadSavedCharts() {
+    try {
+        const response = await fetch('/api/charts/saved');
+        const charts = await response.json();
+        
+        const grid = document.getElementById('savedChartsGrid');
+        grid.innerHTML = '';
+        
+        if (charts.length === 0) {
+            document.getElementById('savedChartsSection').style.display = 'none';
+            return;
+        }
+        
+        document.getElementById('savedChartsSection').style.display = 'block';
+        
+        // Load all chart data in parallel
+        const chartPromises = charts.map(chart => 
+            fetchChartData(chart.data_source).then(data => ({ chart, data }))
+        );
+        
+        const chartDataArray = await Promise.all(chartPromises);
+        
+        // Create all DOM elements first (synchronously)
+        chartDataArray.forEach(({ chart, data }) => {
+            const card = createSavedChartCard(chart, data);
+            grid.appendChild(card);
+        });
+        
+        // Then render all charts in the next frame (they'll render in parallel)
+        requestAnimationFrame(() => {
+            chartDataArray.forEach(({ chart, data }) => {
+                const canvas = document.getElementById(`savedChart${chart.id}`);
+                if (canvas) {
+                    createCustomChart(chart.chart_type, data, chart.data_source, canvas);
+                }
             });
-            
             lucide.createIcons();
-        })
-        .catch(error => console.error('Error loading saved charts:', error));
+        });
+    } catch (error) {
+        console.error('Error loading saved charts:', error);
+    }
 }
 
-function createSavedChartCard(chart) {
+function createSavedChartCard(chart, data) {
     const card = document.createElement('div');
     card.className = 'chart-card';
     card.innerHTML = `
@@ -169,14 +196,6 @@ function createSavedChartCard(chart) {
             <canvas id="savedChart${chart.id}"></canvas>
         </div>
     `;
-    
-    // Load and render the saved chart
-    setTimeout(() => {
-        fetchChartData(chart.data_source).then(data => {
-            const canvas = document.getElementById(`savedChart${chart.id}`);
-            createCustomChart(chart.chart_type, data, chart.data_source, canvas);
-        });
-    }, 100);
     
     return card;
 }
@@ -222,6 +241,7 @@ function createCustomChart(type, data, dataSource, canvas = null) {
             plugins: {
                 legend: {
                     position: 'top',
+                    reverse: true
                 }
             }
         }
@@ -256,8 +276,8 @@ async function fetchChartData(dataSource) {
             datasets: [{
                 label: getTitleFromDataSource(dataSource),
                 data: data.values,
-                backgroundColor: colors.rainbow,
-                borderColor: colors.rainbow,
+                backgroundColor: colors,
+                borderColor: colors,
                 borderWidth: 1
             }]
         };
