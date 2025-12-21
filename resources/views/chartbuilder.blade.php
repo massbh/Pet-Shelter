@@ -93,12 +93,20 @@
             <!-- Saved Charts Section -->
             <div id="savedChartsSection" style="margin-top: 2rem;">
                 <h2 class="caption">Saved Charts</h2>
+                <div id="savedChartsLoading" class="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Loading saved charts...</p>
+                </div>
                 <div id="savedChartsGrid" class="chart-grid"></div>
             </div>
 
             <!-- Pre-built Charts Grid -->
             <h2 class="caption" style="margin-top: 2rem;">Analytics Dashboard</h2>
-            <div class="chart-grid">
+            <div id="analyticsLoading" class="loading-spinner" style="display: flex;">
+                <div class="spinner"></div>
+                <p>Loading analytics dashboard...</p>
+            </div>
+            <div class="chart-grid" id="analyticsChartsGrid" style="display: none;">
                 <div class="chart-card">
                     <h3>Pets by Species</h3>
                     <div class="chart-wrapper">

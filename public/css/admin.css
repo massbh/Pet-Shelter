@@ -644,6 +644,37 @@
     box-shadow: 0 2px 8px rgba(201, 42, 42, 0.3);
 }
 
+/* Loading spinner styles */
+.loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    gap: 1rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #AC5512;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+    color: #666;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    margin: 0;
+}
+
 /* Responsive adjustments for chart builder */
 @media (max-width: 768px) {
     .chart-grid {

@@ -62,12 +62,29 @@ async function createChart(canvasId, endpoint, type, title) {
 
 // Initialize all default charts - load in parallel
 async function initializeCharts() {
-    await Promise.all([
-        createChart('chartSpecies', 'pets-species', 'pie', 'Pets by Species'),
-        createChart('chartMostRequestedSpecies', 'most-requested-species', 'doughnut', 'Most Requested Species'),
-        createChart('chartOldestPets', 'oldest-pets', 'bar', 'Longest Time in Shelter'),
-        createChart('chartMonthly', 'adoption-requests-month', 'line', 'Monthly Requests')
-    ]);
+    const loadingElement = document.getElementById('analyticsLoading');
+    const chartsGrid = document.getElementById('analyticsChartsGrid');
+    
+    try {
+        // Show loading, hide charts
+        loadingElement.style.display = 'flex';
+        chartsGrid.style.display = 'none';
+        
+        // Load all charts in parallel
+        await Promise.all([
+            createChart('chartSpecies', 'pets-species', 'pie', 'Pets by Species'),
+            createChart('chartMostRequestedSpecies', 'most-requested-species', 'doughnut', 'Most Requested Species'),
+            createChart('chartOldestPets', 'oldest-pets', 'bar', 'Longest Time in Shelter'),
+            createChart('chartMonthly', 'adoption-requests-month', 'line', 'Monthly Requests')
+        ]);
+        
+        // Hide loading, show charts
+        loadingElement.style.display = 'none';
+        chartsGrid.style.display = 'grid';
+    } catch (error) {
+        console.error('Error initializing analytics charts:', error);
+        loadingElement.innerHTML = '<p style="text-align: center; color: #C92A2A;">Error loading analytics dashboard. Please refresh the page.</p>';
+    }
 }
 
 // Generate custom chart
@@ -146,14 +163,18 @@ async function loadSavedCharts() {
     
     isLoadingSavedCharts = true;
     
+    // Show loading spinner
+    const loadingElement = document.getElementById('savedChartsLoading');
+    const gridElement = document.getElementById('savedChartsGrid');
+    loadingElement.style.display = 'flex';
+    gridElement.innerHTML = '';
+    
     try {
         const response = await fetch('/api/charts/saved');
         const charts = await response.json();
         
-        const grid = document.getElementById('savedChartsGrid');
-        grid.innerHTML = '';
-        
         if (charts.length === 0) {
+            loadingElement.style.display = 'none';
             document.getElementById('savedChartsSection').style.display = 'none';
             return;
         }
@@ -170,7 +191,7 @@ async function loadSavedCharts() {
         // Create cards and render charts sequentially
         for (const { chart, data } of chartDataArray) {
             const card = createSavedChartCard(chart, data);
-            grid.appendChild(card);
+            gridElement.appendChild(card);
             
             // Wait for next frame to ensure DOM is updated
             await new Promise(resolve => requestAnimationFrame(resolve));
@@ -187,9 +208,13 @@ async function loadSavedCharts() {
             }
         }
         
+        // Hide loading spinner AFTER all charts are rendered
+        loadingElement.style.display = 'none';
         lucide.createIcons();
     } catch (error) {
         console.error('Error loading saved charts:', error);
+        loadingElement.style.display = 'none';
+        gridElement.innerHTML = '<p style="text-align: center; color: #C92A2A;">Error loading saved charts. Please try again.</p>';
     } finally {
         isLoadingSavedCharts = false;
     }
