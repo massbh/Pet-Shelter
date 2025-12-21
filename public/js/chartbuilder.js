@@ -10,6 +10,7 @@ const colors = [
 let customChartInstance = null;
 let currentCustomChart = null;
 let currentChartConfig = null;
+let isLoadingSavedCharts = false; // Add flag to prevent duplicate loads
 
 // Utility function to create charts
 async function createChart(canvasId, endpoint, type, title) {
@@ -62,12 +63,10 @@ async function createChart(canvasId, endpoint, type, title) {
 // Initialize all default charts - load in parallel
 async function initializeCharts() {
     await Promise.all([
-        createChart('chartSpecies', 'pets-species', 'doughnut', 'Pets by Species'),
-        createChart('chartStatus', 'pets-status', 'pie', 'Pets by Status'),
-        createChart('chartAdoptionStatus', 'adoption-requests-status', 'doughnut', 'Adoption Requests'),
-        createChart('chartAge', 'pets-age', 'bar', 'Age Distribution'),
-        createChart('chartMonthly', 'adoption-requests-month', 'line', 'Monthly Requests'),
-        createChart('chartMostRequested', 'most-requested-pets', 'bar', 'Most Requested')
+        createChart('chartSpecies', 'pets-species', 'pie', 'Pets by Species'),
+        createChart('chartMostRequestedSpecies', 'most-requested-species', 'doughnut', 'Most Requested Species'),
+        createChart('chartOldestPets', 'oldest-pets', 'bar', 'Longest Time in Shelter'),
+        createChart('chartMonthly', 'adoption-requests-month', 'line', 'Monthly Requests')
     ]);
 }
 
@@ -123,7 +122,7 @@ function saveCurrentChart() {
             title: title,
             chart_type: currentChartConfig.chart_type,
             data_source: currentChartConfig.data_source,
-            config: currentChartConfig
+            config: null  // Changed: no redundant data
         })
     })
     .then(response => response.json())
@@ -140,6 +139,13 @@ function saveCurrentChart() {
 }
 
 async function loadSavedCharts() {
+    // Prevent multiple simultaneous loads
+    if (isLoadingSavedCharts) {
+        return;
+    }
+    
+    isLoadingSavedCharts = true;
+    
     try {
         const response = await fetch('/api/charts/saved');
         const charts = await response.json();
@@ -161,24 +167,31 @@ async function loadSavedCharts() {
         
         const chartDataArray = await Promise.all(chartPromises);
         
-        // Create all DOM elements first (synchronously)
-        chartDataArray.forEach(({ chart, data }) => {
+        // Create cards and render charts sequentially
+        for (const { chart, data } of chartDataArray) {
             const card = createSavedChartCard(chart, data);
             grid.appendChild(card);
-        });
-        
-        // Then render all charts in the next frame (they'll render in parallel)
-        requestAnimationFrame(() => {
-            chartDataArray.forEach(({ chart, data }) => {
-                const canvas = document.getElementById(`savedChart${chart.id}`);
-                if (canvas) {
+            
+            // Wait for next frame to ensure DOM is updated
+            await new Promise(resolve => requestAnimationFrame(resolve));
+            
+            const canvas = document.getElementById(`savedChart${chart.id}`);
+            if (canvas && canvas.getContext && !canvas.dataset.chartInitialized) {
+                try {
+                    canvas.dataset.chartInitialized = 'true'; // Mark as initialized
                     createCustomChart(chart.chart_type, data, chart.data_source, canvas);
+                } catch (error) {
+                    console.error(`Error rendering chart ${chart.id}:`, error);
+                    canvas.dataset.chartInitialized = 'false';
                 }
-            });
-            lucide.createIcons();
-        });
+            }
+        }
+        
+        lucide.createIcons();
     } catch (error) {
         console.error('Error loading saved charts:', error);
+    } finally {
+        isLoadingSavedCharts = false;
     }
 }
 
@@ -264,8 +277,8 @@ function getTitleFromDataSource(dataSource) {
         'most-requested-pets': 'Most Requested Pets',
         'average-age-by-species': 'Average Age by Species',
         'gender-distribution-by-species': 'Gender Distribution by Species',
-        'newest-pets': 'Newest Pets (Days Since Added)',
-        'oldest-pets': 'Oldest Pets (Days in Shelter)',
+        'newest-pets': 'Shortest Time in Shelter',
+        'oldest-pets': 'Longest Time in Shelter',
         'pets-created-by-month': 'Pets Added Over Time',
         'requests-by-user': 'Requests by User',
         'most-requested-species': 'Most Requested Species',

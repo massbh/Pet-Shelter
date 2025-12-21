@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('chart_type');
             $table->string('data_source');
-            $table->json('config')->nullable();
             $table->timestamps();
         });
     }

@@ -51,8 +51,8 @@
                             <option value="pets-gender">Pets by Gender</option>
                             <option value="average-age-by-species">Average Age by Species</option>
                             <option value="gender-distribution-by-species">Gender Distribution by Species</option>
-                            <option value="newest-pets">Newest Pets</option>
-                            <option value="oldest-pets">Oldest Pets</option>
+                            <option value="newest-pets">Shortest Time in Shelter</option>
+                            <option value="oldest-pets">Longest Time in Shelter</option>
                             <option value="pets-created-by-month">Pets Added Over Time</option>
                         </optgroup>
                         <optgroup label="Adoption Requests">
@@ -107,23 +107,16 @@
                 </div>
 
                 <div class="chart-card">
-                    <h3>Pets by Status</h3>
+                    <h3>Most Requested Species</h3>
                     <div class="chart-wrapper">
-                        <canvas id="chartStatus"></canvas>
+                        <canvas id="chartMostRequestedSpecies"></canvas>
                     </div>
                 </div>
 
                 <div class="chart-card">
-                    <h3>Adoption Requests by Status</h3>
+                    <h3>Longest Time in Shelter</h3>
                     <div class="chart-wrapper">
-                        <canvas id="chartAdoptionStatus"></canvas>
-                    </div>
-                </div>
-
-                <div class="chart-card">
-                    <h3>Pets by Age Group</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="chartAge"></canvas>
+                        <canvas id="chartOldestPets"></canvas>
                     </div>
                 </div>
 
@@ -133,24 +126,12 @@
                         <canvas id="chartMonthly"></canvas>
                     </div>
                 </div>
-
-                <div class="chart-card">
-                    <h3>Most Requested Pets</h3>
-                    <div class="chart-wrapper">
-                        <canvas id="chartMostRequested"></canvas>
-                    </div>
-                </div>
             </div>
         </div>
     </main>
 
     <script>
         lucide.createIcons();
-        
-        // Load saved charts on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadSavedCharts();
-        });
     </script>
 </body>
 </html>

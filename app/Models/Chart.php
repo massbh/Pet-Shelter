@@ -12,8 +12,7 @@ class Chart extends Model
     protected $fillable = [
         'title',
         'chart_type',
-        'data_source',
-        'config'
+        'data_source'
     ];
 
     protected $casts = [

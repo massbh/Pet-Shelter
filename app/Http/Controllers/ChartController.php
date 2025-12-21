@@ -20,8 +20,7 @@ class ChartController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'chart_type' => 'required|string',
-            'data_source' => 'required|string',
-            'config' => 'nullable|array'
+            'data_source' => 'required|string'
         ]);
 
         $chart = Chart::create($validated);
