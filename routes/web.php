@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\PetController;
 use App\Http\Controllers\AdoptionRequestController;
+use App\Http\Controllers\BlogController;
 use App\Models\Pet;
 use Illuminate\Support\Facades\Route;
 use App\Models\QuizQuestion;
@@ -46,6 +47,10 @@ Route::get('/api/quiz/questions', function () {
         ->orderBy('order')
         ->get();
 });
+
+// Blog public routes
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post}', [BlogController::class, 'show'])->name('blog.show');
 
 // Authentication routes
 Route::get('/signin', [AuthController::class, 'showLoginForm'])->name('login');
@@ -95,6 +100,14 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Adoption request management
     Route::get('/admin/adoption-requests', [AdoptionRequestController::class, 'index'])->name('admin.adoption-requests.index');
     Route::put('/admin/adoption-requests/{adoptionRequest}/status', [AdoptionRequestController::class, 'updateStatus'])->name('admin.adoption-requests.update-status');
+    
+    // Blog management - Admin only
+    Route::get('/admin/blog', [BlogController::class, 'adminIndex'])->name('admin.blog.index');
+    Route::get('/admin/blog/create', [BlogController::class, 'create'])->name('admin.blog.create');
+    Route::post('/admin/blog', [BlogController::class, 'store'])->name('admin.blog.store');
+    Route::get('/admin/blog/{post}/edit', [BlogController::class, 'edit'])->name('admin.blog.edit');
+    Route::put('/admin/blog/{post}', [BlogController::class, 'update'])->name('admin.blog.update');
+    Route::delete('/admin/blog/{post}', [BlogController::class, 'destroy'])->name('admin.blog.destroy');
 });
 
 // Legacy route for backwards compatibility

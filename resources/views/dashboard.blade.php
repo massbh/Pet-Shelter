@@ -54,9 +54,11 @@
                 @csrf
                 <button type="submit" class="btn btn-danger"><i data-lucide="log-out"></i> Logout</button>
             </form>
+
             @if($user->isAdmin())
                 <a href="{{ route('pets.create') }}" class="btn btn-primary"><i data-lucide="plus-circle"></i> Add New Pet</a>
                 <a href="/admin/pet-gallery" class="btn btn-primary"><i data-lucide="paw-print"></i> Manage Pets</a>
+                <a href="{{ route('admin.blog.index') }}" class="btn btn-primary"><i data-lucide="file-text"></i> Manage Blog</a>
                 <a href="/quiz" class="btn btn-primary"><i data-lucide="clipboard-list"></i> See Quiz</a>
             @endif
         </div>
