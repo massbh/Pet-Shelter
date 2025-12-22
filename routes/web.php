@@ -7,6 +7,7 @@ use App\Http\Controllers\AdoptionRequestController;
 use App\Http\Controllers\BlogController;
 use App\Models\Pet;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChartController;
 use App\Models\QuizQuestion;
 
 // Public routes
@@ -42,6 +43,10 @@ Route::get('/terms', function () {
     return view('terms-conditions');
 })->name('terms');
 
+// Public chart data (available pets only)
+Route::get('/api/charts/available-pets-species', [ChartController::class, 'availablePetsBySpecies']);
+Route::get('/api/charts/available-pets-age', [ChartController::class, 'availablePetsByAge']);
+Route::get('/api/charts/available-pets-gender', [ChartController::class, 'availablePetsByGender']);
 Route::get('/api/quiz/questions', function () {
     return QuizQuestion::where('is_active', true)
         ->orderBy('order')
@@ -100,6 +105,37 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     // Adoption request management
     Route::get('/admin/adoption-requests', [AdoptionRequestController::class, 'index'])->name('admin.adoption-requests.index');
     Route::put('/admin/adoption-requests/{adoptionRequest}/status', [AdoptionRequestController::class, 'updateStatus'])->name('admin.adoption-requests.update-status');
+
+    // Chart builder
+    Route::get('/admin/chart-builder', [ChartController::class, 'builder'])->name('charts.builder');
+    
+    // Chart data endpoints
+    Route::get('/api/charts/pets-species', [ChartController::class, 'petsBySpecies']);
+    Route::get('/api/charts/pets-status', [ChartController::class, 'petsByStatus']);
+    Route::get('/api/charts/pets-age', [ChartController::class, 'petsByAge']);
+    Route::get('/api/charts/pets-gender', [ChartController::class, 'petsByGender']);
+    Route::get('/api/charts/adoption-requests-status', [ChartController::class, 'adoptionRequestsByStatus']);
+    Route::get('/api/charts/adoption-requests-month', [ChartController::class, 'adoptionRequestsByMonth']);
+    Route::get('/api/charts/most-requested-pets', [ChartController::class, 'mostRequestedPets']);
+    
+    // New chart data endpoints
+    Route::get('/api/charts/average-age-by-species', [ChartController::class, 'averageAgeBySpecies']);
+    Route::get('/api/charts/gender-distribution-by-species', [ChartController::class, 'genderDistributionBySpecies']);
+    Route::get('/api/charts/newest-pets', [ChartController::class, 'newestPets']);
+    Route::get('/api/charts/oldest-pets', [ChartController::class, 'oldestPets']);
+    Route::get('/api/charts/pets-created-by-month', [ChartController::class, 'petsCreatedByMonth']);
+    Route::get('/api/charts/requests-by-user', [ChartController::class, 'requestsByUser']);
+    Route::get('/api/charts/most-requested-species', [ChartController::class, 'mostRequestedSpecies']);
+    Route::get('/api/charts/most-requested-age-groups', [ChartController::class, 'mostRequestedAgeGroups']);
+    Route::get('/api/charts/user-registrations-over-time', [ChartController::class, 'userRegistrationsOverTime']);
+    Route::get('/api/charts/seasonal-trends', [ChartController::class, 'seasonalTrends']);
+});
+
+// Chart API routes (these should be separate from the builder route)
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::post('/charts', [ChartController::class, 'store'])->name('charts.store');
+    Route::get('/api/charts/saved', [ChartController::class, 'index'])->name('charts.index');
+    Route::delete('/charts/{id}', [ChartController::class, 'destroy'])->name('charts.destroy');
     
     // Blog management - Admin only
     Route::get('/admin/blog', [BlogController::class, 'adminIndex'])->name('admin.blog.index');

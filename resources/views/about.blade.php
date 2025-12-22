@@ -5,7 +5,8 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/about.css') }}">
-
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+        <script src="{{ asset('js/about-charts.js') }}" defer></script>
     </head>
     <body>
         
@@ -21,6 +22,28 @@
         </div>
 
         <div class="about-container">
+            <!-- Our Current Animals Section - Moved to top -->
+            <div class="about-section">
+                <h2 style="text-align: center; margin-bottom: 1rem; color: #AC5512;">Our Current Animals</h2>
+                <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: #666; line-height: 1.7;">
+                    Take a look at the wonderful pets currently waiting for their forever homes at our shelter.
+                </p>
+                <div class="stats-charts">
+                    <div class="chart-container">
+                        <h3>Available Pets by Species</h3>
+                        <canvas id="chartAvailableSpecies"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Available Pets by Age Group</h3>
+                        <canvas id="chartAvailableAge"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Gender Distribution</h3>
+                        <canvas id="chartAvailableGender"></canvas>
+                    </div>
+                </div>
+            </div>
+
             <!-- Mission & Vision Section -->
             <div class="about-section">
                 <div class="about-content">
