@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
+            'verify.adoption.owner' => \App\Http\Middleware\VerifyAdoptionRequestOwnership::class,
         ]);
         $middleware->redirectGuestsTo('/signin');
     })

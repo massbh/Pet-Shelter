@@ -28,11 +28,10 @@ class ContactUsController {
                 //This searches the petID
                 $petId = null;
                 if (!empty($adoptionData['petInterest'])) {
-                    $searchTerm = $adoptionData['petInterest'];
+                    $searchTerm = trim(strip_tags($adoptionData['petInterest']));
                     
-                    // If the input is a number, searches petIDs first
                     if (is_numeric($searchTerm)) {
-                        $pet = Pet::find($searchTerm); // Exact ID search
+                        $pet = Pet::find((int)$searchTerm); // Cast to int for safety
                     }
                     
                     // If it didn't find ID, search the name and return its ID

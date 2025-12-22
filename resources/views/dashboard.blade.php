@@ -54,10 +54,13 @@
                 @csrf
                 <button type="submit" class="btn btn-danger"><i data-lucide="log-out"></i> Logout</button>
             </form>
+
             @if($user->isAdmin())
                 <a href="{{ route('pets.create') }}" class="btn btn-primary"><i data-lucide="plus-circle"></i> Add New Pet</a>
                 <a href="/admin/pet-gallery" class="btn btn-primary"><i data-lucide="paw-print"></i> Manage Pets</a>
                 <a href="{{ route('charts.builder') }}" class="btn btn-primary"><i data-lucide="bar-chart-2"></i> View Charts</a>
+                <a href="{{ route('admin.blog.index') }}" class="btn btn-primary"><i data-lucide="file-text"></i> Manage Blog</a>
+                <a href="/quiz" class="btn btn-primary"><i data-lucide="clipboard-list"></i> See Quiz</a>
             @endif
         </div>
 
@@ -65,6 +68,8 @@
             <div>
             <h2 style="color:#FF6B00;">My Adoption Requests</h2>
             @if($adoptionRequests->count() > 0)
+                <p>Looking for your next companion? Take our quick quiz to find the perfect match!</p>
+                <a href="/quiz" class="btn btn-primary"><i data-lucide="heart"></i> Find My Match</a>
                 <table class="requests-table">
                     <thead>
                         <tr>
@@ -107,6 +112,8 @@
             @else
                 <p>You haven't submitted any adoption requests yet.</p>
                 <a href="/admin/pet-gallery" class="btn btn-primary"><i data-lucide="paw-print"></i> Browse Available Pets</a>
+                <p>Not sure which pet to choose? Take a quick quiz and find your perfect companion!</p>
+                <a href="/quiz" class="btn btn-primary"><i data-lucide="heart"></i> Find My Match</a>
             @endif
         </div>
         @else

@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         <link rel="stylesheet" href="{{ asset('css/header.css') }}">
         <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+        <link rel="preload" as="image" href="{{ asset('assets/Front-image.png') }}">
         <script src="{{ asset('js/home_filter.js') }}" defer></script>
-
+        
 
     </head>
     <body>

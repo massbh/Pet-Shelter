@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+<head><title>CSRF Test</title></head>
+<body>
+    <h1>Testing CSRF Protection</h1>
+    <form action="http://localhost:8000/logout" method="POST">
+        <button type="submit">Try Logout Without Token</button>
+    </form>
+</body>
+</html>

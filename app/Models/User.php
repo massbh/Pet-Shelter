@@ -66,4 +66,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(AdoptionRequest::class);
     }
+
+    // En app/Models/User.php, agregar:
+    public function blogPosts()
+    {
+        return $this->hasMany(BlogPost::class);
+    }
 }

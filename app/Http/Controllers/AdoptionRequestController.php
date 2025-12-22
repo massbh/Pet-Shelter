@@ -59,20 +59,27 @@ class AdoptionRequestController extends Controller
             'message' => 'nullable|string|max:1000',
         ]);
 
+        // Verify the pet exists and is available for adoption
+        $pet = Pet::findOrFail($validated['pet_id']);
+        if ($pet->status !== 'available') {
+            return redirect()->route('home')
+                ->with('error', 'This pet is no longer available for adoption.');
+        }
+
         $existingRequest = AdoptionRequest::where('user_id', Auth::id())
             ->where('pet_id', $validated['pet_id'])
             ->where('status', 'pending')
             ->exists();
 
         if ($existingRequest) {
-            return redirect()->route('pets.show', $validated['pet_id'])
+            return redirect()->route('pet.detail', $validated['pet_id'])
                 ->with('error', 'You already have a pending adoption request for this pet.');
         }
 
         AdoptionRequest::create([
             'user_id' => Auth::id(),
             'pet_id' => $validated['pet_id'],
-            'message' => $validated['message'],
+            'message' => strip_tags($validated['message']), // Sanitize message
             'status' => 'pending',
         ]);
 
@@ -85,9 +92,8 @@ class AdoptionRequestController extends Controller
      */
     public function show(AdoptionRequest $adoptionRequest)
     {
-        if (!Auth::user()->isAdmin() && $adoptionRequest->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
+        // Use policy-based authorization
+        $this->authorize('view', $adoptionRequest);
 
         $adoptionRequest->load(['user', 'pet']);
         return view('adoption-requests.show', compact('adoptionRequest'));
@@ -98,6 +104,9 @@ class AdoptionRequestController extends Controller
      */
     public function updateStatus(Request $request, AdoptionRequest $adoptionRequest)
     {
+        // Authorize admin-only access
+        $this->authorize('updateStatus', $adoptionRequest);
+        
         $validated = $request->validate([
             'status' => 'required|in:pending,approved,rejected',
             'admin_notes' => 'nullable|string|max:1000',
@@ -127,10 +136,8 @@ class AdoptionRequestController extends Controller
      */
     public function destroy(AdoptionRequest $adoptionRequest)
     {
-        // Only allow users to delete their own requests, or admins to delete any
-        if (!Auth::user()->isAdmin() && $adoptionRequest->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized action.');
-        }
+        // Use policy-based authorization
+        $this->authorize('delete', $adoptionRequest);
 
         $adoptionRequest->delete();
 

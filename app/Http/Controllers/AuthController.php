@@ -115,4 +115,16 @@ class AuthController extends Controller
         
         return view('dashboard', compact('user', 'adoptionRequests'));
     }
+
+    public function quiz() {
+        
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->withErrors(['error' => 'Please login to access the quiz.']);
+        }
+
+        return view('quiz');
+    }
 }
+
