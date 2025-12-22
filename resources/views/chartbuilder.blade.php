@@ -79,7 +79,7 @@
                 </button>
             </div>
             
-            <!-- Dynamic Chart Area -->
+            <!-- Custom Chart Preview Area -->
             <div id="customChartArea" style="display: none; margin-top: 2rem;">
                 <h2 class="caption">Custom Chart Preview</h2>
                 <div class="chart-card">
@@ -100,7 +100,7 @@
                 <div id="savedChartsGrid" class="chart-grid"></div>
             </div>
 
-            <!-- Pre-built Charts Grid -->
+            <!-- Analytics Dashboard Charts Grid -->
             <h2 class="caption" style="margin-top: 2rem;">Analytics Dashboard</h2>
             <div id="analyticsLoading" class="loading-spinner" style="display: flex;">
                 <div class="spinner"></div>

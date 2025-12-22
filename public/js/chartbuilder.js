@@ -1,4 +1,3 @@
-// Color schemes
 const colors = [
         '#FF6B00', '#FFA040', '#28A745', '#007bff', 
         '#dfa800', '#6c757d', '#17a2b8', '#e83e8c',
@@ -10,9 +9,9 @@ const colors = [
 let customChartInstance = null;
 let currentCustomChart = null;
 let currentChartConfig = null;
-let isLoadingSavedCharts = false; // Add flag to prevent duplicate loads
+let isLoadingSavedCharts = false;
 
-// Utility function to create charts
+// Creates and renders a chart from API endpoint data
 async function createChart(canvasId, endpoint, type, title) {
     try {
         const response = await fetch(`/api/charts/${endpoint}`);
@@ -37,6 +36,7 @@ async function createChart(canvasId, endpoint, type, title) {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
+                        // Only show legend for circular charts
                         display: type === 'pie' || type === 'doughnut',
                         position: 'bottom',
                         reverse: true
@@ -45,6 +45,7 @@ async function createChart(canvasId, endpoint, type, title) {
                         display: false
                     }
                 },
+                // Configure axes only for bar and line charts
                 scales: type === 'bar' || type === 'line' ? {
                     y: {
                         beginAtZero: true,
@@ -60,17 +61,16 @@ async function createChart(canvasId, endpoint, type, title) {
     }
 }
 
-// Initialize all default charts - load in parallel
+// Initializes all default analytics charts using parallel loading for performance
 async function initializeCharts() {
     const loadingElement = document.getElementById('analyticsLoading');
     const chartsGrid = document.getElementById('analyticsChartsGrid');
     
     try {
-        // Show loading, hide charts
         loadingElement.style.display = 'flex';
         chartsGrid.style.display = 'none';
         
-        // Load all charts in parallel
+        // Promise.all ensures all charts load simultaneously rather than sequentially
         await Promise.all([
             createChart('chartSpecies', 'pets-species', 'pie', 'Pets by Species'),
             createChart('chartMostRequestedSpecies', 'most-requested-species', 'doughnut', 'Most Requested Species'),
@@ -78,7 +78,6 @@ async function initializeCharts() {
             createChart('chartMonthly', 'adoption-requests-month', 'line', 'Monthly Requests')
         ]);
         
-        // Hide loading, show charts
         loadingElement.style.display = 'none';
         chartsGrid.style.display = 'grid';
     } catch (error) {
@@ -87,34 +86,33 @@ async function initializeCharts() {
     }
 }
 
-// Generate custom chart
+// Generates a custom chart based on user-selected type and data source
 function generateCustomChart() {
     const chartType = document.getElementById('chartType').value;
     const dataSource = document.getElementById('dataSource').value;
     
-    // Store current configuration
+    // Store configuration for potential save operation
     currentChartConfig = {
         chart_type: chartType,
         data_source: dataSource
     };
     
-    // Show custom chart area and save button
     document.getElementById('customChartArea').style.display = 'block';
     document.querySelector('.btn-save').style.display = 'inline-flex';
     
-    // Fetch data and create chart
     fetchChartData(dataSource).then(data => {
         createCustomChart(chartType, data, dataSource);
     });
 }
 
+// Persists current custom chart configuration to database
 function saveCurrentChart() {
     if (!currentChartConfig) {
         alert('Please generate a chart first');
         return;
     }
     
-    // Generate default name based on chart configuration
+    // Generate human-readable default names
     const chartTypeNames = {
         'bar': 'Bar',
         'pie': 'Pie',
@@ -139,7 +137,7 @@ function saveCurrentChart() {
             title: title,
             chart_type: currentChartConfig.chart_type,
             data_source: currentChartConfig.data_source,
-            config: null  // Changed: no redundant data
+            config: null
         })
     })
     .then(response => response.json())
@@ -155,15 +153,15 @@ function saveCurrentChart() {
     });
 }
 
+// Loads and renders all user-saved charts with parallel data fetching
 async function loadSavedCharts() {
-    // Prevent multiple simultaneous loads
+    // Prevent race conditions from multiple simultaneous calls
     if (isLoadingSavedCharts) {
         return;
     }
     
     isLoadingSavedCharts = true;
     
-    // Show loading spinner
     const loadingElement = document.getElementById('savedChartsLoading');
     const gridElement = document.getElementById('savedChartsGrid');
     loadingElement.style.display = 'flex';
@@ -181,25 +179,25 @@ async function loadSavedCharts() {
         
         document.getElementById('savedChartsSection').style.display = 'block';
         
-        // Load all chart data in parallel
+        // Fetch all chart data concurrently to improve load time
         const chartPromises = charts.map(chart => 
             fetchChartData(chart.data_source).then(data => ({ chart, data }))
         );
         
         const chartDataArray = await Promise.all(chartPromises);
         
-        // Create cards and render charts sequentially
+        // Render charts sequentially to avoid DOM conflicts
         for (const { chart, data } of chartDataArray) {
             const card = createSavedChartCard(chart, data);
             gridElement.appendChild(card);
             
-            // Wait for next frame to ensure DOM is updated
+            // Ensure DOM update before chart initialization
             await new Promise(resolve => requestAnimationFrame(resolve));
             
             const canvas = document.getElementById(`savedChart${chart.id}`);
             if (canvas && canvas.getContext && !canvas.dataset.chartInitialized) {
                 try {
-                    canvas.dataset.chartInitialized = 'true'; // Mark as initialized
+                    canvas.dataset.chartInitialized = 'true';
                     createCustomChart(chart.chart_type, data, chart.data_source, canvas);
                 } catch (error) {
                     console.error(`Error rendering chart ${chart.id}:`, error);
@@ -208,7 +206,6 @@ async function loadSavedCharts() {
             }
         }
         
-        // Hide loading spinner AFTER all charts are rendered
         loadingElement.style.display = 'none';
         lucide.createIcons();
     } catch (error) {
@@ -263,9 +260,11 @@ function deleteChart(id) {
     });
 }
 
+// Instantiates a Chart.js object with provided configuration
 function createCustomChart(type, data, dataSource, canvas = null) {
     const ctx = canvas || document.getElementById('customChart');
     
+    // Clean up existing chart instance to prevent memory leaks
     if (currentCustomChart && !canvas) {
         currentCustomChart.destroy();
     }
@@ -291,6 +290,7 @@ function createCustomChart(type, data, dataSource, canvas = null) {
     }
 }
 
+// Maps data source identifiers to human-readable chart titles
 function getTitleFromDataSource(dataSource) {
     const titles = {
         'pets-species': 'Pets by Species',
@@ -314,12 +314,13 @@ function getTitleFromDataSource(dataSource) {
     return titles[dataSource] || 'Custom Chart';
 }
 
+// Fetches and formats chart data from API endpoint
 async function fetchChartData(dataSource) {
     try {
         const response = await fetch(`/api/charts/${dataSource}`);
         const data = await response.json();
         
-        // Check if data has multiple datasets (for grouped charts)
+        // Handle grouped datasets (e.g., gender distribution by species)
         if (data.datasets && Array.isArray(data.datasets)) {
             return {
                 labels: data.labels,
@@ -333,6 +334,7 @@ async function fetchChartData(dataSource) {
             };
         }
         
+        // Standard single-dataset format
         return {
             labels: data.labels,
             datasets: [{
@@ -356,7 +358,7 @@ async function fetchChartData(dataSource) {
     }
 }
 
-// Initialize charts when page loads
+// Initialize analytics dashboard on page load
 document.addEventListener('DOMContentLoaded', function() {
     initializeCharts();
     loadSavedCharts();
